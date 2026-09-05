@@ -106,7 +106,7 @@
   },
   {
    "name": "Existing harness: $S/tools/gen_corpus.py + difftest.py (what it lacks)",
-   "url": "file:///private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/gen_corpus.py",
+   "url": "file://$WORK/tools/gen_corpus.py",
    "what": "Read both files and measured corpus_seed1.jsonl: 2088 cases (88 hand-written, 7 'error', 879 no-match), 212 icase cases but only 23 have an uppercase letter in the text (text pool is 'abcxyz019_ -' + 7 multibyte chars), 4 texts contain '\\n' (hand cases only), max pattern 217 chars, max text 28 chars, max 9 groups; 777 lazy, 810 brace, 897 alternation, 907 class, 1500 non-ASCII-text cases. Oracle cross-checks this session: pcre2_oracle agrees on 2079/2081 (diffs: é/É folding, ^(a+)+$ match-limit), Node 'ud' agrees on 2055/2081 (26 diffs = empty-iteration capture reset, (|a)+ loop-exit rule, Unicode folding under iu). difftest fork-per-case takes 8.1 s for 2088 cases.",
    "format": "JSONL {flags, pat, text, expect:{span,groups}|null|'error'}; CLI contract './engine [-i] PAT TEXT'.",
    "license": "project-internal.",

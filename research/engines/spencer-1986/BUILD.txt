@@ -3,7 +3,7 @@ c7db272ecea9e0a6b2139585cd38886c500efe35 Fri Dec 26 15:51:37 2014 +1100
 + arm-none-eabi-gcc --version
 + head -1
 arm-none-eabi-gcc (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/regexp.c -Isrc
++ sh $WORK/tools/measure.sh src/regexp.c -Isrc
 + tee measure_regexp.txt
 == src/regexp.c
 cortex-m4  (thumb2, gcc 10.3): text=2751 data=0 bss=0
@@ -27,7 +27,7 @@ x86-64     (clang 21):         text=5051 data=0
       30  .text.regoptail
       30  .text.regnext
       26  .text.regc
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/regsub.c -Isrc
++ sh $WORK/tools/measure.sh src/regsub.c -Isrc
 + tee measure_regsub.txt
 == src/regsub.c
 cortex-m4  (thumb2, gcc 10.3): text=221 data=0 bss=0
@@ -36,7 +36,7 @@ x86-64     (clang 21):         text=297 data=0
 -- cortex-m4 per-function (bytes):
      160  .text.regsub
       61  .rodata.regsub.str1.1
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/regerror.c -Isrc
++ sh $WORK/tools/measure.sh src/regerror.c -Isrc
 + tee measure_regerror.txt
 == src/regerror.c
 cortex-m4  (thumb2, gcc 10.3): text=47 data=0 bss=0
@@ -158,7 +158,7 @@ src/regexp.c:954:1: warning: a function definition without a prototype is deprec
   954 | regnext(p)
       | ^
 15 warnings generated.
-+ python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py ./engine_cli /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/corpus_seed1.jsonl 3000
++ python3 $WORK/tools/difftest.py ./engine_cli $WORK/tools/corpus_seed1.jsonl 3000
 + echo 'difftest exit=1'
 difftest exit=1
 + head -1 difftest_seed1.txt

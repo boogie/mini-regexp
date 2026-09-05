@@ -1,5 +1,5 @@
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/yigit/regex.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/measure/yigit_stub
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/yigit/regex.c
+$ sh $WORK/tools/measure.sh $WORK/survey/engines-src/yigit/regex.c -I$WORK/survey/measure/yigit_stub
+== $WORK/survey/engines-src/yigit/regex.c
 cortex-m4  (thumb2, gcc 10.3): text=1753 data=128 bss=1168
 cortex-m0+ (thumb1, gcc 10.3): text=1773 data=128 bss=1168
 x86-64     (clang 21):         text=2569 data=1232

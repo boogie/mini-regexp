@@ -1,6 +1,6 @@
 commit f21a96538f78fa8e2040831b4209b35f2fb581da 2026-07-28 19:26:37 -0400 fix toctou race in popen children's closing of other popen pipes
 ### measure.sh with ARM musl headers (Cortex-M4 / Cortex-M0+ numbers are authoritative from this run)
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c
+== $WORK/engines/musl-regex/src/src/regex/regcomp.c
 cortex-m4  (thumb2, gcc 10.3): text=9285 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=9021 data=0 bss=0
 x86-64     (clang 21):         text=16121 data=208
@@ -36,7 +36,7 @@ x86-64     (clang 21):         text=16121 data=208
       12  .text.tre_compare_lit
        4  .text.tre_stack_push_voidptr
        4  .text.tre_stack_push_int
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regexec.c
+== $WORK/engines/musl-regex/src/src/regex/regexec.c
 cortex-m4  (thumb2, gcc 10.3): text=3792 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=3936 data=0 bss=0
 x86-64     (clang 21):         text=7614 data=0
@@ -45,7 +45,7 @@ x86-64     (clang 21):         text=7614 data=0
      230  .text.tre_fill_pmatch
       62  .text.tre_neg_char_classes_match
       48  .text.tre_tag_order
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/tre-mem.c
+== $WORK/engines/musl-regex/src/src/regex/tre-mem.c
 cortex-m4  (thumb2, gcc 10.3): text=232 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=244 data=0 bss=0
 x86-64     (clang 21):         text=379 data=0
@@ -54,11 +54,11 @@ x86-64     (clang 21):         text=379 data=0
       36  .text.__tre_mem_destroy
       30  .text.__tre_mem_new_impl
 ### measure.sh with x86_64 musl headers (only the x86-64 line is meaningful from this run)
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c
+== $WORK/engines/musl-regex/src/src/regex/regcomp.c
 x86-64     (clang 21):         text=16242 data=208
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regexec.c
+== $WORK/engines/musl-regex/src/src/regex/regexec.c
 x86-64     (clang 21):         text=7689 data=0
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/tre-mem.c
+== $WORK/engines/musl-regex/src/src/regex/tre-mem.c
 x86-64     (clang 21):         text=383 data=0
 ### Cortex-M4 objects for nm -u and stack usage (same flags as measure.sh + -fstack-usage)
 --- arm-none-eabi-nm -u (undefined = external deps), per object:
@@ -118,46 +118,46 @@ towupper
 wctype
 --- arm-none-eabi-size (all three):
    text	   data	    bss	    dec	    hex	filename
-   9285	      0	      0	   9285	   2445	/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/regcomp.m4.o
-   3792	      0	      0	   3792	    ed0	/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/regexec.m4.o
-    232	      0	      0	    232	     e8	/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/tre-mem.m4.o
+   9285	      0	      0	   9285	   2445	$WORK/engines/musl-regex/regcomp.m4.o
+   3792	      0	      0	   3792	    ed0	$WORK/engines/musl-regex/regexec.m4.o
+    232	      0	      0	    232	     e8	$WORK/engines/musl-regex/tre-mem.m4.o
 --- stack usage (.su):
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:386:1:tre_stack_pop_int	0	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:387:1:tre_stack_pop_voidptr	0	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:441:1:tre_compare_lit	0	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:1189:1:tre_purge_regset	20	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:324:1:tre_stack_destroy	8	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:337:1:tre_stack_push	16	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:379:1:tre_stack_push_voidptr	0	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:2140:1:tre_match_empty	40	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:378:1:tre_stack_push_int	0	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:456:23:tre_new_lit	24	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:141:1:tre_ast_new_node	24	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:170:1:tre_ast_new_iter	32	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:154:1:tre_ast_new_literal	32	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:1111:1:tre_add_tag_left	32	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:1142:1:tre_add_tag_right	32	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:1209:1:tre_add_tags	96	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:2026:1:tre_set_empty	16	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:2042:1:tre_set_one	24	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:2065:1:tre_set_union	56	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:712:20:parse_dup_count.part.0	8	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:2476:1:tre_make_trans	40	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:2630:1:tre_ast_to_tnfa	32	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:188:1:tre_ast_new_union	32	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:206:1:tre_ast_new_catenation	32	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:1693:1:tre_copy_ast	64	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:615:22:parse_bracket	360	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:797:22:parse_atom	32	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:2913:1:regfree	16	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regcomp.c:2697:1:regcomp	152	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regexec.c:99:1:tre_tag_order	20	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regexec.c:930:1:tre_fill_pmatch	36	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regexec.c:125:1:tre_neg_char_classes_match	24	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/regexec.c:996:1:regexec	128	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/tre-mem.c:53:1:__tre_mem_new_impl	8	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/tre-mem.c:71:1:__tre_mem_destroy	16	static
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/musl-regex/src/src/regex/tre-mem.c:89:1:__tre_mem_alloc_impl	32	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:386:1:tre_stack_pop_int	0	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:387:1:tre_stack_pop_voidptr	0	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:441:1:tre_compare_lit	0	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:1189:1:tre_purge_regset	20	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:324:1:tre_stack_destroy	8	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:337:1:tre_stack_push	16	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:379:1:tre_stack_push_voidptr	0	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:2140:1:tre_match_empty	40	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:378:1:tre_stack_push_int	0	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:456:23:tre_new_lit	24	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:141:1:tre_ast_new_node	24	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:170:1:tre_ast_new_iter	32	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:154:1:tre_ast_new_literal	32	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:1111:1:tre_add_tag_left	32	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:1142:1:tre_add_tag_right	32	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:1209:1:tre_add_tags	96	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:2026:1:tre_set_empty	16	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:2042:1:tre_set_one	24	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:2065:1:tre_set_union	56	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:712:20:parse_dup_count.part.0	8	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:2476:1:tre_make_trans	40	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:2630:1:tre_ast_to_tnfa	32	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:188:1:tre_ast_new_union	32	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:206:1:tre_ast_new_catenation	32	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:1693:1:tre_copy_ast	64	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:615:22:parse_bracket	360	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:797:22:parse_atom	32	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:2913:1:regfree	16	static
+$WORK/engines/musl-regex/src/src/regex/regcomp.c:2697:1:regcomp	152	static
+$WORK/engines/musl-regex/src/src/regex/regexec.c:99:1:tre_tag_order	20	static
+$WORK/engines/musl-regex/src/src/regex/regexec.c:930:1:tre_fill_pmatch	36	static
+$WORK/engines/musl-regex/src/src/regex/regexec.c:125:1:tre_neg_char_classes_match	24	static
+$WORK/engines/musl-regex/src/src/regex/regexec.c:996:1:regexec	128	static
+$WORK/engines/musl-regex/src/src/regex/tre-mem.c:53:1:__tre_mem_new_impl	8	static
+$WORK/engines/musl-regex/src/src/regex/tre-mem.c:71:1:__tre_mem_destroy	16	static
+$WORK/engines/musl-regex/src/src/regex/tre-mem.c:89:1:__tre_mem_alloc_impl	32	static
 
 ### Host builds for the differential test (NOT used for size numbers) -- see build_host.sh
 # hostinc/regex.h = stub with musl's regex_t layout so regcomp.c/regexec.c/tre-mem.c compile against the macOS libc

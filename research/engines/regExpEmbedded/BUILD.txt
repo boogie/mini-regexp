@@ -1,5 +1,5 @@
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_charSet.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_charSet.c
+$ sh $WORK/tools/measure.sh $WORK/survey/engines-src/regExpEmbedded/re_charSet.c -I$WORK/survey/engines-src/regExpEmbedded
+== $WORK/survey/engines-src/regExpEmbedded/re_charSet.c
 cortex-m4  (thumb2, gcc 10.3): text=908 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=850 data=0 bss=0
 x86-64     (clang 21):         text=1308 data=0
@@ -12,8 +12,8 @@ x86-64     (clang 21):         text=1308 data=0
       30  .text.addChar
       16  .text.re_isCharInCharSet
 
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpCompiler.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpCompiler.c
+$ sh $WORK/tools/measure.sh $WORK/survey/engines-src/regExpEmbedded/re_regExpCompiler.c -I$WORK/survey/engines-src/regExpEmbedded
+== $WORK/survey/engines-src/regExpEmbedded/re_regExpCompiler.c
 cortex-m4  (thumb2, gcc 10.3): text=1799 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=1763 data=0 bss=0
 x86-64     (clang 21):         text=2622 data=0
@@ -28,47 +28,47 @@ x86-64     (clang 21):         text=2622 data=0
        6  .text.re_compEmitCode
        3  .rodata
 
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c
+$ sh $WORK/tools/measure.sh $WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c -I$WORK/survey/engines-src/regExpEmbedded
+== $WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c
 cortex-m4  (thumb2, gcc 10.3): text=1886 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=1844 data=0 bss=0
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:194:17: error: call to undeclared function 'offsetof'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:194:17: error: call to undeclared function 'offsetof'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
   194 | _Static_assert( offsetof(struct re_matcherPathElement_t, idxI)
       |                 ^
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:194:26: error: expected expression
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:194:26: error: expected expression
   194 | _Static_assert( offsetof(struct re_matcherPathElement_t, idxI)
       |                          ^
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:194:58: error: use of undeclared identifier 'idxI'
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:194:58: error: use of undeclared identifier 'idxI'
   194 | _Static_assert( offsetof(struct re_matcherPathElement_t, idxI)
       |                                                          ^~~~
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:195:29: error: expected expression
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:195:29: error: expected expression
   195 |                 == offsetof(struct re_matcherPathElement_t, idxI_s)
       |                             ^
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:195:61: error: use of undeclared identifier 'idxI_s'
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:195:61: error: use of undeclared identifier 'idxI_s'
   195 |                 == offsetof(struct re_matcherPathElement_t, idxI_s)
       |                                                             ^~~~~~
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:196:30: error: expected expression
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:196:30: error: expected expression
   196 |                 &&  offsetof(struct re_matcherPathElement_t, idxC)
       |                              ^
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:196:62: error: use of undeclared identifier 'idxC'
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:196:62: error: use of undeclared identifier 'idxC'
   196 |                 &&  offsetof(struct re_matcherPathElement_t, idxC)
       |                                                              ^~~~
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:197:33: error: expected expression
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:197:33: error: expected expression
   197 |                     == offsetof(struct re_matcherPathElement_t, idxC_s)
       |                                 ^
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:197:65: error: use of undeclared identifier 'idxC_s'
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:197:65: error: use of undeclared identifier 'idxC_s'
   197 |                     == offsetof(struct re_matcherPathElement_t, idxC_s)
       |                                                                 ^~~~~~
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:198:30: error: expected expression
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:198:30: error: expected expression
   198 |                 &&  offsetof(struct re_matcherPathElement_t, noCapturedGrps)
       |                              ^
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:198:62: error: use of undeclared identifier 'noCapturedGrps'
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:198:62: error: use of undeclared identifier 'noCapturedGrps'
   198 |                 &&  offsetof(struct re_matcherPathElement_t, noCapturedGrps)
       |                                                              ^~~~~~~~~~~~~~
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:199:33: error: expected expression
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:199:33: error: expected expression
   199 |                     == offsetof(struct re_matcherPathElement_t, noCapturedGrps_s)
       |                                 ^
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:199:65: error: use of undeclared identifier 'noCapturedGrps_s'
+$WORK/survey/engines-src/regExpEmbedded/re_regExpMatcher.c:199:65: error: use of undeclared identifier 'noCapturedGrps_s'
   199 |                     == offsetof(struct re_matcherPathElement_t, noCapturedGrps_s)
       |                                                                 ^~~~~~~~~~~~~~~~
 13 errors generated.

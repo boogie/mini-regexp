@@ -1,7 +1,7 @@
-+ S=/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad
-+ M=/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh
-+ cd /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/re1.5
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/compilecode.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
++ S=$WORK
++ M=$WORK/tools/measure.sh
++ cd $WORK/engines/re1.5
++ sh $WORK/tools/measure.sh src/compilecode.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
 == src/compilecode.c
 cortex-m4  (thumb2, gcc 10.3): text=1102 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=1126 data=0 bss=0
@@ -10,7 +10,7 @@ x86-64     (clang 21):         text=1949 data=0
      966  .text._compilecode
       88  .text.re1_5_compilecode
       48  .text.re1_5_sizecode
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/recursiveloop.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
++ sh $WORK/tools/measure.sh src/recursiveloop.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
 == src/recursiveloop.c
 cortex-m4  (thumb2, gcc 10.3): text=306 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=304 data=0 bss=0
@@ -18,7 +18,7 @@ x86-64     (clang 21):         text=572 data=0
 -- cortex-m4 per-function (bytes):
      280  .text.recursiveloop
       26  .text.re1_5_recursiveloopprog
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/charclass.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
++ sh $WORK/tools/measure.sh src/charclass.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
 == src/charclass.c
 cortex-m4  (thumb2, gcc 10.3): text=126 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=126 data=0 bss=0
@@ -26,7 +26,7 @@ x86-64     (clang 21):         text=154 data=0
 -- cortex-m4 per-function (bytes):
       74  .text._re1_5_namedclassmatch
       52  .text._re1_5_classmatch
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh mp_all.c -I.
++ sh $WORK/tools/measure.sh mp_all.c -I.
 == mp_all.c
 cortex-m4  (thumb2, gcc 10.3): text=1530 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=1558 data=0 bss=0
@@ -39,7 +39,7 @@ x86-64     (clang 21):         text=2706 data=0
       52  .text._re1_5_classmatch
       48  .text.re1_5_sizecode
       26  .text.re1_5_recursiveloopprog
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/recursiveloop.c -Isrc
++ sh $WORK/tools/measure.sh src/recursiveloop.c -Isrc
 == src/recursiveloop.c
 cortex-m4  (thumb2, gcc 10.3): text=336 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=328 data=0 bss=0
@@ -48,14 +48,14 @@ x86-64     (clang 21):         text=586 data=0
      296  .text.recursiveloop
       26  .text.re1_5_recursiveloopprog
       14  .rodata.recursiveloop.str1.1
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/backtrack.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
++ sh $WORK/tools/measure.sh src/backtrack.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
 == src/backtrack.c
 cortex-m4  (thumb2, gcc 10.3): text=392 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=396 data=0 bss=0
 x86-64     (clang 21):         text=752 data=0
 -- cortex-m4 per-function (bytes):
      392  .text.re1_5_backtrack
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/sub.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
++ sh $WORK/tools/measure.sh src/sub.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
 == src/sub.c
 cortex-m4  (thumb2, gcc 10.3): text=126 data=0 bss=4
 cortex-m0+ (thumb1, gcc 10.3): text=128 data=0 bss=4
@@ -65,7 +65,7 @@ x86-64     (clang 21):         text=224 data=0
       36  .text.newsub
       24  .text.decref
        8  .text.incref
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/recursive.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
++ sh $WORK/tools/measure.sh src/recursive.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
 == src/recursive.c
 cortex-m4  (thumb2, gcc 10.3): text=322 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=308 data=0 bss=0
@@ -73,7 +73,7 @@ x86-64     (clang 21):         text=548 data=0
 -- cortex-m4 per-function (bytes):
      296  .text.recursive
       26  .text.re1_5_recursiveprog
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/util.c -Isrc
++ sh $WORK/tools/measure.sh src/util.c -Isrc
 == src/util.c
 cortex-m4  (thumb2, gcc 10.3): text=99 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=99 data=0 bss=0
@@ -83,7 +83,7 @@ x86-64     (clang 21):         text=136 data=0
       32  .text.re1_5_fatal
       17  .rodata.re1_5_fatal.str1.1
       14  .rodata.mal.str1.1
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh mp_lib/compilecode.c -Imp_lib -include mpfork_shim.h
++ sh $WORK/tools/measure.sh mp_lib/compilecode.c -Imp_lib -include mpfork_shim.h
 == mp_lib/compilecode.c
 cortex-m4  (thumb2, gcc 10.3): text=1080 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=1106 data=0 bss=0
@@ -93,7 +93,7 @@ x86-64     (clang 21):         text=1953 data=0
       80  .text.re1_5_compilecode
       36  .text.re1_5_sizecode
       22  .text._emit_checked
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh mp_lib/recursiveloop.c -Imp_lib -include mpfork_shim.h
++ sh $WORK/tools/measure.sh mp_lib/recursiveloop.c -Imp_lib -include mpfork_shim.h
 == mp_lib/recursiveloop.c
 cortex-m4  (thumb2, gcc 10.3): text=306 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=304 data=0 bss=0
@@ -101,7 +101,7 @@ x86-64     (clang 21):         text=572 data=0
 -- cortex-m4 per-function (bytes):
      280  .text.recursiveloop
       26  .text.re1_5_recursiveloopprog
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh mp_lib/charclass.c -Imp_lib -include mpfork_shim.h
++ sh $WORK/tools/measure.sh mp_lib/charclass.c -Imp_lib -include mpfork_shim.h
 == mp_lib/charclass.c
 cortex-m4  (thumb2, gcc 10.3): text=150 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=146 data=0 bss=0
@@ -109,7 +109,7 @@ x86-64     (clang 21):         text=211 data=0
 -- cortex-m4 per-function (bytes):
       76  .text._re1_5_classmatch
       74  .text._re1_5_namedclassmatch
-+ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh mpfork_all.c -I.
++ sh $WORK/tools/measure.sh mpfork_all.c -I.
 == mpfork_all.c
 cortex-m4  (thumb2, gcc 10.3): text=1532 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=1558 data=0 bss=0

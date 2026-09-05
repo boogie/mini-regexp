@@ -1,5 +1,5 @@
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1/parse.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1/parse.c
+$ sh $WORK/tools/measure.sh $WORK/survey/engines-src/re1/parse.c -I$WORK/survey/engines-src/re1
+== $WORK/survey/engines-src/re1/parse.c
 cortex-m4  (thumb2, gcc 10.3): text=1715 data=0 bss=28
 cortex-m0+ (thumb1, gcc 10.3): text=1759 data=0 bss=28
 x86-64     (clang 21):         text=2985 data=24
@@ -25,8 +25,8 @@ x86-64     (clang 21):         text=2985 data=24
        7  .rodata.yypgoto
        7  .rodata.yydefgoto
 
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1/compile.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1/compile.c
+$ sh $WORK/tools/measure.sh $WORK/survey/engines-src/re1/compile.c -I$WORK/survey/engines-src/re1
+== $WORK/survey/engines-src/re1/compile.c
 cortex-m4  (thumb2, gcc 10.3): text=759 data=0 bss=4
 cortex-m0+ (thumb1, gcc 10.3): text=731 data=0 bss=4
 x86-64     (clang 21):         text=1367 data=8
@@ -39,8 +39,8 @@ x86-64     (clang 21):         text=1367 data=8
       10  .rodata.count.str1.1
        9  .rodata.emit.str1.1
 
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1/backtrack.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1/backtrack.c
+$ sh $WORK/tools/measure.sh $WORK/survey/engines-src/re1/backtrack.c -I$WORK/survey/engines-src/re1
+== $WORK/survey/engines-src/re1/backtrack.c
 cortex-m4  (thumb2, gcc 10.3): text=267 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=255 data=0 bss=0
 x86-64     (clang 21):         text=475 data=0
@@ -48,8 +48,8 @@ x86-64     (clang 21):         text=475 data=0
      248  .text.backtrack
       19  .rodata.backtrack.str1.1
 
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1/pike.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1/pike.c
+$ sh $WORK/tools/measure.sh $WORK/survey/engines-src/re1/pike.c -I$WORK/survey/engines-src/re1
+== $WORK/survey/engines-src/re1/pike.c
 cortex-m4  (thumb2, gcc 10.3): text=492 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=444 data=0 bss=0
 x86-64     (clang 21):         text=766 data=0
@@ -57,8 +57,8 @@ x86-64     (clang 21):         text=766 data=0
      324  .text.pikevm
      168  .text.addthread
 
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1/recursive.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1/recursive.c
+$ sh $WORK/tools/measure.sh $WORK/survey/engines-src/re1/recursive.c -I$WORK/survey/engines-src/re1
+== $WORK/survey/engines-src/re1/recursive.c
 cortex-m4  (thumb2, gcc 10.3): text=316 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=324 data=0 bss=0
 x86-64     (clang 21):         text=549 data=0
@@ -70,8 +70,8 @@ x86-64     (clang 21):         text=549 data=0
        6  .text.recursiveprog
        6  .text.recursiveloopprog
 
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1/sub.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/re1/sub.c
+$ sh $WORK/tools/measure.sh $WORK/survey/engines-src/re1/sub.c -I$WORK/survey/engines-src/re1
+== $WORK/survey/engines-src/re1/sub.c
 cortex-m4  (thumb2, gcc 10.3): text=126 data=0 bss=4
 cortex-m0+ (thumb1, gcc 10.3): text=128 data=0 bss=4
 x86-64     (clang 21):         text=224 data=0

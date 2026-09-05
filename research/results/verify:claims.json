@@ -64,7 +64,7 @@
   {
    "claim": "Tasmota re1.5 copy measures 1102+336+126 = 1564 B",
    "verdict": "confirmed",
-   "url": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/tasmota-berry/re1.5/",
+   "url": "$WORK/survey/src/tasmota-berry/re1.5/",
    "correction": "re-measured 1102/336/126 with -DTASMOTA"
   },
   {
@@ -130,7 +130,7 @@
   {
    "claim": "JerryScript regexp objects 13873 B of 253707 B jerry-core text (MinSizeRel, stm32f4 toolchain); -DJERRY_BUILTIN_REGEXP=0 fails to build at ecma-builtin-regexp-string-iterator-prototype.c:168",
    "verdict": "confirmed",
-   "url": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/jerryscript/BUILD.txt",
+   "url": "$WORK/engines/jerryscript/BUILD.txt",
    "correction": "from the recorded build logs (not rebuilt): build1 exit 0, build0 exit 2 with first errors at ecma-builtin-regexp-string-iterator-prototype.c:64/69 (undeclared ECMA_OBJECT_CLASS_REGEXP_STRING_ITERATOR / ecma_regexp_string_iterator_t), i.e. same file, earlier line than :168"
   },
   {
@@ -238,7 +238,7 @@
   {
    "claim": "Reference sizes (Cortex-M4 -Os text): tiny-regex-c 1532; re1.5 1566; slre 1946; Espruino 2267; Lua ~2995; T-Rex 3144; Jim 5166; Duktape 5591; mquickjs 7385; Janet PEG 12541; QuickJS 13334 (+49046); JerryScript 13873",
    "verdict": "confirmed",
-   "url": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/survey-refs/BUILD.txt",
+   "url": "$WORK/engines/survey-refs/BUILD.txt",
    "correction": "every number except JerryScript re-run today with measure.sh and reproduced exactly; JerryScript taken from the recorded cross-build log"
   },
   {
@@ -250,7 +250,7 @@
   {
    "claim": "ISA density own measurement: Xtensa LX6 = 0.94-1.31x Thumb-2 (median ~1.12x), RV32IMC = 1.26-1.45x, RV32IM = 1.65-1.99x; dre with -mlongcalls 2129 -> 2325 B = 1.23x",
    "verdict": "confirmed",
-   "url": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/spikes/size_tricks/isa_compare2.sh",
+   "url": "$WORK/spikes/size_tricks/isa_compare2.sh",
    "correction": "re-ran isa_compare2.sh (arm gcc 10.3.1, xtensa-esp32-elf-gcc 8.4.0, riscv32-esp-elf-gcc 12.2.0): current dre.c 1886 -> xtensa 2129 (1.13x), rv32imc 2404 (1.27x), rv32im 3336 (1.77x); re.c 1.12/1.39/1.87; compilecode 1.17/1.45/1.99; charclass 1.31/1.43/1.65; -mlongcalls 2325 (=1.23x of 1886). isa_compare2.out's dre row (m4=1906, 1.12x) was an earlier dre.c revision"
   },
   {
@@ -358,13 +358,13 @@
   {
    "claim": "UTF-8 spike: total UTF-8 support = 144 B by #ifdef removal (1886 -> 1742); decoder 64 B; backward step 14 B",
    "verdict": "confirmed",
-   "url": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/spikes/dre/variants.out",
+   "url": "$WORK/spikes/dre/variants.out",
    "correction": "rebuilt dre.c today: -Os 1886, -DDRE_NO_UTF8 1742 (=144 B); per-function listing at -Os -fno-inline shows .text.decode 64 and .text.prev_cp 14"
   },
   {
    "claim": "UTF-8 spike: validating decoder is 140 B (2.2x); the ASCII-gate fold fix is 6 bytes; the corpus caught 'ő' matching 'ű' under /i",
    "verdict": "unverified",
-   "url": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/spikes/dre/",
+   "url": "$WORK/spikes/dre/",
    "correction": "no artifact (log, variant, or diff) recording the 140 B validating decoder, the 6-byte fix or the ő/ű failure was found under $S/spikes; only the final dre.c and variants.out exist"
   }
  ]

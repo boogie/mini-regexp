@@ -1,9 +1,9 @@
 {
  "name": "quickjs-libregexp",
- "url": "https://github.com/bellard/quickjs (git clone --depth 1 on 2026-09-04 into /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/quickjs-libregexp/src; commit 04be246001599f5995fa2f2d8c91a0f198d3f34c, VERSION file 2026-06-04; files read: libregexp.c, libregexp.h, libregexp-opcode.h, libunicode.h, libunicode.c (range tables), cutils.h, cutils.c (unicode_from_utf8), quickjs.c (lre_exec call site), Makefile, LICENSE (MIT))",
+ "url": "https://github.com/bellard/quickjs (git clone --depth 1 on 2026-09-04 into $WORK/engines/quickjs-libregexp/src; commit 04be246001599f5995fa2f2d8c91a0f198d3f34c, VERSION file 2026-06-04; files read: libregexp.c, libregexp.h, libregexp-opcode.h, libunicode.h, libunicode.c (range tables), cutils.h, cutils.c (unicode_from_utf8), quickjs.c (lre_exec call site), Makefile, LICENSE (MIT))",
  "commit": "04be246001599f5995fa2f2d8c91a0f198d3f34c",
  "files_measured": "src/libregexp.c (3448 lines) compiled alone with -I src (headers: libregexp.h, libregexp-opcode.h, libunicode.h, cutils.h, list.h). It is the whole engine (parser + bytecode compiler + backtracking VM) but NOT self-contained: it references libunicode.c (case folding, CharRange set ops, \\p{} property tables) and cutils.c (DynBuf growable buffer, UTF-8 decode, rqsort). Those two TUs measured separately with the same flags: libunicode.c Cortex-M4 text=49046 (M0+ 49176, x86-64 55170+456 data; 30600 of it is retained after --gc-sections when linked with libregexp, 6734 if the \\p{} lookups are stubbed), cutils.c text=2079 (1747 retained). CONFIG_ALL_UNICODE is #defined unconditionally in libunicode.h:35, so -DCONFIG_ALL_UNICODE produced a byte-identical object. TEST/DUMP_REOP/DUMP_EXEC undefined -> no dump/test code in the object. Nothing excluded from libregexp.c.",
- "build_cmd_file": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/quickjs-libregexp/BUILD.txt",
+ "build_cmd_file": "$WORK/engines/quickjs-libregexp/BUILD.txt",
  "cortex_m4_text": 13334,
  "cortex_m4_data": 0,
  "cortex_m4_bss": 0,

@@ -1,8 +1,8 @@
 # tiny-regex-c build/measure log  (commit f2632c6d9ed25272987471cdb8b70395c2460bdb, 2024-10-25)
 # git clone --depth 1 https://github.com/kokke/tiny-regex-c src
 
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/tiny-regex-c/src/re.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/tiny-regex-c/src
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/tiny-regex-c/src/re.c
+$ sh $WORK/tools/measure.sh $WORK/engines/tiny-regex-c/src/re.c -I$WORK/engines/tiny-regex-c/src
+== $WORK/engines/tiny-regex-c/src/re.c
 cortex-m4  (thumb2, gcc 10.3): text=1532 data=0 bss=280
 cortex-m0+ (thumb1, gcc 10.3): text=1482 data=0 bss=280
 x86-64     (clang 21):         text=2645 data=520
@@ -19,7 +19,7 @@ x86-64     (clang 21):         text=2645 data=520
       22  .text.re_match
       18  .rodata.re_print.str1.1
 
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/tiny-regex-c/analyze_m4.sh
+$ sh $WORK/engines/tiny-regex-c/analyze_m4.sh
 -- arm-none-eabi-nm -u re_m4.o (external deps):
          U _ctype_
          U memcpy
@@ -79,7 +79,7 @@ re.c:(.text.matchcharclass+0xd4): undefined reference to `_ctype_'
 re.c:(.text.matchone+0x98): undefined reference to `_ctype_'
 collect2: error: ld returned 1 exit status
 
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/tiny-regex-c/analyze_m4b.sh
+$ sh $WORK/engines/tiny-regex-c/analyze_m4b.sh
 -- which functions reference memcpy/printf/putchar/_ctype_:
    1 [.text.matchalphanum]: _ctype_
    1 [.text.matchcharclass]: _ctype_
@@ -165,11 +165,11 @@ total 3176
 0000000000000c40 b _re_compile.ccl_buf
 
 # --- differential test (corpus_seed1.jsonl, Python re oracle) ---
-$ python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py ./driver /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/corpus_seed1.jsonl 0     # plain cc build (PRIMARY)
+$ python3 $WORK/tools/difftest.py ./driver $WORK/tools/corpus_seed1.jsonl 0     # plain cc build (PRIMARY)
 #   -> cases=2088 checked=2081 pass=1224 fail=857 timeouts=0
-$ python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py ./driver_uc /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/corpus_seed1.jsonl 0  # -funsigned-char (matches ARM target char)
+$ python3 $WORK/tools/difftest.py ./driver_uc $WORK/tools/corpus_seed1.jsonl 0  # -funsigned-char (matches ARM target char)
 #   -> pass=1231 fail=850
-$ python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py ./driver_dot0 ... # -DRE_DOT_MATCHES_NEWLINE=0 -> pass=1226 fail=855
-$ python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py ./driver_uc_dot0 ... # both -> pass=1233 fail=848
-$ python3 classify.py ./driver /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/corpus_seed1.jsonl ./driver_uc   # -> classify_primary.txt, driver.classify.json
+$ python3 $WORK/tools/difftest.py ./driver_dot0 ... # -DRE_DOT_MATCHES_NEWLINE=0 -> pass=1226 fail=855
+$ python3 $WORK/tools/difftest.py ./driver_uc_dot0 ... # both -> pass=1233 fail=848
+$ python3 classify.py ./driver $WORK/tools/corpus_seed1.jsonl ./driver_uc   # -> classify_primary.txt, driver.classify.json
 $ time ./driver 'a*a*a*a*a*a*a*a*b' 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'   # 1.97 s -> exponential backtracking

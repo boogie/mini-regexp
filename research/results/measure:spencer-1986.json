@@ -3,7 +3,7 @@
  "url": "https://github.com/garyhouston/regexp.old (git clone, single commit c7db272ecea9e0a6b2139585cd38886c500efe35 'import' 2014-12-26; this is Henry Spencer's 1986 regexp(3) as revised 1993/1995 for 'Software Solutions in C' - README and COPYRIGHT read from src/, GitHub page fetched)",
  "commit": "c7db272ecea9e0a6b2139585cd38886c500efe35",
  "files_measured": "src/regexp.c (1093 lines; regcomp+regexec = the whole engine) measured with -Isrc. Also measured but NOT counted: src/regsub.c (regsub() substitution helper, 221 B) and src/regerror.c (default error handler = fprintf+exit, 47 B; replaced by a stub in any embedding). Not measured: try.c, timer.c (test/timing programs).",
- "build_cmd_file": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/spencer-1986/BUILD.txt",
+ "build_cmd_file": "$WORK/engines/spencer-1986/BUILD.txt",
  "cortex_m4_text": 2751,
  "cortex_m4_data": 0,
  "cortex_m4_bss": 0,

@@ -1,24 +1,24 @@
-# subreg — exact commands run (auditor re-run). S=/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad
+# subreg — exact commands run (auditor re-run). S=$WORK
 # Source: https://github.com/mattbucknall/subreg  commit e0c0a21bb5ac9d7fc3859a41736312f6b8148584 (2025-10-18), shallow clone into $S/engines/subreg/src
-git clone --depth 1 https://github.com/mattbucknall/subreg.git /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/src
+git clone --depth 1 https://github.com/mattbucknall/subreg.git $WORK/engines/subreg/src
 
 # (3) size measurement — engine core = src/subreg.c only (subreg.h is header-only; tests/ excluded)
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/src/subreg.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/src        # output saved in measure.out
+$WORK/tools/measure.sh $WORK/engines/subreg/src/subreg.c -I$WORK/engines/subreg/src        # output saved in measure.out
 #   cortex-m4 text=1704 data=0 bss=0 | cortex-m0+ text=1556 | x86-64 text=2536
 #   per-function (all 12 are engine functions; nothing excluded; sum = 1704):
 #   788 parse_literal, 292 decode_non_class_metacharacter, 178 parse_alternation, 128 subreg_match, 104 skip_block,
 #   66 decode_hex, 38 match_char.isra.0, 32 match_word, 28 match_hexadecimal, 20 match_whitespace, 18 invert_match, 12 match_digit
 
 # (4) Cortex-M4 object with identical flags, then nm -u (run under sh: zsh does not word-split $COMMON)
-sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/build_m4.sh                                                    # output saved in nm.out ; nm -u printed NOTHING (zero externals)
+sh $WORK/engines/subreg/build_m4.sh                                                    # output saved in nm.out ; nm -u printed NOTHING (zero externals)
 
 # stack usage per function (RAM model)
 sh -c 'COMMON="-Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w"; arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb $COMMON -fstack-usage -Isrc -c src/subreg.c -o subreg-m4-su.o && cat subreg-m4-su.su'   # stack.out
 
 # (6) host driver + difftest
-cc -O1 -Wall -Wextra -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/src -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/engine_cli /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/driver.c /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/src/subreg.c
-python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/engine_cli /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/corpus_seed1.jsonl 40      # difftest.out
+cc -O1 -Wall -Wextra -I$WORK/engines/subreg/src -o $WORK/engines/subreg/engine_cli $WORK/engines/subreg/driver.c $WORK/engines/subreg/src/subreg.c
+python3 $WORK/tools/difftest.py $WORK/engines/subreg/engine_cli $WORK/tools/corpus_seed1.jsonl 40      # difftest.out
 # (7) failure classification (re-runs the corpus, buckets each failure, verifies possessive bucket with Python 3.11 possessive/atomic oracle)
-python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/classify.py                                                          # classify.out
+python3 $WORK/engines/subreg/classify.py                                                          # classify.out
 # hang reproduction through the raw API (no driver): hang.c calls subreg_match("(?:a*)*","b",...) -> never returns
-cc -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/src -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/hang /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/hang.c /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/subreg/src/subreg.c
+cc -I$WORK/engines/subreg/src -o $WORK/engines/subreg/hang $WORK/engines/subreg/hang.c $WORK/engines/subreg/src/subreg.c

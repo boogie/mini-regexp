@@ -17,3 +17,23 @@ agents; every number has its commands recorded.
 
 Measurement protocol: `tools/measure.sh FILE.c`, engine translation units only, no test/debug
 code, `.text` includes `.rodata`.
+
+## Reading the BUILD.txt files
+
+Each `engines/<name>/BUILD.txt` is a transcript of the commands actually run to fetch, build and
+measure that engine, including the upstream URL and the pinned commit. Two placeholders stand in
+for machine-specific paths:
+
+- `$WORK` — a scratch directory where sources were cloned and objects built
+- `$REPO` — the root of this repository
+
+Set both and the transcripts replay:
+
+```sh
+export REPO=$PWD
+export WORK=$(mktemp -d)
+```
+
+Engine sources are not vendored here; only the fetch command, the pinned commit and the
+measurement output are. That keeps the repository small and makes each measurement independently
+checkable against upstream.

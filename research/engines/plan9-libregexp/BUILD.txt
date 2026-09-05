@@ -1,7 +1,7 @@
 # plan9-libregexp — Plan 9 / plan9port libregexp (Rob Pike's Pike-VM NFA regexp, UTF-8 aware)
 # All paths relative to this directory:
-#   /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/plan9-libregexp
-# S = /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad
+#   $WORK/engines/plan9-libregexp
+# S = $WORK
 # NOTE: zsh does not word-split $VAR — every flag list below is spelled out. `diff`/`grep` are rewritten by the
 # rtk hook in this environment; rtk's diff summary mis-reported the headers as identical, so cmp(1) is used.
 

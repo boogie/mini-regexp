@@ -1,5 +1,5 @@
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/measure/remimu_wrap.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/remimu
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/measure/remimu_wrap.c
+$ sh $WORK/tools/measure.sh $WORK/survey/measure/remimu_wrap.c -I$WORK/survey/engines-src/remimu
+== $WORK/survey/measure/remimu_wrap.c
 cortex-m4  (thumb2, gcc 10.3): text=7345 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=7509 data=0 bss=0
 x86-64     (clang 21):         text=9659 data=0

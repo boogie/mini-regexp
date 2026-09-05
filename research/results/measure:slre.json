@@ -3,7 +3,7 @@
  "url": "https://github.com/cesanta/slre (git clone --depth 1, commit b92b363aa7a7814b8d224f1007503802d702872a, 2026-08-26; docs read from src/docs/syntax.md, api.md, overview.md)",
  "commit": "b92b363aa7a7814b8d224f1007503802d702872a",
  "files_measured": "src/slre.c (single engine TU, 437 lines, with src/slre.h). unit_test.c NOT measured. Whole file = engine; nothing excluded.",
- "build_cmd_file": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/slre/BUILD.txt",
+ "build_cmd_file": "$WORK/engines/slre/BUILD.txt",
  "cortex_m4_text": 1946,
  "cortex_m4_data": 0,
  "cortex_m4_bss": 0,

@@ -1,5 +1,5 @@
 # slre (cesanta/slre) build + measurement log
-# All paths relative to $S = /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad
+# All paths relative to $S = $WORK
 # Source: https://github.com/cesanta/slre  commit b92b363aa7a7814b8d224f1007503802d702872a (2026-08-26 "Fix typo in README documentation reference")
 cd $S/engines/slre
 git clone --depth 1 https://github.com/cesanta/slre.git src

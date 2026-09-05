@@ -1,7 +1,7 @@
 # pike-tpop — Kernighan/Pike "A Regular Expression Matcher" (Beautiful Code ch.1 / TPOP 9.2)
 # All paths relative to this directory:
-#   /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/pike-tpop
-# S = /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad
+#   $WORK/engines/pike-tpop
+# S = $WORK
 
 # 1. Source acquisition (2026-09-04)
 curl -sSL -o beautiful.html "https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html"

@@ -1,5 +1,5 @@
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/quickjs/libregexp.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/quickjs
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/quickjs/libregexp.c
+$ sh $WORK/tools/measure.sh $WORK/survey/src/quickjs/libregexp.c -I$WORK/survey/src/quickjs
+== $WORK/survey/src/quickjs/libregexp.c
 cortex-m4  (thumb2, gcc 10.3): text=13334 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=13736 data=0 bss=0
 x86-64     (clang 21):         text=24609 data=24
@@ -63,8 +63,8 @@ x86-64     (clang 21):         text=24609 data=24
        4  .text.lre_get_flags
        4  .text.lre_get_capture_count
 
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/quickjs/libunicode.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/quickjs
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/quickjs/libunicode.c
+$ sh $WORK/tools/measure.sh $WORK/survey/src/quickjs/libunicode.c -I$WORK/survey/src/quickjs
+== $WORK/survey/src/quickjs/libunicode.c
 cortex-m4  (thumb2, gcc 10.3): text=49046 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=49176 data=0 bss=0
 x86-64     (clang 21):         text=55170 data=456
@@ -198,8 +198,8 @@ x86-64     (clang 21):         text=55170 data=456
        4  .rodata.unicode_prop_Emoji_Keycap_Sequence_table
        3  .rodata.CSWTCH.178
 
-$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/quickjs/cutils.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/quickjs
-== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/quickjs/cutils.c
+$ sh $WORK/tools/measure.sh $WORK/survey/src/quickjs/cutils.c -I$WORK/survey/src/quickjs
+== $WORK/survey/src/quickjs/cutils.c
 cortex-m4  (thumb2, gcc 10.3): text=2079 data=0 bss=0
 cortex-m0+ (thumb1, gcc 10.3): text=2123 data=0 bss=0
 x86-64     (clang 21):         text=4019 data=0

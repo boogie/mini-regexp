@@ -1,1 +1,1 @@
-cd /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/librxvm && for f in *.c; do sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh $f -I.; done  # eriknyquist/librxvm master (2018-06-23) librxvm/*.c
+cd $WORK/engines/librxvm && for f in *.c; do sh $WORK/tools/measure.sh $f -I.; done  # eriknyquist/librxvm master (2018-06-23) librxvm/*.c

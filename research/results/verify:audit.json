@@ -1,6 +1,6 @@
 {
  "label": "verify:audit",
- "toolchain": "arm-none-eabi-gcc 10.3.1 (GNU Arm Embedded 10.3-2021.10), Apple clang 21.0.0; tools/measure.sh flags unchanged; all commands re-run from each engine's BUILD.txt; audit artefacts in /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/audit (trc_audit.sh, lua_audit2.sh, lua_wrap_search.c, probe.sh, rerun2_*.txt)",
+ "toolchain": "arm-none-eabi-gcc 10.3.1 (GNU Arm Embedded 10.3-2021.10), Apple clang 21.0.0; tools/measure.sh flags unchanged; all commands re-run from each engine's BUILD.txt; audit artefacts in $WORK/audit (trc_audit.sh, lua_audit2.sh, lua_wrap_search.c, probe.sh, rerun2_*.txt)",
  "audited": [
   {
    "name": "tiny-regex-c",

@@ -1,33 +1,33 @@
-# T-Rex 1.3 (Alberto Demichelis) — exact commands run (auditor re-run).  S=/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad   E=/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex
+# T-Rex 1.3 (Alberto Demichelis) — exact commands run (auditor re-run).  S=$WORK   E=$WORK/engines/t-rex
 # Sources:
 #  (primary, C)  http://tiny-rex.sourceforge.net/  -> tarball https://sourceforge.net/projects/tiny-rex/files/t-rex/trex%201.3/trex_1_3.tar.gz/download
 #                sha256 059c070155d9e93dac44a977d6d6e770a7e5d0059b053f0e4b7eab0b57732796  (tar dated 2006-08-20), extracted to E/sf/trex13/trex/{trex.c,trex.h,readme.txt,history.txt,TRexpp.h,test.c}
 #  (secondary, C++ port) https://github.com/albertodemichelis/squirrel  commit f9267f2f2a9afa1face89d8ea078c686331e30d1 (2026-02-28), file sqstdlib/sqstdrex.cpp
-curl -sSL -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sf/trex_1_3.tar.gz "https://sourceforge.net/projects/tiny-rex/files/t-rex/trex%201.3/trex_1_3.tar.gz/download"
-mkdir -p /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sf/trex13 && tar xzf /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sf/trex_1_3.tar.gz -C /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sf/trex13
-git clone --depth 1 https://github.com/albertodemichelis/squirrel /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/squirrel
+curl -sSL -o $WORK/engines/t-rex/sf/trex_1_3.tar.gz "https://sourceforge.net/projects/tiny-rex/files/t-rex/trex%201.3/trex_1_3.tar.gz/download"
+mkdir -p $WORK/engines/t-rex/sf/trex13 && tar xzf $WORK/engines/t-rex/sf/trex_1_3.tar.gz -C $WORK/engines/t-rex/sf/trex13
+git clone --depth 1 https://github.com/albertodemichelis/squirrel $WORK/engines/t-rex/squirrel
 
 # (3) size — engine core = sf/trex13/trex/trex.c only (trex.h header-only; test.c and TRexpp.h excluded). _DEBUG not defined -> dump code not compiled.
-sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sf/trex13/trex/trex.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sf/trex13/trex                     # -> E/measure.out
+sh $WORK/tools/measure.sh $WORK/engines/t-rex/sf/trex13/trex/trex.c -I$WORK/engines/t-rex/sf/trex13/trex                     # -> E/measure.out
 #   cortex-m4 text=2929 data=0 bss=0 | cortex-m0+ text=2855 | x86-64 text=5559 ; all 16 functions are engine code, nothing excluded (sum = 2929)
 
 # (4) Cortex-M4 object with identical flags, nm -u, defined symbols with sizes, -fstack-usage
-sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/build_m4.sh                                                                          # -> E/nm.out  (U: _ctype_ free longjmp malloc memset realloc setjmp strlen)
+sh $WORK/engines/t-rex/build_m4.sh                                                                          # -> E/nm.out  (U: _ctype_ free longjmp malloc memset realloc setjmp strlen)
 
 # secondary: Squirrel C++ port, same flags but arm-none-eabi-g++ -std=gnu++11 -fno-exceptions -fno-rtti
-sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/build_cpp.sh                                                                         # -> E/cpp_measure.out (cortex-m4 text=3144, m0+ 3088, x86-64 6166)
+sh $WORK/engines/t-rex/build_cpp.sh                                                                         # -> E/cpp_measure.out (cortex-m4 text=3144, m0+ 3088, x86-64 6166)
 
 # struct / jmp_buf sizes on the target (RAM model)
-arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sf/trex13/trex -c /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sizes.c -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sizes-m4.o && arm-none-eabi-nm -S /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sizes-m4.o
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -I$WORK/engines/t-rex/sf/trex13/trex -c $WORK/engines/t-rex/sizes.c -o $WORK/engines/t-rex/sizes-m4.o && arm-none-eabi-nm -S $WORK/engines/t-rex/sizes-m4.o
 
 # (6) host driver + difftest
-cc -O1 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sf/trex13/trex -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/engine_cli /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/driver.c /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sf/trex13/trex/trex.c
-python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/engine_cli /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/corpus_seed1.jsonl 60                  # -> E/difftest.out
+cc -O1 -w -I$WORK/engines/t-rex/sf/trex13/trex -o $WORK/engines/t-rex/engine_cli $WORK/engines/t-rex/driver.c $WORK/engines/t-rex/sf/trex13/trex/trex.c
+python3 $WORK/tools/difftest.py $WORK/engines/t-rex/engine_cli $WORK/tools/corpus_seed1.jsonl 60                  # -> E/difftest.out
 # (7) failure classification (re-runs corpus, one bucket per failure)
-python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/classify.py                                                                     # -> E/classify.out
+python3 $WORK/engines/t-rex/classify.py                                                                     # -> E/classify.out
 # raw-API reproductions with AddressSanitizer (no driver): empty pattern crash, reads past end of string, non-ASCII rejection
-cc -g -O0 -w -fsanitize=address -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sf/trex13/trex -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/crash /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/crash.c /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/sf/trex13/trex/trex.c
-/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/crash empty ; /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/crash 'a.' 'a' ; /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/crash '\D\W\S' '1 a' ; /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/t-rex/crash 'é' 'é'
+cc -g -O0 -w -fsanitize=address -I$WORK/engines/t-rex/sf/trex13/trex -o $WORK/engines/t-rex/crash $WORK/engines/t-rex/crash.c $WORK/engines/t-rex/sf/trex13/trex/trex.c
+$WORK/engines/t-rex/crash empty ; $WORK/engines/t-rex/crash 'a.' 'a' ; $WORK/engines/t-rex/crash '\D\W\S' '1 a' ; $WORK/engines/t-rex/crash 'é' 'é'
 
 # ---- 2026-09-04 re-verification pass (second agent run): every command above re-executed; all numbers reproduced
 #   measure.sh -> cortex-m4 text=2929 data=0 bss=0 (sum of 16 .text + 5 .rodata sections = 2929), m0+ 2855, x86-64 5559

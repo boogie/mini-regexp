@@ -25,6 +25,10 @@ Two engines are maintained deliberately, for two different situations.
 Measured with `tools/measure.sh`: `arm-none-eabi-gcc 10.3.1 -Os -ffreestanding`, engine
 translation unit only, `.text` including `.rodata`. Both have zero `data` and `bss`.
 
+Sizes throughout this repository are for **Arm Cortex-M4** and **Cortex-M0+**, the 32-bit
+microcontroller cores in parts like the nRF52 — not Apple Silicon. x86-64 is reported alongside
+them because it is what most contributors build on.
+
 Read the two numbers for what they are. **Product A's 546 bytes is a matcher VM, not an engine
 that accepts a pattern** — patterns are compiled on a host and the bytecode is additional flash
 per pattern, so a device running A cannot take a pattern from a config file or the network.

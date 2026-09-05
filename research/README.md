@@ -3,7 +3,7 @@
 Material behind `docs/feasibility.md` (2026-09-04). Produced by automated survey/measurement
 agents; every number has its commands recorded.
 
-- `results/measure:*.json` — per-engine measurements: Cortex-M4 / M0+ / x86-64 `.text` at `-Os`,
+- `results/measure:*.json` — per-engine measurements: Cortex-M4 / Cortex-M0+ / x86-64 `.text` at `-Os`,
   per-function breakdown, libc dependencies, RAM model, differential-test results with failure
   classification.
 - `results/survey*.json` — catalog of 51 C regex engines, the embedded-language survey with

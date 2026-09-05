@@ -13,7 +13,7 @@ set**, not smallest program that can recognize any regular-expression subset.
 - Cortex-M0+ carries a caveat: Thumb-1 emits a switch jump table for the opcode dispatch, so the
   object is 538 bytes but pulls `__gnu_thumb1_case_uqi` from libgcc, linking to about 560 bytes.
   Building with `-fno-jump-tables` gives a dependency-free 586 bytes. Which of the two is the
-  published M0+ number is an open decision (`DECISIONS.md`). Object `.text` alone would have
+  published Cortex-M0+ number is an open decision (`DECISIONS.md`). Object `.text` alone would have
   hidden this, which is why undefined symbols are now reported for both ARM targets.
 - Hard gate: 600 bytes.
 - Stack is reported separately: 64 static bytes for `re_match`, with a transient 12-byte UTF-8

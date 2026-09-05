@@ -110,7 +110,7 @@ Each of these has a measured answer already, recorded with its numbers in `DECIS
 - **Bitmap character classes**: more expensive than the comparisons they replace, and they would
   introduce `.rodata` where there is none.
 - **`__builtin_clz` in the decoder**: 4 bytes smaller on Cortex-M4, but pulls `__clzsi2` from
-  libgcc on M0+ and fails the undefined-symbol gate.
+  libgcc on Cortex-M0+ and fails the undefined-symbol gate.
 - **`-ffixed-r8` … `-ffixed-r11`**: all worse. Taking high registers away with a flag produces
   spills, not better allocation.
 - **Hand-written assembly**: measured at 46 bytes smaller with a C fallback, and rejected. It made

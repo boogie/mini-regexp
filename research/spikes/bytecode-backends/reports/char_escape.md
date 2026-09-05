@@ -1,6 +1,6 @@
 # char_escape
 
-CHAR and escaped variable-width branches. It fits the 600-byte M4 VM ceiling.
+CHAR and escaped variable-width branches. It fits the 600-byte Cortex-M4 VM ceiling.
 
 ## Measured sizes
 

@@ -1,6 +1,6 @@
 # baseline
 
-Unmodified instruction format; the readable experimental VM reproduces the original 546-byte M4 object.
+Unmodified instruction format; the readable experimental VM reproduces the original 546-byte Cortex-M4 object.
 
 ## Measured sizes
 

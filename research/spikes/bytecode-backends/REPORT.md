@@ -10,11 +10,11 @@ The measured choice under the 600-byte Cortex-M4 VM ceiling is **CHAR + escaped 
 
 Toolchain: arm-none-eabi-gcc (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release). The exact flags and snapshot SHA-256 hashes are in results.json.
 
-Object flash means .text + .rodata + initialized data, consistent with tools/measure.sh. Linked flash includes alignment and any pulled-in libgcc routines, with no libc or startup. M0+ needs __gnu_thumb1_case_uqi in several builds; omitting it would undercount the image. The linked images have no unresolved symbols. Pattern bytecode is additional to VM flash. JavaScript build-tool size is not target flash.
+Object flash means .text + .rodata + initialized data, consistent with tools/measure.sh. Linked flash includes alignment and any pulled-in libgcc routines, with no libc or startup. Cortex-M0+ needs __gnu_thumb1_case_uqi in several builds; omitting it would undercount the image. The linked images have no unresolved symbols. Pattern bytecode is additional to VM flash. JavaScript build-tool size is not target flash.
 
 ## All executable VM variants
 
-| Variant | M4 object B | M4 linked B | M0+ linked B | Corpus bytecode B | Saved |
+| Variant | Cortex-M4 object B | Cortex-M4 linked B | Cortex-M0+ linked B | Corpus bytecode B | Saved |
 |---|---:|---:|---:|---:|---:|
 | [baseline](reports/baseline.md) | 546 | 548 | 568 | 261247 | 0.00% |
 | [char](reports/char.md) | 562 | 564 | 580 | 237339 | 9.15% |
@@ -89,7 +89,7 @@ Compiler scratch remains 1016 B. The repacker additionally requires a caller-own
 - Fused-star builds differ on three deliberately small instruction budgets: fusion executes fewer dispatch steps. All three agree when rerun with sufficient budget. The instruction budget remains enforced, but is not an invariant amount of logical regex work across representations.
 - The original compiler rejects 367 corpus rows; their names, patterns and errors are retained in results.json. They are not classified as successful VM tests.
 - C repacker tests exercise zero output capacity, insufficient scratch, too-small output and invalid jump targets. The public trust boundary still excludes arbitrary untrusted bytecode.
-- Host execution validates the C implementations; M4/M0+ figures are cross-compiled and linked. No board timing or hardware execution claim is made.
+- Host execution validates the C implementations; Cortex-M4/Cortex-M0+ figures are cross-compiled and linked. No board timing or hardware execution claim is made.
 
 ## Deployment and further directions
 

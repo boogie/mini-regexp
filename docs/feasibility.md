@@ -17,7 +17,15 @@ Every size below: Cortex-M4 (Thumb-2, nRF52), `arm-none-eabi-gcc 10.3 -Os`, the 
 
 ### 2.1 Measured engines
 
-| Engine | Licence | M4 bytes | Missing for v1 | Corpus (2081) |
+> **The size and corpus columns are measurements; the "Missing versus mini-regexp v1" column is
+> not.** It records the survey's reading of each engine's source and documentation. Running the
+> engines later disproved several of these readings — Lua's `lstrlib` does have word boundaries
+> through `%f[set]`, musl's regex kept TRE's `\d`/`\w`/`\s`/`\b` extensions, and T-Rex's
+> alternation is leftmost-first after all. `docs/comparison.md` supersedes this column: it was
+> produced by building thirteen of these engines and running the same 32-row probe against each.
+> This table is kept because it is what the architectural decisions were made on at the time.
+
+| Engine | Licence | Cortex-M4 bytes | Missing versus mini-regexp v1 | Corpus cases matching the oracle, of 2081 |
 |---|---|---|---|---|
 | Kernighan/Pike TPOP matcher | book | 156 | everything; only `c . ^ $ *`, boolean | 1189* |
 | kokke/tiny-regex-c | Unlicense | 1162 (+257 ctype) | `\|`, groups, `{n,m}`, lazy, UTF-8, `i`; not reentrant (280 B bss) | 1224 |
@@ -30,7 +38,7 @@ Every size below: Cortex-M4 (Thumb-2, nRF52), `arm-none-eabi-gcc 10.3 -Os`, the 
 | Espruino RegExp | MPL-2 | 2267 | `\|` inside a group, `{n,m}`, lazy; needs a JsVar host | not measured |
 | rsc/re1 (Cox) | BSD | 2468 | classes, `^ $`, `\d\w\s`, `{n,m}`, `i`; malloc + yacc | 707 |
 | Henry Spencer 1986 | own | 2751 | `(?:)`, lazy, `{n,m}`, `\d\w\s`, `i`; malloc | 1029 |
-| T-Rex (Squirrel) | zlib | 2929 | lazy, `i`, UTF-8; malloc+setjmp; not leftmost-first | 628 |
+| T-Rex (Squirrel) | zlib | 2929 | lazy, `i`, UTF-8; malloc+setjmp | 628 |
 | Plan 9 libregexp | MIT | 3137 (+206 UTF-8) | `{n,m}`, lazy, `\d\w\s`, `i`; **33 KB RAM** per pattern | 1105 |
 | Jim Tcl jimregexp | BSD-2 | 5166 | complete, but 2.5x the budget | not measured |
 | mujs regexp.c | ISC | ~5400 | complete JS subset, 2.7x the budget | not measured |
@@ -39,7 +47,7 @@ Every size below: Cortex-M4 (Thumb-2, nRF52), `arm-none-eabi-gcc 10.3 -Os`, the 
 | musl/TRE (POSIX) | MIT | 13309 (+20 KB libc) | leftmost-longest, not Perl semantics; malloc | 1406 |
 | QuickJS libregexp | MIT | 13334 (+49 KB libunicode) | UTF-16 internally, malloc | 2054 |
 
-\* 42% of the corpus is a "no match" case, so even a dumb engine scores 800-900; of the Pike matcher's 1189, 877 are accidental agreements. The numbers are only meaningful relative to each other.
+\* The corpus column counts how many of 2081 generated cases the engine answered the same as the oracle. It is a weak signal on its own: 42% of the corpus is a "no match" case, so even an engine that understands almost nothing scores 800-900. Of the Pike matcher's 1189, 877 are accidental agreements. Use the numbers only relative to each other, and prefer the feature probe in `docs/comparison.md`.
 \*\* Matcher functions + search loop (the independent re-measurement corrected this from 1393 so that the calculation is the same as for the other engines); the language survey measured ~3.0 KB with all the rodata and the Lua API glue. Not a regexp language, it is here for comparison.
 
 The 2081 cases (`corpus_seed1`, the first corpus, without `\b`; the spikes run on the later `corpus_wb_seed1`, 2095 cases, which does include `\b`): Python `re` (`re.ASCII`) is the oracle, Perl/JS/Python leftmost-first semantics, byte offsets in UTF-8 text, with group spans checked. The failure classification (missing feature / semantics / bug) is given per engine in `research/results/measure:*.json`.
@@ -58,7 +66,7 @@ The 2081 cases (`corpus_seed1`, the first corpus, without `\b`; the spikes run o
 
 What they use today:
 
-| Runtime | Regexp | Engine | Size (M4) |
+| Runtime | Regexp | Engine | Size (Cortex-M4) |
 |---|---|---|---|
 | MicroPython | `re` module, optional | re1.5 | 1566 |
 | CircuitPython | `re` module, disabled on SAMD21 | modified re1.5 copy | 1676 |
@@ -106,7 +114,7 @@ Conclusion: the "regexp is big" perception is real and still shapes decisions to
 
 The survey examined five approaches with measured data (`research/results/survey_algorithms.json`):
 
-| Approach | Code size (M4) | RAM | Worst case |
+| Approach | Code size (Cortex-M4) | RAM | Worst case |
 |---|---|---|---|
 | (a) direct pattern interpretation, recursive backtracking | **1.9 KB measured**, full v1 | 0 heap, 0 static; ~230 B stack per group iteration | exponential, tamed into an error by the step limit (34 B) |
 | (b) bytecode + recursive backtracking (re1.5 style) | 1.56 KB measured without v1, estimated 1.95-2.1 KB for full v1; spike: 2.6 KB | bytecode buffer from the caller; 48 B stack per choice point | exponential; `(a*)*` loops forever without separate protection |
@@ -121,7 +129,7 @@ Why (a):
 - Speed is not a concern (short strings), linear running time would cost 400-800 B (d), and its RAM requirement is worse on an MCU.
 - The recursion depth grows with the length of the text (about 230 B per group iteration), but for short strings it fits in a 2 KB task stack; a step limit and a depth limit are both cheap.
 
-Feature costs (measured by cutting with #ifdef, M4): `\b\B` 106 B, `i` 70 B, `{n,m}` 134 B, step limit 34 B, UTF-8 144 B. Without all five, 1406 B. So the v1 list does not fit in 1000 B, 1500 B needs about two features dropped, and the full v1 fits in 2000 B with headroom.
+Feature costs (measured by cutting with #ifdef, Cortex-M4): `\b\B` 106 B, `i` 70 B, `{n,m}` 134 B, step limit 34 B, UTF-8 144 B. Without all five, 1406 B. So the v1 list does not fit in 1000 B, 1500 B needs about two features dropped, and the full v1 fits in 2000 B with headroom.
 
 ISA multipliers (same C, same flags, measured with the PlatformIO toolchains found on the machine): Xtensa LX6 (ESP32) 1.12x compared to Thumb-2 (median; with `-mlongcalls`, which ESP-IDF always passes, 1.23x), RV32IMC (ESP32-C3/C6) 1.37x. A 1.9 KB Thumb-2 engine is therefore 2.1-2.3 KB on ESP32 and 2.4-2.6 KB on ESP32-C3. The target is below 2000 B on Cortex-M4 and "as small as possible" on ESP32.
 
@@ -142,7 +150,7 @@ seeds, with a Python 3 `re` + `re.ASCII` oracle.
 
 ### 6.1 The three algorithm spikes
 
-| Spike | M4 | M0+ | x86-64 | corpus (seed1) | stack |
+| Spike | Cortex-M4 | Cortex-M0+ | x86-64 | corpus (seed1) | stack |
 |---|---:|---:|---:|---|---|
 | (a) direct pattern interpretation | **1941** | 1975 | 3356 | 2094/2095 | recurses per group iteration |
 | (b) bytecode + recursive backtracking | 2198 | 2220 | 4188 | 2093/2095 | `re_match` 536 B static frame |
@@ -181,7 +189,7 @@ passes it, and why the CI gate lists the undefined symbols.
 
 We measured two forms for the same job — handling patterns that arrive at run time:
 
-| Form | M4 | `i` support |
+| Form | Cortex-M4 | `i` support |
 |---|---:|---|
 | B-lite: C compiler (2250) + VM (546) | **2796** | none |
 | direct: no compilation step | **1849** | none (`-DRE_NO_ICASE`) |
@@ -218,7 +226,7 @@ gcc already decides optimally at `-Os`; with forced inlining it gets 71% bigger.
 
 First round, eight parallel directions, each with independent verification:
 
-| direction | M4 | Δ |
+| direction | Cortex-M4 | Δ |
 |---|---:|---:|
 | Lua/subreg-style rewrite | 1774 | −167 |
 | Thumb-2 micro-optimisation | 1802 | −139 |
@@ -256,7 +264,7 @@ failure is the intended lack of `é`/`É` Unicode folding), 29 M sanitizer cases
 
 Feature ledger on the 1634-byte engine (the size reached by turning the feature off):
 
-| turned off | M4 | Δ |
+| turned off | Cortex-M4 | Δ |
 |---|---:|---:|
 | `RE_NO_ALT` (groups + alternation) | 1190 | −444 |
 | `RE_NO_CLASSES` | 1496 | −138 |
@@ -281,7 +289,7 @@ The estimates in section 5 were made before the spikes. In hindsight:
   product A. A was taken to 546 by moving the compiler off the device, which section 5 did
   not take into account.
 - **It overestimated** the stack consumption: the estimate was ~230 B per group iteration,
-  the measured value is 104 B per iteration (M4) — that is, more favourable, but the fact of
+  the measured value is 104 B per iteration (Cortex-M4) — that is, more favourable, but the fact of
   *linear growth* remained, and this is product B's most important open question (see
   `docs/all-in-engine.md`).
 - **Stale** feature costs: instead of section 5's estimate of `\b\B` 106 / `i` 70 / `{n,m}` 134 /
@@ -293,7 +301,7 @@ The estimates in section 5 were made before the spikes. In hindsight:
 The bytecode saving is a value measured over 3587 **distinct** corpus programs (against the 261247-byte
 baseline), not weighted by frequency.
 
-| variant | M4 VM (object) | bytecode saving |
+| variant | Cortex-M4 VM (object) | bytecode saving |
 |---|---:|---:|
 | baseline | 546 | 0% |
 | **tail-sharing** | **546** | **8.37%** |
@@ -302,7 +310,7 @@ baseline), not weighted by frequency.
 | + merged repetition | 686 | 30.44% |
 
 **Tail-sharing is free.** The VM does not change by a single byte (546 as an object, 548 linked,
-M0+ 568 — byte for byte the baseline), because this is a purely compiler-side post-pass: it decodes
+Cortex-M0+ 568 — byte for byte the baseline), because this is a purely compiler-side post-pass: it decodes
 the finished bytecode into a graph, merges the instructions with completely identical continuations
 (automaton minimisation with a fixed point), then re-encodes. Alternatives that end the same way
 collapse onto a shared tail. Concrete examples: `(a|ab)+` 64→45, `(?:abc|xbc)+` 80→45, `abc|xbc`
@@ -383,12 +391,12 @@ documented claims.
 **Object code size hides what the linker pulls in.** For a long time `measure.sh` reported only the
 object's `.text`. Product A's VM is 538 bytes as an object on Cortex-M0+, but because of the Thumb-1
 jump table it pulls `__gnu_thumb1_case_uqi` in from libgcc, so linked it is about 560 bytes.
-On Cortex-M4 (Thumb-2) this does not happen. The "no libc dependency" claim was therefore true on M4
-and not on M0+ — and the CI gate did not notice, because it only ran `nm -u` on the M4 object.
-Fixed: `measure.sh` lists the undefined symbols for both ARM targets, CI fails on M4 and warns on M0+.
+On Cortex-M4 (Thumb-2) this does not happen. The "no libc dependency" claim was therefore true on Cortex-M4
+and not on Cortex-M0+ — and the CI gate did not notice, because it only ran `nm -u` on the Cortex-M4 object.
+Fixed: `measure.sh` lists the undefined symbols for both ARM targets, CI fails on Cortex-M4 and warns on Cortex-M0+.
 
 The two options as measured: accept the libgcc helper and admit the linked 560 bytes,
-or compile for M0+ with `-fno-jump-tables` and get 586 bytes with no dependency. Open decision.
+or compile for Cortex-M0+ with `-fno-jump-tables` and get 586 bytes with no dependency. Open decision.
 
 Product B (the direct interpreter) is unaffected: its dispatch is an if chain, not a switch, so it is
 clean on both targets.
@@ -420,7 +428,7 @@ Repo layout (proposal):
 ```
 src/re.c src/re.h          the engine, one translation unit, C99, 0 libc
 test/                       unit + corpus + fuzz harness
-tools/measure.sh            size measurement (Cortex-M4, M0+, x86-64)
+tools/measure.sh            size measurement (Cortex-M4, Cortex-M0+, x86-64)
 tools/gen_corpus.py         corpus generator (Python re oracle)
 tools/difftest.py           differential runner
 size_baseline.txt           size gate
@@ -435,10 +443,10 @@ Steps:
 3. **Alternation + groups + `{n,m}` + lazy** the same way, one at a time, size + corpus after every step. 1-2 days.
 4. **UTF-8, `i`, `\b`**, the step limit, error codes, invalid patterns. 1 day.
 5. **Hardening**: fuzzing (ASan/UBSan, libFuzzer), exhaustive enumeration, stack measurement on Cortex-M4 (`-fstack-usage`), documented limits (max captures, max depth, step limit). 1-2 days.
-6. **Size optimisation** only behind green tests, based on the per-function breakdown; target ≤ 1800 B on M4, so that it stays around 2 KB on ESP32 as well.
+6. **Size optimisation** only behind green tests, based on the per-function breakdown; target ≤ 1800 B on Cortex-M4, so that it stays around 2 KB on ESP32 as well.
 7. **Integration example**: a 30-line example of how it is bound into a VM (string + flags → span/capture array), plus a size report for nRF52 and ESP32 (the Xtensa toolchain is under PlatformIO).
 
-Working method: size-driven development. Every commit message contains the M4 byte count; the feature ledger (what each feature costs) is part of the README.
+Working method: size-driven development. Every commit message contains the Cortex-M4 byte count; the feature ledger (what each feature costs) is part of the README.
 
 ## 9. Risks
 

@@ -100,7 +100,7 @@ Measured, closed, recorded in `DECISIONS.md` and `docs/`:
 - **Bitmap character classes** are more expensive than the comparisons they replace
   (`\s` +16, `\w` +28 or +32) and would introduce `.rodata` where there is none.
 - **`__builtin_clz` in the UTF-8 decoder** saves 4 bytes on Cortex-M4 but pulls `__clzsi2` from
-  libgcc on M0+, which fails the undefined-symbol gate.
+  libgcc on Cortex-M0+, which fails the undefined-symbol gate.
 - **`-ffixed-r8` … `-ffixed-r11`** to force low registers: 1728 / 1742 / 1740 / 1722, all worse.
   Taking high registers away with a flag only produces spills.
 - **Struct field reordering** on any of the structs: 0 bytes. All 34 `re_state` accesses already

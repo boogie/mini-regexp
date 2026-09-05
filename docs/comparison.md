@@ -36,39 +36,39 @@ Rows sorted by measured size, ascending.
 
 | Engine | Cortex-M4 `.text` | Literals & anchors | `*` `+` `?` | `{n,m}` | Lazy | Alternation |
 |---|---:|:---:|:---:|:---:|:---:|:---:|
-| pike-tpop | 156 | ◐ ᴬ | ◐ ᴮ | ○ | ○ | ○ |
+| [pike-tpop](https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html) | 156 | ◐ ᴬ | ◐ ᴮ | ○ | ○ | ○ |
 | **mini-regexp A** | **546** | ● | ● | ● | ● | ● |
-| tiny-regex-c | 1162 | ◐ ᶜ | ● | ○ | ○ | ○ |
-| lua-lstrlib | 1481 | ◐ ᶜ | ● | ⊘ | ● | ⊘ |
+| [tiny-regex-c](https://github.com/kokke/tiny-regex-c) | 1162 | ◐ ᶜ | ● | ○ | ○ | ○ |
+| [lua-lstrlib](https://github.com/lua/lua/blob/master/lstrlib.c) | 1481 | ◐ ᶜ | ● | ⊘ | ● | ⊘ |
 | **mini-regexp B** | **1518** | ● | ● | ● | ● | ● |
-| re1.5 | 1530 | ◐ ᶜ | ● | ⊘ | ● | ● |
-| subreg | 1704 | ◐ ᴰ | ● | ○ | ○ | ● |
-| slre | 1946 | ◐ ᶜ | ● | ○ | ● | ● |
-| rsc-re1 | 2468 | ◐ ᴱ | ● | ○ | ● | ● |
-| spencer-1986 | 2751 | ◐ ᶜ | ● | ○ | ⊘ | ● |
-| plan9-libregexp | 3137 | ● | ● | ○ | ○ | ◐ ᶠ |
-| t-rex | 3144 | ◐ ᶜ | ● | ● | ○ | ● |
-| musl-regex | 13309 | ◐ ᴳ | ● | ● | ○ ᴴ | ◐ ᶠ |
-| quickjs-libregexp | 13334 | ● | ● | ● | ● | ● |
+| [re1.5](https://github.com/pfalcon/re1.5) | 1530 | ◐ ᶜ | ● | ⊘ | ● | ● |
+| [subreg](https://github.com/mattbucknall/subreg) | 1704 | ◐ ᴰ | ● | ○ | ○ | ● |
+| [slre](https://github.com/cesanta/slre) | 1946 | ◐ ᶜ | ● | ○ | ● | ● |
+| [rsc-re1](https://github.com/rsc/re1) | 2468 | ◐ ᴱ | ● | ○ | ● | ● |
+| [spencer-1986](https://github.com/garyhouston/regexp.old) | 2751 | ◐ ᶜ | ● | ○ | ⊘ | ● |
+| [plan9-libregexp](https://github.com/9fans/plan9port) | 3137 | ● | ● | ○ | ○ | ◐ ᶠ |
+| [t-rex](http://tiny-rex.sourceforge.net/) | 3144 | ◐ ᶜ | ● | ● | ○ | ● |
+| [musl-regex](https://git.musl-libc.org/cgit/musl/tree/src/regex) | 13309 | ◐ ᴳ | ● | ● | ○ ᴴ | ◐ ᶠ |
+| [quickjs-libregexp](https://github.com/bellard/quickjs) | 13334 | ● | ● | ● | ● | ● |
 
 ### Matrix, part 2 — structure, classes and text model
 
 | Engine | Groups | Captures | Classes & ranges | `\d \w \s` | `\b \B` | UTF-8 code points | `-i` | Probe rows passed (raw / genuine) |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|---:|
-| pike-tpop | ○ | ○ | ○ | ○ | ○ | ○ | ○ ᴵ | 9 / 5 |
+| [pike-tpop](https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html) | ○ | ○ | ○ | ○ | ○ | ○ | ○ ᴵ | 9 / 5 |
 | **mini-regexp A** | ● | ● | ● | ● | ● | ● | ● | **32 / 32** |
-| tiny-regex-c | ○ | ○ | ● | ● | ○ | ○ ᴶ | – | 17 / 14 |
-| lua-lstrlib | ⊘ | ◐ ᴷ | ● | ● | ◐ ᴸ | ○ ᴶ | – ᴵ | 19 / 16 ᴸ |
+| [tiny-regex-c](https://github.com/kokke/tiny-regex-c) | ○ | ○ | ● | ● | ○ | ○ ᴶ | – | 17 / 14 |
+| [lua-lstrlib](https://github.com/lua/lua/blob/master/lstrlib.c) | ⊘ | ◐ ᴷ | ● | ● | ◐ ᴸ | ○ ᴶ | – ᴵ | 19 / 16 ᴸ |
 | **mini-regexp B** | ● | ● | ● | ● | ● | ● | ● ᴹ | **32 / 32** |
-| re1.5 | ● | ● | ● | ● | ⊘ | ○ ᴶ | – | 22 / 21 |
-| subreg | ● | ◐ ᴺ | ● | ● | ○ ᴼ | ○ | ● | 21 / 19 |
-| slre | ◐ ᴾ | ● | ● | ◐ ᵠ | ○ ᴼ | ○ ᴶ | ● | 23 / 20 ᴿ |
-| rsc-re1 | ● | ● | ○ | ○ | ○ | ○ | ⊘ | 16 / 12 ᴿ |
-| spencer-1986 | ◐ ᴾ | ● | ● | ○ | ○ | ○ ᴶ | – | 18 / 15 |
-| plan9-libregexp | ◐ ᴾ | ● | ● | ○ | ○ | ● | – | 20 / 18 |
-| t-rex | ● | ◐ ˢ | ● | ● | ◐ ᵀ | ⊘ ᵁ | – | 24 / 23 |
-| musl-regex | ◐ ᴾ | ● | ● | ● | ● | ● ⱽ | ● | 28 / 28 |
-| quickjs-libregexp | ● | ● | ● | ● | ● | ● ᵂ | ● | 32 / 32 |
+| [re1.5](https://github.com/pfalcon/re1.5) | ● | ● | ● | ● | ⊘ | ○ ᴶ | – | 22 / 21 |
+| [subreg](https://github.com/mattbucknall/subreg) | ● | ◐ ᴺ | ● | ● | ○ ᴼ | ○ | ● | 21 / 19 |
+| [slre](https://github.com/cesanta/slre) | ◐ ᴾ | ● | ● | ◐ ᵠ | ○ ᴼ | ○ ᴶ | ● | 23 / 20 ᴿ |
+| [rsc-re1](https://github.com/rsc/re1) | ● | ● | ○ | ○ | ○ | ○ | ⊘ | 16 / 12 ᴿ |
+| [spencer-1986](https://github.com/garyhouston/regexp.old) | ◐ ᴾ | ● | ● | ○ | ○ | ○ ᴶ | – | 18 / 15 |
+| [plan9-libregexp](https://github.com/9fans/plan9port) | ◐ ᴾ | ● | ● | ○ | ○ | ● | – | 20 / 18 |
+| [t-rex](http://tiny-rex.sourceforge.net/) | ● | ◐ ˢ | ● | ● | ◐ ᵀ | ⊘ ᵁ | – | 24 / 23 |
+| [musl-regex](https://git.musl-libc.org/cgit/musl/tree/src/regex) | ◐ ᴾ | ● | ● | ● | ● | ● ⱽ | ● | 28 / 28 |
+| [quickjs-libregexp](https://github.com/bellard/quickjs) | ● | ● | ● | ● | ● | ● ᵂ | ● | 32 / 32 |
 
 "Raw" is the number of the 32 rows whose output matched the expectation exactly. "Genuine" removes
 passes that the probe showed were produced by something other than the feature under test — a
@@ -251,3 +251,28 @@ literal output differed from the probe's expectation is `group`: `(ab)+` against
 `match 0 4` followed by `1 2 4`. That extra line is the correct ECMAScript group span, and the
 QuickJS oracle prints byte-identical output for the same input — so it is scored as a pass under the
 same rule the QuickJS run used, not as a deviation.
+
+## Sources
+
+Every engine was built from the commit pinned in its `research/engines/<name>/BUILD.txt`, which
+also records the exact fetch and measurement commands.
+
+| Engine | Cortex-M4 | Upstream | Note |
+|---|---:|---|---|
+| pike-tpop | 156 | [www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html](https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html) | Kernighan and Pike, *The Practice of Programming* §9.2 |
+| tiny-regex-c | 1162 | [github.com/kokke/tiny-regex-c](https://github.com/kokke/tiny-regex-c) |  |
+| lua-lstrlib | 1481 | [github.com/lua/lua/blob/master/lstrlib.c](https://github.com/lua/lua/blob/master/lstrlib.c) | Lua pattern matching, not regex |
+| re1.5 | 1530 | [github.com/pfalcon/re1.5](https://github.com/pfalcon/re1.5) | used by MicroPython |
+| subreg | 1704 | [github.com/mattbucknall/subreg](https://github.com/mattbucknall/subreg) |  |
+| slre | 1946 | [github.com/cesanta/slre](https://github.com/cesanta/slre) |  |
+| rsc-re1 | 2468 | [github.com/rsc/re1](https://github.com/rsc/re1) | Russ Cox's teaching implementation |
+| spencer-1986 | 2751 | [github.com/garyhouston/regexp.old](https://github.com/garyhouston/regexp.old) | Henry Spencer's 1986 regexp |
+| plan9-libregexp | 3137 | [github.com/9fans/plan9port](https://github.com/9fans/plan9port) |  |
+| t-rex | 3144 | [tiny-rex.sourceforge.net](http://tiny-rex.sourceforge.net/) | also shipped inside Squirrel |
+| musl-regex | 13309 | [git.musl-libc.org/cgit/musl/tree/src/regex](https://git.musl-libc.org/cgit/musl/tree/src/regex) | TRE-derived |
+| quickjs-libregexp | 13334 | [github.com/bellard/quickjs](https://github.com/bellard/quickjs) |  |
+
+Sizes are Cortex-M4 `.text` including `.rodata`, measured with `tools/measure.sh`
+(`arm-none-eabi-gcc 10.3.1 -Os -ffreestanding`), engine translation unit only. Where an engine is
+part of a larger project, only the regex translation unit was measured; `BUILD.txt` says which
+files were included and which were excluded.

@@ -40,20 +40,20 @@ and `i`. Rows passed, against measured Cortex-M4 size:
 
 | Engine | Cortex-M4 | Probe rows passed |
 |---|---:|---:|
-| pike-tpop | 156 | 5 of 32 |
+| [pike-tpop](https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html) | 156 | 5 of 32 |
 | **mini-regexp A** | **546** | **32 of 32** |
-| kokke/tiny-regex-c | 1162 | 14 |
-| Lua `lstrlib` patterns | 1481 | 18 |
+| [kokke/tiny-regex-c](https://github.com/kokke/tiny-regex-c) | 1162 | 14 |
+| [Lua `lstrlib` patterns](https://github.com/lua/lua/blob/master/lstrlib.c) | 1481 | 18 |
 | **mini-regexp B** | **1518** | **32 of 32** |
-| MicroPython re1.5 | 1530 | 21 |
-| subreg | 1704 | 19 |
-| SLRE | 1946 | 20 |
-| rsc-re1 | 2468 | 12 |
-| Spencer 1986 | 2751 | 15 |
-| plan9 libregexp | 3137 | 18 |
-| T-Rex | 3144 | 23 |
-| musl regex | 13309 | 28 |
-| QuickJS libregexp | 13334 | 32 |
+| [MicroPython re1.5](https://github.com/pfalcon/re1.5) | 1530 | 21 |
+| [subreg](https://github.com/mattbucknall/subreg) | 1704 | 19 |
+| [SLRE](https://github.com/cesanta/slre) | 1946 | 20 |
+| [rsc-re1](https://github.com/rsc/re1) | 2468 | 12 |
+| [Spencer 1986](https://github.com/garyhouston/regexp.old) | 2751 | 15 |
+| [plan9 libregexp](https://github.com/9fans/plan9port) | 3137 | 18 |
+| [T-Rex](http://tiny-rex.sourceforge.net/) | 3144 | 23 |
+| [musl regex](https://git.musl-libc.org/cgit/musl/tree/src/regex) | 13309 | 28 |
+| [QuickJS libregexp](https://github.com/bellard/quickjs) | 13334 | 32 |
 
 Counts are after discounting passes the probe showed were produced by something other than the
 feature under test — a missing feature re-read as literal text that also happens not to match, for

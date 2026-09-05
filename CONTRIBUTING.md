@@ -94,7 +94,7 @@ Each of these has a measured answer already, recorded with its numbers in `DECIS
 `docs/feasibility.md`. Re-deriving them costs hours and finds the same result.
 
 - **Compiler choice.** gcc `-Os` beats clang at every optimisation level on both engines
-  (A: 546 against 578 at `-Oz`; B: 1518 against 2044 at the time it was measured).
+  (A: 546 against 578 at `-Oz`; B: 1518 against 2044).
 - **Forced inlining.** `-O2` and `-O3` are far larger than `-Os`; inline-parameter tuning changed
   nothing.
 - **Adding a compile step to product B.** Pure re-scanning in the direct interpreter is 62 bytes;

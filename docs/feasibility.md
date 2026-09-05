@@ -187,6 +187,9 @@ passes it, and why the CI gate lists the undefined symbols.
 
 ### 6.3 Product B: compiling on the device vs. no compilation
 
+The table below records the historical pre-1518 builds used to close the compiler/format axis;
+the current bounded-stack direct interpreter is documented in section 6.8.
+
 We measured two forms for the same job — handling patterns that arrive at run time:
 
 | Form | Cortex-M4 | `i` support |
@@ -289,9 +292,9 @@ The estimates in section 5 were made before the spikes. In hindsight:
   product A. A was taken to 546 by moving the compiler off the device, which section 5 did
   not take into account.
 - **It overestimated** the stack consumption: the estimate was ~230 B per group iteration,
-  the measured value is 104 B per iteration (Cortex-M4) — that is, more favourable, but the fact of
-  *linear growth* remained, and this is product B's most important open question (see
-  `docs/all-in-engine.md`).
+  the measured value is 104 B per iteration (Cortex-M4). The linear-growth defect was fixed by
+  moving group iteration into caller-provided workspace; the resulting bounded-stack engine is
+  documented in section 6.8 and `docs/all-in-engine.md`.
 - **Stale** feature costs: instead of section 5's estimate of `\b\B` 106 / `i` 70 / `{n,m}` 134 /
   step limit 34 / UTF-8 144, the measured ledger is in 6.5.
 
@@ -475,10 +478,10 @@ Open:
 1. **Size budget on ESP32.** The 2000 B applies to Cortex-M4; with the measured 1.12x on ESP32
    (1.23x with `-mlongcalls`) and the 1.37x multiplier on ESP32-C3, product A's 546 bytes become
    612-672 and 748 bytes respectively. Is that acceptable as it is, or do we need a separate ESP32 target number?
-2. **Product B's shipping condition.** It has two open bugs today (unbounded stack on a
-   quantified group, `(a*){65536}` crash). Introducing the bounded stack solves
-   both, but it costs size. What is the order: 1400 bytes first, then the bounded stack,
-   or the other way round?
+2. **Product B's shipping condition.** The historical open bugs (unbounded stack on a
+   quantified group, `(a*){65536}` crash) were closed by the bounded-stack implementation in
+   section 6.8. The remaining shipping work is API hardening, hook-layer integration and wider
+   validation; the original 1400-byte target was revised to approximately 1550 bytes.
 3. **The contract of `i` in product B.** ASCII-only today. With the host hook layer the embedding
    language can supply a Unicode `other_case` — should that be the default expectation, or
    should it stay an optional extra?

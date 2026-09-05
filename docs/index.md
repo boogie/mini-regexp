@@ -27,14 +27,15 @@ actually use.
 | | Cortex-M4 | Cortex-M0+ | x86-64 | pattern source |
 |---|---:|---:|---:|---|
 | **A** — bytecode VM | **546 B** | 538 B | 908 B | compiled off-device |
-| **B** — all-in interpreter | **1518 B** | 1586 B | 2830 B | supplied at runtime |
+| **B** — all-in interpreter (core) | **1518 B** | 1586 B | 2830 B | supplied at runtime |
 
 `arm-none-eabi-gcc 10.3.1 -Os -ffreestanding`, engine translation unit only, `.text` including
 `.rodata`, zero `data` and `bss`. Sizes are for **Arm** microcontroller cores — not Apple Silicon.
 
 Product A's 546 bytes is a matcher VM, not an engine that accepts a pattern: patterns are compiled
 on a host, and a device running A cannot take a pattern from a config file or the network. Product
-B's 1518 bytes is the number to compare against a conventional engine.
+B's 1518-byte core is the number to compare against a conventional engine; its optional host
+Unicode hook layer adds 40–134 bytes. See `docs/all-in-engine.md` for the full accounting.
 
 ## Measured against the field
 
@@ -63,7 +64,7 @@ supports literals, `.`, `*` and edge-anchored `^`/`$`, and answers 5 of the 32 r
 evidence does support:
 
 > On this probe, mini-regexp answers every row exactly as ECMAScript does, in 546 bytes for the
-> precompiled-bytecode engine and 1518 for the all-in engine. The smallest other engine measured
+> precompiled-bytecode engine and a 1518-byte core for the all-in engine. The smallest other engine measured
 > that answers all 32 rows is QuickJS's libregexp at 13334 bytes — 24× product A and 8.8× product B.
 
 [The full matrix, with per-engine notes and reproduction commands →](comparison.html)

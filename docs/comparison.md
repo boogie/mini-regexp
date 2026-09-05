@@ -150,7 +150,7 @@ drops to t-rex at 3144 bytes with 23. Nothing between 546 and 13309 bytes comes 
 probe:
 
 > On this 32-row feature probe, mini-regexp answers every row exactly as ECMAScript does, in 546
-> bytes of Cortex-M4 `.text` for the precompiled-bytecode engine and 1518 bytes for the all-in
+> bytes of Cortex-M4 `.text` for the precompiled-bytecode engine and a 1518-byte core for the all-in
 > engine. The smallest other engine measured that answers all 32 rows is QuickJS's libregexp at
 > 13334 bytes — 24× the size of product A and 8.8× the size of product B. Of the thirteen other
 > engines measured, exactly one is smaller than product A, and it answers 5 of the 32 rows.

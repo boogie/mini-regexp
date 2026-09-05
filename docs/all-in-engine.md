@@ -63,8 +63,9 @@ layer, measured separately:
 | engine, hooks compiled out | +40 | |
 | engine, `-DRE_HOOKS` | +134 | |
 
-So 1518 + 40…134 = **1558–1652 bytes today**, which meets the revised ~1550 target with hooks
-compiled out. Any size note that omits the hook layer understates the product by 40–134 bytes.
+So 1518 + 40…134 = **1558–1652 bytes today**. The core is within the revised ~1550-byte target;
+the complete product is 8–102 bytes above it depending on hook configuration. Any size note that
+omits the hook layer understates the product by 40–134 bytes.
 
 ## Feature ledger
 

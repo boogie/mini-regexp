@@ -20,10 +20,12 @@ Two engines are maintained deliberately, for two different situations.
 | | Cortex-M4 | Cortex-M0+ | x86-64 | pattern source |
 |---|---:|---:|---:|---|
 | **A** — bytecode VM | **546 B** | 538 B | 908 B | compiled off-device |
-| **B** — all-in interpreter | **1518 B** | 1586 B | 2830 B | supplied at runtime |
+| **B** — all-in interpreter (core) | **1518 B** | 1586 B | 2830 B | supplied at runtime |
 
 Measured with `tools/measure.sh`: `arm-none-eabi-gcc 10.3.1 -Os -ffreestanding`, engine
 translation unit only, `.text` including `.rodata`. Both have zero `data` and `bss`.
+Product B's optional host Unicode hook layer adds 40 B when compiled out of the API surface and
+134 B when enabled; see `docs/all-in-engine.md` for the complete product accounting.
 
 Sizes throughout this repository are for **Arm Cortex-M4** and **Cortex-M0+**, the 32-bit
 microcontroller cores in parts like the nRF52 — not Apple Silicon. x86-64 is reported alongside
@@ -32,7 +34,7 @@ them because it is what most contributors build on.
 Read the two numbers for what they are. **Product A's 546 bytes is a matcher VM, not an engine
 that accepts a pattern** — patterns are compiled on a host and the bytecode is additional flash
 per pattern, so a device running A cannot take a pattern from a config file or the network.
-Product B's 1518 bytes is the number to compare against a conventional engine, because it does
+Product B's 1518-byte core is the number to compare against a conventional engine, because it does
 what a conventional engine does.
 
 ### Measured against the field
@@ -66,7 +68,7 @@ instance. Every discount is footnoted in `docs/comparison.md`.
 **The strongest claim this evidence supports:**
 
 > On this 32-row probe, mini-regexp answers every row exactly as ECMAScript does, in 546 bytes for
-> the precompiled-bytecode engine and 1518 bytes for the all-in engine. The smallest other engine
+> the precompiled-bytecode engine and a 1518-byte core for the all-in engine. The smallest other engine
 > measured that answers all 32 rows is QuickJS's libregexp at 13334 bytes — 24× product A and 8.8×
 > product B. Of the thirteen other engines measured, exactly one is smaller than product A, and it
 > answers 5 rows.
@@ -267,7 +269,8 @@ DECISIONS.md    decision log, one line each
 
 This project is developed with AI assistance. Claude, Anthropic's assistant, produced the
 feasibility research, the measurement and test tooling, the early prototypes and the size
-optimisation rounds. ChatGPT Codex contributed review and optimisation work. Design decisions,
+optimisation rounds. ChatGPT contributed engine implementation work, including the size-optimised matcher and
+compiler that the shipping product A grew from, as well as review. Design decisions,
 review and the released code are the author's responsibility.
 
 ## License

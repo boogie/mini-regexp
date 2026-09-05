@@ -50,7 +50,7 @@ measurement, target, known defects and the hook-layer accounting are in `docs/al
 | build | Cortex-M4 |
 |---|---:|
 | product A matcher VM (shipping) | 546 |
-| product B engine, hooks compiled out | 1518 + 40 |
+| product B engine, hooks compiled out of the API surface | 1518 + 40 |
 | product B engine, `-DRE_HOOKS` | 1518 + 134 |
 
 Quoting a product B number without the hook layer understates the product by 40–134 bytes.
@@ -78,7 +78,7 @@ What it does not claim:
 2. **Not a like-for-like comparison at 546 bytes.** That figure is a VM, not an engine that accepts
    a pattern: patterns are compiled on a host, the bytecode is additional flash per pattern, and a
    device running product A cannot take a pattern from a user, a config file or the network. Every
-   other engine in the table can. Product B's 1518 bytes is the figure to quote whenever the
+   other engine in the table can. Product B's 1518-byte core is the figure to quote whenever the
    comparison is with a runtime-pattern engine; mixing A's size with B's use case would be
    dishonest.
 3. **Not conformance.** Thirty-two rows is a feature probe. The differential corpus — 2103 and 3103

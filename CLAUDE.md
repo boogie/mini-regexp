@@ -87,7 +87,7 @@ engine, not just the corpus.
 Measured, closed, recorded in `DECISIONS.md` and `docs/`:
 
 - **Compiler choice.** gcc `-Os` beats clang at every level on both engines
-  (A: 546 vs 578 at `-Oz`; B: 1712 vs 2044). Only gcc 10.3.1 is installed.
+  (A: 546 vs 578 at `-Oz`; B: 1518 vs 2044). Only gcc 10.3.1 is installed.
 - **Forced inlining hurts.** `-O2` and `-O3` are far larger than `-Os`; inline-parameter
   tuning changed nothing.
 - **A compile step for product B loses.** Pure re-scanning is only 62 bytes; every

@@ -1,0 +1,4 @@
+title: mini-regexp
+description: A regex engine small enough to embed — 546 bytes of Cortex-M4 with captures, alternation and UTF-8.
+theme: jekyll-theme-minimal
+show_downloads: false

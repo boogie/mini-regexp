@@ -1,0 +1,436 @@
++ S=/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad
++ D=/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib
++ COMMON='-Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w'
++ cd /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib
++ cd lua
++ git remote -v
+origin	https://github.com/lua/lua.git (fetch)
+origin	https://github.com/lua/lua.git (push)
++ git log -1 '--format=%H %cd %d'
+312b9efaa1061c2c4cad08554dbc1351c3270eef Fri Aug 7 15:59:21 2026 -0300  (grafted, HEAD, tag: v5.4.9)
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua/lstrlib.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua/lstrlib.c
+cortex-m4  (thumb2, gcc 10.3): text=9641 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=9603 data=0 bss=0
+x86-64     (clang 21):         text=15186 data=448
+-- cortex-m4 per-function (bytes):
+    1376  .text.str_format
+     712  .text.str_pack
+     692  .text.str_gsub
+     640  .text.match
+     500  .text.getoption
+     408  .text.str_unpack
+     396  .text.str_find_aux
+     230  .rodata.str_format.str1.1
+     204  .text.str_rep
+     196  .text.unpackint
+     176  .text.match_class
+     168  .text.str_byte
+     160  .text.arith
+     152  .text.luaopen_string
+     144  .text.getdetails
+     144  .rodata.strlib
+     136  .text.str_packsize
+     128  .text.str_sub
+     128  .rodata.str_pack.str1.1
+     126  .rodata.match.str1.1
+     122  .text.packint
+     120  .text.gmatch
+     108  .text.classend
+     103  .rodata.str_unpack.str1.1
+     100  .text.str_char
+      98  .rodata.str1.1
+      97  .rodata.str_gsub.str1.1
+      92  .text.gmatch_aux
+      88  .text.matchbracketclass
+      88  .text.get_onecapture
+      84  .text.str_dump
+      80  .text.checkformat
+      80  .rodata.stringmetamethods
+      76  .text.str_upper
+      76  .text.str_lower
+      76  .rodata.getdetails.str1.1
+      67  .rodata.classend.str1.1
+      64  .text.start_capture
+      62  .text.tonum
+      62  .text.str_reverse
+      62  .rodata.getoption.str1.1
+      60  .text.singlematch.isra.0
+      60  .text.push_captures
+      56  .text.getnum
+      52  .text.addlenmod
+      47  .rodata.str_packsize.str1.1
+      46  .rodata.unpackint.str1.1
+      46  .rodata.get_onecapture.str1.1
+      40  .text.posrelatI
+      40  .text.getnumlimit
+      40  .rodata.getnumlimit.str1.1
+      39  .rodata.checkformat.str1.1
+      38  .text.writer
+      38  .text.copywithendian
+      33  .rodata.arith.str1.1
+      32  .text.push_onecapture
+      32  .text.get2digits
+      30  .rodata.str_dump.str1.1
+      28  .text.str_len
+      28  .rodata.str_rep.str1.1
+      22  .rodata.str_byte.str1.1
+      19  .rodata.str_char.str1.1
+      18  .rodata.push_captures.str1.1
+      12  .text.arith_unm
+      12  .text.arith_sub
+      12  .text.arith_pow
+      12  .text.arith_mul
+      12  .text.arith_mod
+      12  .text.arith_idiv
+      12  .text.arith_div
+      12  .text.arith_add
+      11  .rodata.str_find_aux.str1.1
+       8  .rodata.luaopen_string.str1.1
+       7  .rodata.arith_idiv.str1.1
+       6  .text.str_match
+       6  .text.str_find
+       6  .rodata.arith_unm.str1.1
+       6  .rodata.arith_sub.str1.1
+       6  .rodata.arith_pow.str1.1
+       6  .rodata.arith_mul.str1.1
+       6  .rodata.arith_mod.str1.1
+       6  .rodata.arith_div.str1.1
+       6  .rodata.arith_add.str1.1
++ mkdir -p obj
++ arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -fstack-usage -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lstrlib.c -o obj/lstrlib_m4.o
++ arm-none-eabi-size obj/lstrlib_m4.o
+   text	   data	    bss	    dec	    hex	filename
+   9641	      0	      0	   9641	   25a9	obj/lstrlib_m4.o
++ arm-none-eabi-nm -u obj/lstrlib_m4.o
+         U __aeabi_d2f
+         U __aeabi_dcmpeq
+         U __aeabi_f2d
+         U __aeabi_ldivmod
+         U _ctype_
+         U localeconv
+         U lua_arith
+         U lua_callk
+         U lua_createtable
+         U lua_dump
+         U lua_gettable
+         U lua_gettop
+         U lua_isinteger
+         U lua_isstring
+         U lua_newuserdatauv
+         U lua_pushcclosure
+         U lua_pushinteger
+         U lua_pushlstring
+         U lua_pushnil
+         U lua_pushnumber
+         U lua_pushstring
+         U lua_pushvalue
+         U lua_rotate
+         U lua_setfield
+         U lua_setmetatable
+         U lua_settop
+         U lua_stringtonumber
+         U lua_toboolean
+         U lua_tointegerx
+         U lua_tolstring
+         U lua_tonumberx
+         U lua_topointer
+         U lua_touserdata
+         U lua_type
+         U lua_typename
+         U luaL_addlstring
+         U luaL_addstring
+         U luaL_addvalue
+         U luaL_argerror
+         U luaL_buffinit
+         U luaL_buffinitsize
+         U luaL_checkinteger
+         U luaL_checklstring
+         U luaL_checknumber
+         U luaL_checkstack
+         U luaL_checktype
+         U luaL_checkversion_
+         U luaL_error
+         U luaL_getmetafield
+         U luaL_optinteger
+         U luaL_optlstring
+         U luaL_prepbuffsize
+         U luaL_pushresult
+         U luaL_pushresultsize
+         U luaL_setfuncs
+         U luaL_tolstring
+         U luaL_typeerror
+         U memchr
+         U memcmp
+         U memcpy
+         U snprintf
+         U strchr
+         U strcpy
+         U strlen
+         U strpbrk
+         U strspn
++ for s in .text.match .text.match_class .text.classend .text.matchbracketclass .text.start_capture .text.singlematch.isra.0
++ echo 'RELOCS .text.match:'
+RELOCS .text.match:
++ arm-none-eabi-objdump -dr -j .text.match obj/lstrlib_m4.o
++ /usr/bin/grep -oE 'R_ARM_[A-Z0-9_]+[[:space:]]+[^[:space:]]+'
++ /usr/bin/awk '{print $2}'
++ sort
++ uniq -c
+   1 .rodata.get_onecapture.str1.1
+   4 .rodata.match.str1.1
+   2 classend
+   5 luaL_error
+   2 matchbracketclass
+   1 memcmp
+   3 singlematch.isra.0
+   1 start_capture
++ for s in .text.match .text.match_class .text.classend .text.matchbracketclass .text.start_capture .text.singlematch.isra.0
++ echo 'RELOCS .text.match_class:'
+RELOCS .text.match_class:
++ arm-none-eabi-objdump -dr -j .text.match_class obj/lstrlib_m4.o
++ /usr/bin/grep -oE 'R_ARM_[A-Z0-9_]+[[:space:]]+[^[:space:]]+'
++ /usr/bin/awk '{print $2}'
++ sort
++ uniq -c
+   1 _ctype_
++ for s in .text.match .text.match_class .text.classend .text.matchbracketclass .text.start_capture .text.singlematch.isra.0
++ echo 'RELOCS .text.classend:'
+RELOCS .text.classend:
++ arm-none-eabi-objdump -dr -j .text.classend obj/lstrlib_m4.o
++ /usr/bin/grep -oE 'R_ARM_[A-Z0-9_]+[[:space:]]+[^[:space:]]+'
++ /usr/bin/awk '{print $2}'
++ sort
++ uniq -c
+   2 .rodata.classend.str1.1
+   2 luaL_error
++ for s in .text.match .text.match_class .text.classend .text.matchbracketclass .text.start_capture .text.singlematch.isra.0
++ echo 'RELOCS .text.matchbracketclass:'
+RELOCS .text.matchbracketclass:
++ arm-none-eabi-objdump -dr -j .text.matchbracketclass obj/lstrlib_m4.o
++ /usr/bin/grep -oE 'R_ARM_[A-Z0-9_]+[[:space:]]+[^[:space:]]+'
++ /usr/bin/awk '{print $2}'
++ sort
++ uniq -c
+   1 match_class
++ for s in .text.match .text.match_class .text.classend .text.matchbracketclass .text.start_capture .text.singlematch.isra.0
++ echo 'RELOCS .text.start_capture:'
+RELOCS .text.start_capture:
++ arm-none-eabi-objdump -dr -j .text.start_capture obj/lstrlib_m4.o
++ /usr/bin/grep -oE 'R_ARM_[A-Z0-9_]+[[:space:]]+[^[:space:]]+'
++ /usr/bin/awk '{print $2}'
++ sort
++ uniq -c
+   1 .rodata.push_captures.str1.1
+   1 luaL_error
+   1 match
++ for s in .text.match .text.match_class .text.classend .text.matchbracketclass .text.start_capture .text.singlematch.isra.0
++ echo 'RELOCS .text.singlematch.isra.0:'
+RELOCS .text.singlematch.isra.0:
++ arm-none-eabi-objdump -dr -j .text.singlematch.isra.0 obj/lstrlib_m4.o
++ /usr/bin/grep -oE 'R_ARM_[A-Z0-9_]+[[:space:]]+[^[:space:]]+'
++ /usr/bin/awk '{print $2}'
++ sort
++ uniq -c
+   1 match_class
+   1 matchbracketclass
++ arm-none-eabi-objdump -s -j .rodata.get_onecapture.str1.1 -j .rodata.push_captures.str1.1 obj/lstrlib_m4.o
+
+obj/lstrlib_m4.o:     file format elf32-littlearm
+
+Contents of section .rodata.get_onecapture.str1.1:
+ 0000 696e7661 6c696420 63617074 75726520  invalid capture 
+ 0010 696e6465 78202525 25640075 6e66696e  index %%%d.unfin
+ 0020 69736865 64206361 70747572 6500      ished capture.  
+Contents of section .rodata.push_captures.str1.1:
+ 0000 746f6f20 6d616e79 20636170 74757265  too many capture
+ 0010 7300                                 s.              
++ /usr/bin/grep -E 'match|classend|singlematch|expand|capture|balance' obj/lstrlib_m4.su
+lua/lstrlib.c:427:12:match_class	8	static
+lua/lstrlib.c:447:12:matchbracketclass	24	static
+lua/lstrlib.c:403:20:classend	16	static
+lua/lstrlib.c:853:12:gmatch	32	static
+lua/lstrlib.c:702:15:get_onecapture	16	static
+lua/lstrlib.c:725:13:push_onecapture	32	static
+lua/lstrlib.c:735:12:push_captures	24	static
+lua/lstrlib.c:470:12:singlematch.isra	4	static
+lua/lstrlib.c:570:20:match	40	static
+lua/lstrlib.c:534:20:start_capture	24	static
+lua/lstrlib.c:823:12:str_match	0	static
+lua/lstrlib.c:837:12:gmatch_aux	24	static
++ cat
++ arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c obj/wrap_engine.c -o obj/wrap_m4.o
++ arm-none-eabi-ld -r --gc-sections -u lua_pat_search obj/wrap_m4.o -o obj/engine_only_m4.o
++ arm-none-eabi-size -A obj/engine_only_m4.o
++ /usr/bin/awk '$1 ~ /^\.(text|rodata)/ && $2>0'
+.text.match_class                176      0
+.text.matchbracketclass           88      0
+.text.classend                   108      0
+.text.singlematch.isra.0          60      0
+.text.match                      640      0
+.text.start_capture               64      0
+.text.lua_pat_search               4      0
+.rodata.classend.str1.1           67      0
+.rodata.get_onecapture.str1.1     46      0
+.rodata.push_captures.str1.1      18      0
+.rodata.match.str1.1             126      0
++ arm-none-eabi-size obj/engine_only_m4.o
+   text	   data	    bss	    dec	    hex	filename
+   1397	      0	      0	   1397	    575	obj/engine_only_m4.o
++ arm-none-eabi-nm -u obj/engine_only_m4.o
+         U __aeabi_d2f
+         U __aeabi_dcmpeq
+         U __aeabi_f2d
+         U __aeabi_ldivmod
+         U _ctype_
+         U localeconv
+         U lua_arith
+         U lua_callk
+         U lua_createtable
+         U lua_dump
+         U lua_gettable
+         U lua_gettop
+         U lua_isinteger
+         U lua_isstring
+         U lua_newuserdatauv
+         U lua_pushcclosure
+         U lua_pushinteger
+         U lua_pushlstring
+         U lua_pushnil
+         U lua_pushnumber
+         U lua_pushstring
+         U lua_pushvalue
+         U lua_rotate
+         U lua_setfield
+         U lua_setmetatable
+         U lua_settop
+         U lua_stringtonumber
+         U lua_toboolean
+         U lua_tointegerx
+         U lua_tolstring
+         U lua_tonumberx
+         U lua_topointer
+         U lua_touserdata
+         U lua_type
+         U lua_typename
+         U luaL_addlstring
+         U luaL_addstring
+         U luaL_addvalue
+         U luaL_argerror
+         U luaL_buffinit
+         U luaL_buffinitsize
+         U luaL_checkinteger
+         U luaL_checklstring
+         U luaL_checknumber
+         U luaL_checkstack
+         U luaL_checktype
+         U luaL_checkversion_
+         U luaL_error
+         U luaL_getmetafield
+         U luaL_optinteger
+         U luaL_optlstring
+         U luaL_prepbuffsize
+         U luaL_pushresult
+         U luaL_pushresultsize
+         U luaL_setfuncs
+         U luaL_tolstring
+         U luaL_typeerror
+         U memchr
+         U memcmp
+         U memcpy
+         U snprintf
+         U strchr
+         U strcpy
+         U strlen
+         U strpbrk
+         U strspn
++ arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c obj/wrap_engine.c -o obj/wrap_m0.o
++ arm-none-eabi-ld -r --gc-sections -u lua_pat_search obj/wrap_m0.o -o obj/engine_only_m0.o
++ arm-none-eabi-size obj/engine_only_m0.o
+   text	   data	    bss	    dec	    hex	filename
+   1359	      0	      0	   1359	    54f	obj/engine_only_m0.o
++ clang --target=x86_64-apple-macos12 -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c obj/wrap_engine.c -o obj/wrap_x86.o
++ nm -S --defined-only obj/wrap_x86.o
++ /usr/bin/grep -iE ' (t|T|s|S) _?(match|match_class|classend|matchbracketclass|start_capture|singlematch|max_expand|min_expand|end_capture|match_capture|matchbalance|check_capture|capture_to_close)(\.|$)'
+000000000000314e 0000000000000000 t _classend
+00000000000000d5 0000000000000000 t _match
+00000000000032d2 0000000000000000 t _match_class
+00000000000031ec 0000000000000000 t _matchbracketclass
+0000000000003287 0000000000000000 t _singlematch
+00000000000030d8 0000000000000000 t _start_capture
++ mkdir -p hostcore
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lapi.c -o hostcore/lapi.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lauxlib.c -o hostcore/lauxlib.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lcode.c -o hostcore/lcode.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lctype.c -o hostcore/lctype.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/ldebug.c -o hostcore/ldebug.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/ldo.c -o hostcore/ldo.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/ldump.c -o hostcore/ldump.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lfunc.c -o hostcore/lfunc.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lgc.c -o hostcore/lgc.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/llex.c -o hostcore/llex.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lmem.c -o hostcore/lmem.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lobject.c -o hostcore/lobject.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lopcodes.c -o hostcore/lopcodes.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lparser.c -o hostcore/lparser.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lstate.c -o hostcore/lstate.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lstring.c -o hostcore/lstring.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/ltable.c -o hostcore/ltable.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/ltm.c -o hostcore/ltm.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lundump.c -o hostcore/lundump.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lvm.c -o hostcore/lvm.o
++ for f in lapi lauxlib lcode lctype ldebug ldo ldump lfunc lgc llex lmem lobject lopcodes lparser lstate lstring ltable ltm lundump lvm lzio
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua -c lua/lzio.c -o hostcore/lzio.o
++ cc -O2 -std=gnu99 -w -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/lua-lstrlib/lua driver.c hostcore/lapi.o hostcore/lauxlib.o hostcore/lcode.o hostcore/lctype.o hostcore/ldebug.o hostcore/ldo.o hostcore/ldump.o hostcore/lfunc.o hostcore/lgc.o hostcore/llex.o hostcore/lmem.o hostcore/lobject.o hostcore/lopcodes.o hostcore/lparser.o hostcore/lstate.o hostcore/lstring.o hostcore/ltable.o hostcore/ltm.o hostcore/lundump.o hostcore/lvm.o hostcore/lzio.o -lm -o engine_cli
++ ./engine_cli 'a+?b' xaab
+match 1 4
++ ./engine_cli -i '(h)(e)llo' 'say HELLO'
+match 4 9
+1 4 5
+2 5 6
++ cc -O2 -std=gnu99 -w -I$D/lua driver.c hostcore/*.o -lm -o engine_cli   # rebuilt after adding LUAPAT_RAW probe mode
+ok
++ cc -O2 -std=gnu99 -w -I$D/lua driver.c hostcore/*.o -lm -o engine_cli   # rebuilt after unfinished-capture fix (final driver)
+ok
++ python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py ./engine_cli /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/corpus_seed1.jsonl 20
+cases=2088 checked=2081 pass=809 fail=1272 timeouts=0 group_spans_checked=14
+  FAIL flags='' pat='a.c' text='a\nc' -> expected nomatch, got match 0 3
+  FAIL flags='' pat='a??b' text='ab' -> engine rejected pattern: error unsupported:lazy-??
+  FAIL flags='' pat='a{2}' text='aaaa' -> engine rejected pattern: error unsupported:counted-{n,m}
+  FAIL flags='' pat='a{2,}' text='aaaa' -> engine rejected pattern: error unsupported:counted-{n,m}
+  FAIL flags='' pat='a{2,3}' text='aaaa' -> engine rejected pattern: error unsupported:counted-{n,m}
+  FAIL flags='' pat='a{2,3}?' text='aaaa' -> engine rejected pattern: error unsupported:counted-{n,m}
+  FAIL flags='' pat='a{0}' text='aaa' -> engine rejected pattern: error unsupported:counted-{n,m}
+  FAIL flags='' pat='(a|ab)(c|bcd)(d*)' text='abcd' -> engine rejected pattern: error unsupported:alternation
+  FAIL flags='' pat='(a*)*' text='b' -> engine rejected pattern: error unsupported:quantified-group
+  FAIL flags='' pat='(a*)+' text='b' -> engine rejected pattern: error unsupported:quantified-group
+  FAIL flags='' pat='(a|b)*c' text='ababc' -> engine rejected pattern: error unsupported:alternation
+  FAIL flags='' pat='(?:ab)+' text='ababab' -> engine rejected pattern: error unsupported:quantified-group
+  FAIL flags='' pat='a|b|c' text='xxc' -> engine rejected pattern: error unsupported:alternation
+  FAIL flags='' pat='(a)|(b)' text='b' -> engine rejected pattern: error unsupported:alternation
+  FAIL flags='' pat='(a)|(b)' text='a' -> engine rejected pattern: error unsupported:alternation
+  FAIL flags='' pat='x(a|)y' text='xy' -> engine rejected pattern: error unsupported:alternation
+  FAIL flags='' pat='(|a)+' text='aaa' -> engine rejected pattern: error unsupported:alternation
+  FAIL flags='' pat='.' text='é' -> expected match [0, 2], got match 0 1
+  FAIL flags='' pat='.' text='😀' -> expected match [0, 4], got match 0 1
+  FAIL flags='' pat='^.$' text='日' -> expected match [0, 3], got nomatch

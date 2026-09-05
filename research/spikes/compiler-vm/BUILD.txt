@@ -1,0 +1,68 @@
+Original optimized VM measurement:
+
+  tools/measure.sh src/re.c
+
+Current measurement on 2026-09-04 with the toolchains reported by tools/measure.sh:
+
+  cortex-m4   text=546 data=0 bss=0
+  cortex-m0+  text=538 data=0 bss=0
+  x86-64      text=908 data=0
+
+Cortex-M4 byte ledger:
+
+  re_match                                  476
+  UTF-8 decoder                              70
+  current total                             546
+  remaining to hard 600-byte ceiling         54
+
+Cortex-M4 stack usage reported by `-fstack-usage`:
+
+  re_match: 64 bytes static
+  UTF-8 decoder: 12 bytes static
+
+The matcher does not recurse on the C stack. Its caller-provided backtrack workspace uses
+`depth * (capture_slots + 2) * sizeof(void *)` bytes. On a 32-bit target that is 16 bytes per
+choice point with no user captures and 24 bytes with one capture.
+
+The compiled bytecode for each pattern is additional flash data. For example:
+
+  node tools/re_compile.js '\bfoo\b' word_test
+
+emits the bytecode header, overall capture slots and the VM's search wrapper.
+
+The first case-insensitive compilation builds a Unicode simple-fold reverse map in the host-side
+JavaScript process. This affects compiler startup time and memory, not the embedded VM size.
+
+Current differential baselines:
+
+  seed1: cases=2103 checked=1955 pass=1955 fail=0 group_spans_checked=382
+  seed7: cases=3103 checked=2872 pass=2872 fail=0 group_spans_checked=533
+
+Nullable repeats and deliberate budget exhaustion cases are reported separately.
+
+Build the host-only span adapter:
+
+  cc -std=c99 -Wall -Wextra -Werror -O2 \
+    -o /tmp/tinyre_vm_adapter research/spikes/compiler-vm/corpus_adapter.c src/re.c
+
+Run one case:
+
+  TINYRE_VM_ADAPTER=/tmp/tinyre_vm_adapter \
+    node research/spikes/compiler-vm/corpus_adapter.js 'a+' 'baaa'
+
+Run the focused regression tests:
+
+  TINYRE_VM_ADAPTER=/tmp/tinyre_vm_adapter \
+    node research/spikes/compiler-vm/test.js
+
+Test the optimized VM API directly:
+
+  cc -std=c99 -Wall -Wextra -Werror -O2 \
+    -o /tmp/test_tinyre_vm research/spikes/compiler-vm/test_vm.c \
+    src/re.c && /tmp/test_tinyre_vm
+
+Run the differential corpus:
+
+  TINYRE_VM_ADAPTER=/tmp/tinyre_vm_adapter \
+    python3 tools/difftest.py --batch research/spikes/compiler-vm/corpus_adapter.js \
+    tests/corpus/corpus_wb_seed1.jsonl

@@ -1,0 +1,1 @@
+cd /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/mruby-hs-regexp && sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh regexp.c -I.  # masamitsu-murase/mruby-hs-regexp master src/regexp.c with 3-line stub mruby.h

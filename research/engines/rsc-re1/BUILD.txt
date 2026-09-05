@@ -1,0 +1,228 @@
++ cd /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/src
++ git remote -v
+origin	https://github.com/rsc/re1 (fetch)
+origin	https://github.com/rsc/re1 (push)
++ git log -1 '--format=%H %ad' --date=iso
+6ca5ae583ae8774733465794d36dad32b3c65378 2012-12-08 02:23:54 +0000
++ bison --version
++ head -1
+bison (GNU Bison) 2.3
++ arm-none-eabi-gcc --version
++ head -1
+arm-none-eabi-gcc (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)
++ clang --version
++ head -1
+Apple clang version 21.0.0 (clang-2100.1.1.101)
++ rm -f y.tab.c y.tab.h
++ bison -y -d parse.y
++ ls -la y.tab.c y.tab.h
+-rw-r--r--@ 1 boogie  wheel  45084 Sep  4 15:18 y.tab.c
+-rw-r--r--@ 1 boogie  wheel   2242 Sep  4 15:18 y.tab.h
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh y.tab.c
+== y.tab.c
+cortex-m4  (thumb2, gcc 10.3): text=1715 data=0 bss=28
+cortex-m0+ (thumb1, gcc 10.3): text=1759 data=0 bss=28
+x86-64     (clang 21):         text=2985 data=24
+-- cortex-m4 per-function (bytes):
+     724  .text.yyparse
+     260  .rodata.yytranslate
+     192  .text.printre
+     112  .text.parse
+      62  .rodata.printre.str1.1
+      60  .text.fatal
+      42  .rodata.yyparse.str1.1
+      36  .text.mal
+      27  .rodata.yypact
+      27  .rodata.yydefact
+      25  .rodata.parse.str1.1
+      23  .rodata.yytable
+      23  .rodata.yycheck
+      22  .text.reg
+      19  .rodata.yyr2
+      19  .rodata.yyr1
+      14  .rodata.mal.str1.1
+      14  .rodata.fatal.str1.1
+       7  .rodata.yypgoto
+       7  .rodata.yydefgoto
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh compile.c
+== compile.c
+cortex-m4  (thumb2, gcc 10.3): text=759 data=0 bss=4
+cortex-m0+ (thumb1, gcc 10.3): text=731 data=0 bss=4
+x86-64     (clang 21):         text=1367 data=8
+-- cortex-m4 per-function (bytes):
+     288  .text.emit
+     204  .text.printprog
+      92  .rodata.printprog.str1.1
+      80  .text.count
+      76  .text.compile
+      10  .rodata.count.str1.1
+       9  .rodata.emit.str1.1
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh sub.c
+== sub.c
+cortex-m4  (thumb2, gcc 10.3): text=126 data=0 bss=4
+cortex-m0+ (thumb1, gcc 10.3): text=128 data=0 bss=4
+x86-64     (clang 21):         text=224 data=0
+-- cortex-m4 per-function (bytes):
+      58  .text.update
+      36  .text.newsub
+      24  .text.decref
+       8  .text.incref
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh pike.c
+== pike.c
+cortex-m4  (thumb2, gcc 10.3): text=492 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=444 data=0 bss=0
+x86-64     (clang 21):         text=766 data=0
+-- cortex-m4 per-function (bytes):
+     324  .text.pikevm
+     168  .text.addthread
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh backtrack.c
+== backtrack.c
+cortex-m4  (thumb2, gcc 10.3): text=267 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=255 data=0 bss=0
+x86-64     (clang 21):         text=475 data=0
+-- cortex-m4 per-function (bytes):
+     248  .text.backtrack
+      19  .rodata.backtrack.str1.1
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh recursive.c
+== recursive.c
+cortex-m4  (thumb2, gcc 10.3): text=316 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=324 data=0 bss=0
+x86-64     (clang 21):         text=549 data=0
+-- cortex-m4 per-function (bytes):
+     140  .text.recursiveloop
+     140  .text.recursive
+      14  .rodata.recursiveloop.str1.1
+      10  .rodata.recursive.str1.1
+       6  .text.recursiveprog
+       6  .text.recursiveloopprog
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh thompson.c
+== thompson.c
+cortex-m4  (thumb2, gcc 10.3): text=288 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=260 data=0 bss=0
+x86-64     (clang 21):         text=412 data=0
+-- cortex-m4 per-function (bytes):
+     212  .text.thompsonvm
+      76  .text.addthread
++ COMMON='-Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w'
++ mkdir -p /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -c y.tab.c -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/y.tab.o
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -c compile.c -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/compile.o
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -c sub.c -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/sub.o
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -c pike.c -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/pike.o
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -c backtrack.c -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/backtrack.o
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -c recursive.c -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/recursive.o
++ for f in y.tab.c compile.c sub.c pike.c backtrack.c recursive.c thompson.c
++ arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -c thompson.c -o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/thompson.o
++ for o in '$D/m4obj/*.o'
++ echo '== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/backtrack.o'
+== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/backtrack.o
++ arm-none-eabi-nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/backtrack.o
+         U decref
+         U fatal
+         U incref
+         U memset
+         U newsub
+         U update
++ for o in '$D/m4obj/*.o'
++ echo '== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/compile.o'
+== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/compile.o
++ arm-none-eabi-nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/compile.o
+         U fatal
+         U mal
+         U printf
++ for o in '$D/m4obj/*.o'
++ echo '== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/pike.o'
+== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/pike.o
++ arm-none-eabi-nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/pike.o
+         U decref
+         U gen
+         U incref
+         U mal
+         U memset
+         U newsub
+         U update
++ for o in '$D/m4obj/*.o'
++ echo '== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/recursive.o'
+== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/recursive.o
++ arm-none-eabi-nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/recursive.o
+         U fatal
++ for o in '$D/m4obj/*.o'
++ echo '== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/sub.o'
+== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/sub.o
++ arm-none-eabi-nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/sub.o
+         U mal
+         U memmove
++ for o in '$D/m4obj/*.o'
++ echo '== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/thompson.o'
+== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/thompson.o
++ arm-none-eabi-nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/thompson.o
+         U gen
+         U mal
+         U memset
++ for o in '$D/m4obj/*.o'
++ echo '== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/y.tab.o'
+== nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/y.tab.o
++ arm-none-eabi-nm -u /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/y.tab.o
+         U _impure_ptr
+         U exit
+         U fputc
+         U fputs
+         U free
+         U malloc
+         U memcpy
+         U memset
+         U printf
+         U putchar
+         U strchr
+         U vfprintf
++ arm-none-eabi-size /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/backtrack.o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/compile.o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/pike.o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/recursive.o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/sub.o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/thompson.o /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/y.tab.o
+   text	   data	    bss	    dec	    hex	filename
+    267	      0	      0	    267	    10b	/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/backtrack.o
+    759	      0	      4	    763	    2fb	/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/compile.o
+    492	      0	      0	    492	    1ec	/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/pike.o
+    316	      0	      0	    316	    13c	/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/recursive.o
+    126	      0	      4	    130	     82	/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/sub.o
+    288	      0	      0	    288	    120	/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/thompson.o
+   1715	      0	     28	   1743	    6cf	/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/rsc-re1/m4obj/y.tab.o
+
+== fstack-usage (bytes per frame, Cortex-M4 -Os) and struct sizes; commands:
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fstack-usage -w -c FILE.c   (see m4obj/*.su)
+backtrack.c:23:1:backtrack	12048	static
+compile.c:30:1:count	16	static
+compile.c:54:1:emit	24	static
+compile.c:12:1:compile	16	static
+compile.c:146:1:printprog	32	static
+pike.c:35:1:addthread	64	static
+pike.c:62:1:pikevm	64	static
+recursive.c:8:1:recursive	24	static
+recursive.c:43:1:recursiveprog	0	static
+recursive.c:49:1:recursiveloop	24	static
+recursive.c:89:1:recursiveloopprog	0	static
+sub.c:10:1:newsub	8	static
+sub.c:25:1:incref	0	static
+sub.c:32:1:update	24	static
+sub.c:49:1:decref	0	static
+thompson.c:34:1:addthread	16	static
+thompson.c:58:1:thompsonvm	48	static
+parse.y:129:1:fatal	16	static
+parse.y:168:1:mal	16	static
+parse.y:180:1:reg	16	static
+y.tab.c:1078:1:yyparse	1248	static
+parse.y:149:1:parse	16	static
+parse.y:192:1:printre	8	static
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -I src -c sizes.c; objdump -s -j .rodata sizes.o -> words: Regexp Inst Sub BtThread PkThread Prog
+ 0000 08000000 08000000 0c000000 58000000  ............X...
+ 0010 18000000 14000000                    ........        

@@ -1,0 +1,25 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/dietlibc/libregex/rx.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/dietlibc/include
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/dietlibc/libregex/rx.c
+cortex-m4  (thumb2, gcc 10.3): text=2793 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=2749 data=0 bss=0
+x86-64     (clang 21):         text=4959 data=0
+-- cortex-m4 per-function (bytes):
+    1204  .text.parseregex
+     482  .text.matchatom
+     214  .text.matchpiece
+     208  .text.regexec
+     120  .text.regex_putnext.constprop.0
+      98  .text.matchregex
+      92  .text.__regfree
+      72  .text.matchbranch
+      62  .text.matchatom_CHAR_ICASE
+      44  .text.matchatom_CHAR
+      42  .text.regcomp
+      35  .rodata.regerror.str1.1
+      30  .text.closebracket.isra.0
+      28  .text.regerror
+      22  .text.regfree
+      18  .text.piece_putnext
+      18  .rodata.parseregex.str1.1
+       4  .text.matchempty
+

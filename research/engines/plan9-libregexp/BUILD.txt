@@ -1,0 +1,80 @@
+# plan9-libregexp — Plan 9 / plan9port libregexp (Rob Pike's Pike-VM NFA regexp, UTF-8 aware)
+# All paths relative to this directory:
+#   /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/plan9-libregexp
+# S = /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad
+# NOTE: zsh does not word-split $VAR — every flag list below is spelled out. `diff`/`grep` are rewritten by the
+# rtk hook in this environment; rtk's diff summary mis-reported the headers as identical, so cmp(1) is used.
+
+# 1. Source acquisition (2026-09-04)
+git clone --depth 1 --filter=blob:none --sparse https://github.com/9fans/plan9port.git plan9port
+(cd plan9port && git sparse-checkout set src/libregexp include && git sparse-checkout add src/lib9/utf && git log -1 --format='%H %cd')
+#   -> b6564bd96ca189c69e28797738dad56f91eb5967  Wed Aug 26 07:04:59 2026 -0400
+curl -sSL -o libregexp9.tgz https://swtch.com/plan9port/unix/libregexp9.tgz && mkdir -p libregexp9 && tar xzf libregexp9.tgz -C libregexp9
+# Compare the two distributions (byte-exact):
+for f in regcomp.c regexec.c regaux.c regsub.c rregexec.c rregsub.c regerror.c regcomp.h; do cmp -s libregexp9/libregexp/$f plan9port/src/libregexp/$f && echo "same $f" || echo "DIFFERENT $f"; done
+cmp -s libregexp9/libregexp/regexp9.h plan9port/include/regexp9.h || echo "DIFFERENT regexp9.h"
+#   all .c files identical; regcomp.h differs (NSUBEXP 32 tarball vs 128 plan9port); regexp9.h differs (Reclass class[16] vs class[128])
+
+# 2. Build tree for the PRIMARY measurement (plan9port sources + plan9port headers)
+#    plan9port/src/libregexp/lib9.h pulls in <u.h>/<libc.h> (pthread.h etc.) which do not exist for arm-none-eabi,
+#    so p9p/ holds byte-identical copies of the unmodified sources + plan9port headers + the tarball's own
+#    6-line minimal lib9.h as the stub (no engine source modified; cmp verifies every copy).
+mkdir -p p9p
+cp plan9port/src/libregexp/{regcomp.c,regexec.c,regaux.c,regsub.c,regerror.c,rregexec.c,rregsub.c,regcomp.h} p9p/
+cp plan9port/include/regexp9.h p9p/ ; cp libregexp9/libregexp/lib9.h p9p/lib9.h
+for f in regcomp.c regexec.c regaux.c regsub.c regerror.c rregexec.c rregsub.c regcomp.h; do cmp p9p/$f plan9port/src/libregexp/$f; done
+cmp p9p/regexp9.h plan9port/include/regexp9.h
+
+# 3. Size measurement (protocol tool; -Os, -ffunction-sections, text includes .rodata)
+#    PRIMARY: plan9port headers  -> measure_p9p.txt
+for f in regcomp regexec regaux regsub regerror rregexec rregsub; do sh $S/tools/measure.sh p9p/$f.c -Ip9p -Iplan9port/include; done 2>&1 | tee measure_p9p.txt
+#      regcomp.c  cortex-m4 text=2155 data=0 bss=468 | m0+ 2075 | x86-64 3457 (+752 "data" = Apple size(1) lumps __bss)
+#      regexec.c  cortex-m4 text=738  | m0+ 744 | x86-64 1220
+#      regaux.c   cortex-m4 text=340  | m0+ 350 | x86-64 515
+#      regsub.c 136, regerror.c 73, rregexec.c 674, rregsub.c 140 (cortex-m4; NOT engine core, excluded)
+#    SECONDARY: tarball headers (NSUBEXP 32 / class[16]) -> measure_all.txt
+for f in regcomp regexec regaux regsub regerror rregexec rregsub; do sh $S/tools/measure.sh libregexp9/libregexp/$f.c -Ilibregexp9/libregexp -Iplan9port/include; done 2>&1 | tee measure_all.txt
+#      regcomp.c 2155 / regexec.c 734 / regaux.c 340 (cortex-m4)
+#    Required UTF-8 helpers from lib9/utf (chartorune, utfrune) — external to libregexp but needed to link:
+for f in rune utfrune; do sh $S/tools/measure.sh plan9port/src/lib9/utf/$f.c -Iplan9port/src/lib9/utf -Iplan9port/include; done 2>&1 | tee -a measure_all.txt
+#      rune.c: chartorune 150 (runetochar 132, runenlen 48, fullrune 46, runelen 18 unused by regexp); utfrune.c: 56 (cortex-m4)
+
+# 4. Cortex-M4 objects (same flags as measure.sh) for nm -u / per-function / stack usage / struct sizes
+mkdir -p m4p m4 m0p m0 x86p
+for f in regcomp regexec regaux; do arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -Ip9p -Iplan9port/include -fstack-usage -c p9p/$f.c -o m4p/$f.o; done
+for f in regcomp regexec regaux; do arm-none-eabi-nm -u m4p/$f.o; done
+arm-none-eabi-nm -S -t d m4p/regcomp.o m4p/regexec.o m4p/regaux.o
+cat m4p/*.su          # regexec9 frame 20640 B (2 x Relist[10] x 1028 B); regcomp path ~500 B
+for f in rune utfrune; do arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -Iplan9port/src/lib9/utf -Iplan9port/include -fstack-usage -c plan9port/src/lib9/utf/$f.c -o m4/$f.o; done
+arm-none-eabi-nm -u m4/rune.o m4/utfrune.o
+# struct sizes on ARM (m4p/sz.c = char arrays sized by sizeof(...)):
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -w -Ip9p -Iplan9port/include -c m4p/sz.c -o m4p/sz.o && arm-none-eabi-nm -S -t d m4p/sz.o
+#   plan9port headers: Reprog 33344, Reinst 12, Reclass 260, Resub 8, Resublist 1024, Relist 1028, regexec stack lists 20560, regexec2 heap lists 514000
+#   tarball headers (m4/sz.c):  Reprog 4224, Relist 260, Resublist 256, regexec stack lists 5200, regexec2 heap lists 130000
+# Cortex-M0+ and x86-64 sizes of the excluded glue functions (to subtract from whole-file totals):
+for f in regcomp regaux; do arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -Ip9p -Iplan9port/include -c p9p/$f.c -o m0p/$f.o; done
+arm-none-eabi-nm -S -t d m0p/regcomp.o m0p/regaux.o | grep -E "regcomplit9|regcompnl9|_rrenewemptythread"   # 12, 12, 88
+for f in regcomp regexec regaux; do clang --target=x86_64-apple-macos12 -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -Ip9p -Iplan9port/include -c p9p/$f.c -o x86p/$f.o; done
+size -m x86p/regcomp.o; nm -n x86p/regcomp.o; nm -n x86p/regaux.o   # Mach-O has no symbol sizes: regcomplit9 = 0x5b0-0x59c = 20, regcompnl9 = 0x5c1-0x5b0 = 17, _rrenewemptythread = 515-0x182 = 129
+for f in rune utfrune; do arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -Iplan9port/src/lib9/utf -Iplan9port/include -c plan9port/src/lib9/utf/$f.c -o m0/$f.o; done
+arm-none-eabi-nm -S -t d m0/rune.o m0/utfrune.o | grep -E "chartorune|utfrune"    # 164, 54
+
+# Engine-only sums (exclude regcomplit9+regcompnl9 = alternative-mode API wrappers, _rrenewemptythread = Rune-string API only):
+#   cortex-m4: (2155-16) + 738 + (340-80) = 3137   (+ chartorune 150 + utfrune 56 = 3343 with the required UTF-8 helpers)
+#   cortex-m0+: (2075-24) + 744 + (350-88) = 3057  (+164+54 = 3275)
+#   x86-64:    (3457-37) + 1220 + (515-129) = 5026
+#   tarball headers, cortex-m4: (2155-16) + 734 + (340-80) = 3133
+
+# 5. Host driver (PROTOCOL.md CLI contract) and differential test
+#    driver.c overrides regerror9 (library hook; default regerror.c exits the process) and emulates -i by ASCII-lowercasing.
+cc -O1 -std=gnu99 -w -Ip9p -Iplan9port/include -o driver driver.c p9p/regcomp.c p9p/regexec.c p9p/regaux.c plan9port/src/lib9/utf/rune.c plan9port/src/lib9/utf/utfrune.c
+python3 $S/tools/difftest.py ./driver $S/tools/corpus_seed1.jsonl 3000 > difftest_out.txt
+#   cases=2088 checked=2081 pass=1105 fail=976 timeouts=0 group_spans_checked=59
+cc -O1 -std=gnu99 -w -Ilibregexp9/libregexp -Iplan9port/include -o driver_tarball driver.c libregexp9/libregexp/regcomp.c libregexp9/libregexp/regexec.c libregexp9/libregexp/regaux.c plan9port/src/lib9/utf/rune.c plan9port/src/lib9/utf/utfrune.c
+python3 $S/tools/difftest.py ./driver_tarball $S/tools/corpus_seed1.jsonl 3000 > difftest_tarball_out.txt   # identical counts and identical failure list
+python3 classify.py $S/tools/corpus_seed1.jsonl > classify_out.txt        # failure buckets + examples (uses ./driver)
+# regexec heap-fallback counter: regexec.c compiled with -Dmalloc=cnt_malloc (compile-time rename only, source untouched)
+cc -O1 -std=gnu99 -w -c cntmalloc.c -o cntmalloc.o
+cc -O1 -std=gnu99 -w -Ilibregexp9/libregexp -Iplan9port/include -Dmalloc=cnt_malloc -c libregexp9/libregexp/regexec.c -o regexec_cnt.o
+cc -O1 -std=gnu99 -w -Ilibregexp9/libregexp -Iplan9port/include -o driver_cnt driver.c libregexp9/libregexp/regcomp.c libregexp9/libregexp/regaux.c plan9port/src/lib9/utf/rune.c plan9port/src/lib9/utf/utfrune.c cntmalloc.o regexec_cnt.o
+#   -> 21 of 2088 corpus cases overflow the 2x10-entry stack thread lists and fall back to 2 x malloc(BIGLISTSIZE*sizeof(Relist))

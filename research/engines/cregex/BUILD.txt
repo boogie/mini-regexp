@@ -1,0 +1,36 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/cregex/src/parse.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/cregex/include
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/cregex/src/parse.c
+cortex-m4  (thumb2, gcc 10.3): text=1068 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=1072 data=0 bss=0
+x86-64     (clang 21):         text=2392 data=0
+-- cortex-m4 per-function (bytes):
+     844  .text.parse_context
+      94  .text.concatenate
+      70  .text.cregex_parse
+      28  .text.push
+      28  .text.consume
+       4  .text.cregex_parse_free
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/cregex/src/compile.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/cregex/include
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/cregex/src/compile.c
+cortex-m4  (thumb2, gcc 10.3): text=994 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=992 data=0 bss=0
+x86-64     (clang 21):         text=1696 data=0
+-- cortex-m4 per-function (bytes):
+     562  .text.compile_context
+     132  .text.cregex_compile_node
+     106  .text.count_instructions
+     100  .text.compile_char_class.isra.0
+      58  .text.node_is_anchored
+      32  .text.emit
+       4  .text.cregex_compile_free
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/cregex/src/vm.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/cregex/include
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/cregex/src/vm.c
+cortex-m4  (thumb2, gcc 10.3): text=542 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=528 data=0 bss=0
+x86-64     (clang 21):         text=960 data=0
+-- cortex-m4 per-function (bytes):
+     314  .text.cregex_program_run
+     228  .text.vm_add_thread
+

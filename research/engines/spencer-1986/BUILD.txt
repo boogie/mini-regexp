@@ -1,0 +1,182 @@
++ git -C src log -1 '--format=%H %ad'
+c7db272ecea9e0a6b2139585cd38886c500efe35 Fri Dec 26 15:51:37 2014 +1100
++ arm-none-eabi-gcc --version
++ head -1
+arm-none-eabi-gcc (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/regexp.c -Isrc
++ tee measure_regexp.txt
+== src/regexp.c
+cortex-m4  (thumb2, gcc 10.3): text=2751 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=2759 data=0 bss=0
+x86-64     (clang 21):         text=5051 data=0
+-- cortex-m4 per-function (bytes):
+     932  .text.regbranch
+     500  .text.regmatch
+     248  .text.regcomp
+     240  .text.reg
+     168  .rodata.regbranch.str1.1
+     152  .text.regexec
+      75  .rodata.regmatch.str1.1
+      69  .rodata.reg.str1.1
+      53  .rodata.regcomp.str1.1
+      52  .text.regtry
+      52  .text.reginsert
+      48  .text.regtail
+      42  .rodata.regexec.str1.1
+      34  .text.regnode
+      30  .text.regoptail
+      30  .text.regnext
+      26  .text.regc
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/regsub.c -Isrc
++ tee measure_regsub.txt
+== src/regsub.c
+cortex-m4  (thumb2, gcc 10.3): text=221 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=221 data=0 bss=0
+x86-64     (clang 21):         text=297 data=0
+-- cortex-m4 per-function (bytes):
+     160  .text.regsub
+      61  .rodata.regsub.str1.1
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/regerror.c -Isrc
++ tee measure_regerror.txt
+== src/regerror.c
+cortex-m4  (thumb2, gcc 10.3): text=47 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=47 data=0 bss=0
+x86-64     (clang 21):         text=54 data=0
+-- cortex-m4 per-function (bytes):
+      32  .text.regerror
+      15  .rodata.regerror.str1.1
++ COMMON='-Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w'
++ arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -Isrc -fstack-usage -c src/regexp.c -o regexp_m4.o
++ arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -Isrc -fstack-usage -c src/regsub.c -o regsub_m4.o
++ arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -Isrc -fstack-usage -c src/regerror.c -o regerror_m4.o
++ arm-none-eabi-size regexp_m4.o regsub_m4.o regerror_m4.o
+   text	   data	    bss	    dec	    hex	filename
+   2751	      0	      0	   2751	    abf	regexp_m4.o
+    221	      0	      0	    221	     dd	regsub_m4.o
+     47	      0	      0	     47	     2f	regerror_m4.o
++ arm-none-eabi-nm -u regexp_m4.o
+         U malloc
+         U memmove
+         U memset
+         U regerror
+         U strchr
+         U strcspn
+         U strlen
+         U strncmp
+         U strspn
+         U strstr
++ arm-none-eabi-nm -u regsub_m4.o
+         U _ctype_
+         U regerror
+         U strncpy
++ arm-none-eabi-nm -u regerror_m4.o
+         U _impure_ptr
+         U exit
+         U fprintf
++ arm-none-eabi-nm regexp_m4.o
+         U malloc
+         U memmove
+         U memset
+00000000 t reg
+00000000 t regbranch
+00000000 t regc
+00000000 T regcomp
+         U regerror
+00000000 T regexec
+00000000 t reginsert
+00000000 t regmatch
+00000000 t regnext
+00000000 t regnode
+00000000 t regoptail
+00000000 t regtail
+00000000 t regtry
+         U strchr
+         U strcspn
+         U strlen
+         U strncmp
+         U strspn
+         U strstr
++ cat regexp_m4.su regsub_m4.su regerror_m4.su
+src/regexp.c:539:1:regnode	0	static
+src/regexp.c:564:1:regc	0	static
+src/regexp.c:954:1:regnext	0	static
+src/regexp.c:580:1:reginsert	16	static
+src/regexp.c:762:1:regmatch	32	static
+src/regexp.c:726:1:regtry	16	static
+src/regexp.c:605:1:regtail	16	static
+src/regexp.c:630:1:regoptail	4	static
+src/regexp.c:250:1:reg	40	static
+src/regexp.c:320:1:regbranch	56	static
+src/regexp.c:161:1:regcomp	48	static
+src/regexp.c:672:1:regexec	32	static
+src/regsub.c:15:1:regsub	24	static
+src/regerror.c:8:1:regerror	8	static
++ cc -O2 -Isrc -o engine_cli driver.c src/regexp.c
+src/regexp.c:161:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  161 | regcomp(exp)
+      | ^
+src/regexp.c:250:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  250 | reg(cp, paren, flagp)
+      | ^
+src/regexp.c:320:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  320 | regbranch(cp, flagp)
+      | ^
+src/regexp.c:361:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  361 | regpiece(cp, flagp)
+      | ^
+src/regexp.c:430:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  430 | regatom(cp, flagp)
+      | ^
+src/regexp.c:539:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  539 | regnode(cp, op)
+      | ^
+src/regexp.c:564:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  564 | regc(cp, b)
+      | ^
+src/regexp.c:580:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  580 | reginsert(cp, op, opnd)
+      | ^
+src/regexp.c:605:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  605 | regtail(cp, p, val)
+      | ^
+src/regexp.c:630:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  630 | regoptail(cp, p, val)
+      | ^
+src/regexp.c:672:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  672 | regexec(prog, str)
+      | ^
+src/regexp.c:726:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  726 | regtry(ep, prog, string)
+      | ^
+src/regexp.c:762:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  762 | regmatch(ep, prog)
+      | ^
+src/regexp.c:917:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  917 | regrepeat(ep, node)
+      | ^
+src/regexp.c:954:1: warning: a function definition without a prototype is deprecated in all versions of C and is not supported in C23 [-Wdeprecated-non-prototype]
+  954 | regnext(p)
+      | ^
+15 warnings generated.
++ python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py ./engine_cli /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/corpus_seed1.jsonl 3000
++ echo 'difftest exit=1'
+difftest exit=1
++ head -1 difftest_seed1.txt
+cases=2088 checked=2081 pass=1029 fail=1052 timeouts=1 group_spans_checked=78
+
+##### Additional commands run after build.sh (all from engines/spencer-1986/) #####
+# driver.c was then patched so regerror() also prints its message to stderr (stdout contract unchanged), rebuilt:
+cc -O2 -w -Isrc -o engine_cli driver.c src/regexp.c
+# failure classification (re-runs every corpus case, reproduces difftest verdicts, buckets construct-first):
+python3 classify.py ./engine_cli $S/tools/corpus_seed1.jsonl > classify_summary.txt   # per-case detail in classify_out.txt
+# bug check: corpus subset restricted to Spencer-supported syntax (no -i, (?, lazy, {n,m}, \letter, non-ASCII, \n in text, \ inside []):
+#   filter script inline in session -> corpus_subset.jsonl (140 kept / 1948 dropped)
+python3 $S/tools/difftest.py ./engine_cli corpus_subset.jsonl 40 > difftest_subset.txt
+#   -> cases=140 checked=140 pass=134 fail=6 timeouts=1 (5x "*+ operand could be empty" rejection, 1x ^(a+)+$ timeout)
+# rodata content:
+arm-none-eabi-objdump -s -j .rodata.regbranch.str1.1 -j .rodata.regmatch.str1.1 -j .rodata.reg.str1.1 -j .rodata.regcomp.str1.1 -j .rodata.regexec.str1.1 regexp_m4.o
+# ARM struct size check (passes): _Static_assert(sizeof(regexp)==96) compiled with arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Isrc
+# compiled-program size probe (host; regexp.c compiled with -Dmalloc=probe_malloc, hook in probe_hook.c):
+cc -O2 -w -Isrc -c probe_hook.c -o probe_hook.o; cc -O2 -w -Isrc -Dmalloc=probe_malloc -c src/regexp.c -o regexp_probe.o; cc -O2 -w -Isrc -o probe probe.c probe_hook.o regexp_probe.o
+./probe 'a' 'abc' 'a*' '(a|b)+c' '[a-z]' '[^a-zA-Z0-9_]' '^([a-z]+)@([a-z]+)\.com$' '(ab)*'
+#   a=12 B program, abc=14, a*=15, (a|b)+c=46, [a-z]=37, [^a-zA-Z0-9_]=74, email pattern=114, (ab)*=34 (+96 B header on ARM)

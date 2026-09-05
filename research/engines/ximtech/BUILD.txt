@@ -1,0 +1,13 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/ximtech-Regex/Regex.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/ximtech-Regex/include
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/ximtech-Regex/Regex.c
+cortex-m4  (thumb2, gcc 10.3): text=2355 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=2453 data=0 bss=0
+x86-64     (clang 21):         text=3776 data=0
+-- cortex-m4 per-function (bytes):
+     872  .text.regexCompile
+     529  .rodata.regexCompile.str1.1
+     508  .text.matchPattern
+     184  .text.matchCharClass
+     152  .text.matchOne
+     110  .text.regexMatch
+

@@ -1,0 +1,42 @@
+# pike-tpop — Kernighan/Pike "A Regular Expression Matcher" (Beautiful Code ch.1 / TPOP 9.2)
+# All paths relative to this directory:
+#   /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/pike-tpop
+# S = /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad
+
+# 1. Source acquisition (2026-09-04)
+curl -sSL -o beautiful.html "https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html"
+# pike.c   = lines 150-184 of beautiful.html (the <pre> block starting at line 149) transcribed verbatim,
+#            plus one added line `#include "pike.h"` and a header comment.
+# pike.h   = added wrapper: three prototypes (clang 21 errors on implicit declarations in C99 mode).
+# pike_ll.c = SECONDARY: same match/matchhere + the "leftmost longest" matchstar from the same page
+#            (the <blockquote><pre> block at line 311).
+# Verification that pike.c bodies are byte-identical to the page:
+sed -n '150,184p' beautiful.html > orig_block.txt
+sed -n '/\/\* match: search/,$p' pike.c > mine_block.txt
+cmp orig_block.txt mine_block.txt    # exit 0; md5 7a92add2e142e9a484ac01796f82a425 for both
+
+# 2. Size measurement (protocol tool; -Os, -ffunction-sections, text includes .rodata)
+sh $S/tools/measure.sh pike.c
+#   cortex-m4  (thumb2, gcc 10.3): text=156 data=0 bss=0   (matchhere 72, match 46, matchstar 38)
+#   cortex-m0+ (thumb1, gcc 10.3): text=160 data=0 bss=0
+#   x86-64     (clang 21):         text=313 data=0
+sh $S/tools/measure.sh pike_ll.c
+#   cortex-m4: text=166 (matchhere 72, matchstar 48, match 46); cortex-m0+: 170; x86-64: 277
+# No functions excluded: all three are engine functions (match = search-anywhere entry point).
+
+# 3. Cortex-M4 object for nm/objdump (same flags as measure.sh; NOTE zsh needs the flags spelled out)
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -c pike.c -o pike.m4.o
+arm-none-eabi-nm -u pike.m4.o          # prints nothing: zero undefined symbols
+arm-none-eabi-nm -S --size-sort pike.m4.o
+arm-none-eabi-size -A pike.m4.o
+arm-none-eabi-objdump -d pike.m4.o
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -w -fstack-usage -c pike.c -o pike_su.o; cat pike_su.su
+
+# 4. Host driver (PROTOCOL.md CLI contract) and differential test
+cc -O1 -std=gnu99 -o driver driver.c pike.c
+cc -O1 -std=gnu99 -o driver_ll driver.c pike_ll.c
+python3 $S/tools/difftest.py ./driver $S/tools/corpus_seed1.jsonl                 # mode A: leftmost-shortest end (engine-faithful)
+PIKE_LONGEST=1 python3 $S/tools/difftest.py ./driver $S/tools/corpus_seed1.jsonl  # mode B: leftmost-longest end
+PIKE_LONGEST=1 python3 $S/tools/difftest.py ./driver_ll $S/tools/corpus_seed1.jsonl
+python3 classify.py ./driver $S/tools/corpus_seed1.jsonl                 # failure classification, mode A
+python3 classify.py ./driver $S/tools/corpus_seed1.jsonl PIKE_LONGEST=1  # failure classification, mode B

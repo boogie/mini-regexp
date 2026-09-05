@@ -1,0 +1,29 @@
+#ifndef MINI_REGEXP_BYTECODE_H
+#define MINI_REGEXP_BYTECODE_H
+
+enum re_opcode {
+    RE_OP_MATCH,
+    RE_OP_BOL,
+    RE_OP_EOL,
+    RE_OP_WORD_BOUNDARY,
+    RE_OP_LINE_BOL,
+    RE_OP_LINE_EOL,
+    RE_OP_CLASS,
+    RE_OP_SPLIT,
+    RE_OP_JUMP,
+    RE_OP_NOT_WORD_BOUNDARY,
+    RE_OP_SAVE
+};
+
+enum {
+    RE_BYTE_BITS = 8,
+    RE_OFFSET_BYTES = 2,
+    RE_BRANCH_BYTES = 3,
+    RE_CLASS_NEGATED = 0x80,
+    RE_CLASS_NEGATED_SHIFT = 7,
+    RE_CLASS_RANGE_MASK = 0x7f,
+    RE_MAX_CAPTURE_SLOTS = 0xff,
+    RE_CAPTURE_PAIR_SLOTS = 2
+};
+
+#endif

@@ -1,0 +1,35 @@
+# build artifacts
+*.o
+*.su
+*.a
+*.elf
+*.bin
+*.dSYM/
+build/
+/driver
+/fuzz
+
+# python
+__pycache__/
+*.pyc
+
+# research: only BUILD.txt / driver.c are tracked per engine, never the clones
+research/engines/*/src/
+research/engines/*/*.o
+research/engines/*/driver
+research/engines/*/engine_cli
+
+# editors / OS
+.DS_Store
+.vscode/
+.idea/
+
+# codegraph local index
+.codegraph/
+
+# spike build outputs
+research/spikes/*/build/
+research/spikes/*/*.o
+research/spikes/*/drv
+research/spikes/*/driver
+research/spikes/*/fz

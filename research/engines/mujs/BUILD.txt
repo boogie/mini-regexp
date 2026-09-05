@@ -1,0 +1,73 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/mujs/regexp.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/mujs
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/mujs/regexp.c
+cortex-m4  (thumb2, gcc 10.3): text=5369 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=5417 data=0 bss=0
+x86-64     (clang 21):         text=10271 data=0
+-- cortex-m4 per-function (bytes):
+     956  .text.regnext
+     752  .text.match
+     532  .text.js_regcompx
+     528  .text.parserep
+     424  .text.compile
+     348  .text.nextrune
+     203  .rodata.js_regcompx.str1.1
+     176  .text.count
+     124  .text.addrange
+      98  .text.empty
+      88  .rodata.nextrune.str1.1
+      80  .text.parsecat
+      68  .text.newrep
+      68  .rodata.parserep.str1.1
+      62  .text.addranges_s
+      62  .rodata.addrange.str1.1
+      58  .text.js_regexec
+      53  .rodata.regnext.str1.1
+      52  .text.hex
+      48  .text.parsealt
+      48  .text.incclasscanon
+      46  .text.addranges_w
+      44  .text.newcclass
+      44  .text.js_regfreex
+      40  .rodata.newrep.str1.1
+      33  .rodata.count.str1.1
+      32  .text.newnode
+      30  .text.iswordchar
+      28  .text.js_regcomp
+      28  .text.isnewline
+      27  .rodata.newcclass.str1.1
+      26  .text.regemit
+      26  .text.default_alloc
+      24  .text.dec
+      24  .rodata.hex.str1.1
+      20  .text.regaccept
+      20  .text.canon
+      19  .rodata.dec.str1.1
+      16  .text.js_regfree
+      14  .text.die
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/mujs/utf.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/mujs
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/mujs/utf.c
+cortex-m4  (thumb2, gcc 10.3): text=19460 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=19516 data=0 bss=0
+x86-64     (clang 21):         text=19906 data=0
+-- cortex-m4 per-function (bytes):
+    5096  .rodata.ucd_toupper1
+    4976  .rodata.ucd_tolower1
+    4184  .rodata.ucd_alpha2
+    2040  .rodata.ucd_toupper_full
+     668  .rodata.ucd_alpha1
+     636  .rodata.ucd_toupper2
+     624  .rodata.ucd_tolower2
+     448  .rodata.ucd_tolower_full
+     164  .text.jsU_chartorune
+     142  .text.jsU_runetochar
+      72  .text.jsU_toupperrune
+      72  .text.jsU_tolowerrune
+      68  .text.jsU_isupperrune
+      68  .text.jsU_islowerrune
+      68  .text.jsU_isalpharune
+      52  .text.ucd_bsearch
+      32  .text.jsU_toupperrune_full
+      32  .text.jsU_tolowerrune_full
+      18  .text.jsU_runelen
+

@@ -1,0 +1,1 @@
+cd /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/gyrovorbis-tiny-regex-c && sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh re.c  # gyrovorbis/tiny-regex-c master (2026-06-01)

@@ -1,0 +1,37 @@
+C compiler:
+
+  tools/measure.sh research/spikes/c-compiler/re_compile.c -Iresearch/spikes/c-compiler
+
+  cortex-m4   text=2250 data=0 bss=0
+  cortex-m0+  text=2382 data=0 bss=0
+  x86-64      text=4569 data=0
+
+Combined C compiler and matcher VM:
+
+  tools/measure.sh research/spikes/c-compiler/combined.c -Iresearch/spikes/c-compiler
+
+  cortex-m4   text=2796 data=0 bss=0
+  cortex-m0+  text=2920 data=0 bss=0
+  x86-64      text=5477 data=0
+
+Both measurements have no undefined runtime symbols. Build and run the focused tests with:
+
+  cc -std=c99 -Wall -Wextra -Werror -O1 -fsanitize=address,undefined \
+    -o /tmp/test-c-compiler research/spikes/c-compiler/test.c \
+    research/spikes/c-compiler/re_compile.c
+  /tmp/test-c-compiler
+
+  cc -std=c99 -Wall -Wextra -Werror -O2 -o /tmp/tinyre-c-compiler \
+    research/spikes/c-compiler/driver.c research/spikes/c-compiler/re_compile.c
+  TINYRE_C_COMPILER=/tmp/tinyre-c-compiler node research/spikes/c-compiler/test.js
+
+The full non-`i` corpus parity audit on 2026-09-05 compared 3628 distinct patterns and produced:
+
+  bytecode parity: 3628/3628
+
+Unicode fold-table survey for the current JavaScript semantics:
+
+  mapped code points: 1509
+  contiguous delta runs: 698
+  fold classes: 1479
+  largest non-canonical class membership: 3

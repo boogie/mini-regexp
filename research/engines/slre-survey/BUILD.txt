@@ -1,0 +1,14 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/slre/slre.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/slre/slre.c
+cortex-m4  (thumb2, gcc 10.3): text=1946 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=2054 data=0 bss=0
+x86-64     (clang 21):         text=3713 data=0
+-- cortex-m4 per-function (bytes):
+     876  .text.bar
+     560  .text.slre_match
+     300  .text.match_op
+     108  .text.doh
+      58  .text.get_op_len
+      22  .text.op_len
+      22  .rodata.slre_match.str1.1
+

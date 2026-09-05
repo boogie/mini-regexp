@@ -1,0 +1,3 @@
+cd /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/picomatch && sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh picomatch.c -std=gnu2x  # Beariish/picomatch master (2025-06-22); source uses C23 'label before declaration', so -std=gnu2x overrides the protocol's gnu99 (no source edits)
+gcc 10.3 (protocol) cannot parse C23 label-before-declaration in picomatch.c; numbers above are clang 21 (x86-64 and armv7em) with -std=gnu2x
+sh clang_measure.sh  # fallback because gcc 10.3 rejects C23 label-before-declaration

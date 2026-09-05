@@ -1,0 +1,19 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/subreg/subreg.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/subreg/subreg.c
+cortex-m4  (thumb2, gcc 10.3): text=1704 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=1556 data=0 bss=0
+x86-64     (clang 21):         text=2536 data=0
+-- cortex-m4 per-function (bytes):
+     788  .text.parse_literal
+     292  .text.decode_non_class_metacharacter
+     178  .text.parse_alternation
+     128  .text.subreg_match
+     104  .text.skip_block
+      66  .text.decode_hex
+      38  .text.match_char.isra.0
+      32  .text.match_word
+      28  .text.match_hexadecimal
+      20  .text.match_whitespace
+      18  .text.invert_match
+      12  .text.match_digit
+

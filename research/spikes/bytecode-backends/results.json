@@ -1,0 +1,5092 @@
+{
+  "toolchain": "arm-none-eabi-gcc (GNU Arm Embedded Toolchain 10.3-2021.10) 10.3.1 20210824 (release)",
+  "flags": [
+    "-Os",
+    "-std=gnu99",
+    "-DNDEBUG",
+    "-ffreestanding",
+    "-fno-stack-protector",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fno-unwind-tables",
+    "-fno-asynchronous-unwind-tables",
+    "-fno-pic"
+  ],
+  "hostFlags": [
+    "-std=c99",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-O1",
+    "-g",
+    "-fsanitize=address,undefined"
+  ],
+  "samples": [
+    {
+      "pattern": "",
+      "search": false
+    },
+    {
+      "pattern": "",
+      "search": true
+    },
+    {
+      "pattern": "a",
+      "search": false
+    },
+    {
+      "pattern": "a",
+      "search": true
+    },
+    {
+      "pattern": "abc",
+      "search": false
+    },
+    {
+      "pattern": "abc",
+      "search": true
+    },
+    {
+      "pattern": "[a-z]+",
+      "search": false
+    },
+    {
+      "pattern": "[a-z]+",
+      "search": true
+    },
+    {
+      "pattern": "a*",
+      "search": false
+    },
+    {
+      "pattern": "a*",
+      "search": true
+    },
+    {
+      "pattern": "a+",
+      "search": false
+    },
+    {
+      "pattern": "a+",
+      "search": true
+    },
+    {
+      "pattern": "a*?",
+      "search": false
+    },
+    {
+      "pattern": "a*?",
+      "search": true
+    },
+    {
+      "pattern": "a{1,3}",
+      "search": false
+    },
+    {
+      "pattern": "a{1,3}",
+      "search": true
+    },
+    {
+      "pattern": "(a|ab)+",
+      "search": false
+    },
+    {
+      "pattern": "(a|ab)+",
+      "search": true
+    },
+    {
+      "pattern": "\\bfoo\\b",
+      "search": false
+    },
+    {
+      "pattern": "\\bfoo\\b",
+      "search": true
+    },
+    {
+      "pattern": "^([a-z]+)=([0-9]+)$",
+      "search": false
+    },
+    {
+      "pattern": "^([a-z]+)=([0-9]+)$",
+      "search": true
+    },
+    {
+      "pattern": "abc|xbc",
+      "search": false
+    },
+    {
+      "pattern": "abc|xbc",
+      "search": true
+    },
+    {
+      "pattern": "(?:abc|xbc)+",
+      "search": false
+    },
+    {
+      "pattern": "(?:abc|xbc)+",
+      "search": true
+    },
+    {
+      "pattern": "^a{100}$",
+      "search": false
+    },
+    {
+      "pattern": "^a{100}$",
+      "search": true
+    },
+    {
+      "pattern": "é",
+      "search": false
+    },
+    {
+      "pattern": "é",
+      "search": true
+    },
+    {
+      "pattern": "[a-z]",
+      "search": false
+    },
+    {
+      "pattern": "[a-z]",
+      "search": true
+    },
+    {
+      "pattern": "[aaab]",
+      "search": false
+    },
+    {
+      "pattern": "[aaab]",
+      "search": true
+    },
+    {
+      "pattern": "[^a]",
+      "search": false
+    },
+    {
+      "pattern": "[^a]",
+      "search": true
+    },
+    {
+      "pattern": "\\W",
+      "search": false
+    },
+    {
+      "pattern": "\\W",
+      "search": true
+    },
+    {
+      "pattern": "[a-zA-Z_]",
+      "search": false
+    },
+    {
+      "pattern": "[a-zA-Z_]",
+      "search": true
+    },
+    {
+      "pattern": "(?:a|b)*c",
+      "search": false
+    },
+    {
+      "pattern": "(?:a|b)*c",
+      "search": true
+    }
+  ],
+  "cases": 7197,
+  "rejected": [
+    {
+      "name": "corpus_wb_seed1.jsonl:23",
+      "pattern": "(a*)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:24",
+      "pattern": "(a*)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:31",
+      "pattern": "(|a)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:96",
+      "pattern": "\\b*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:99",
+      "pattern": "(",
+      "error": "missing )"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:100",
+      "pattern": "[a",
+      "error": "missing ]"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:101",
+      "pattern": "a{2,1}",
+      "error": "bad repeat"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:138",
+      "pattern": "_|((?:)+?[^\\s\\]]){2}?\\S|a+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:142",
+      "pattern": "a(?:(-.?|本*1ű*\\s|)*?.{1,}?.(|\\(+z)?)[b-d\\-]*?(?:[y-}\\sb]x*?c+[^y-}\\s]{3,})|(\\B1 +x)*a{0}|[a-b]x9",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:173",
+      "pattern": "(b[\\^]||(?:9+ .)9{2,}ű{2,3})*[x-{y-z]\\S(9a[x-|c-d0-5]*\\?)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:183",
+      "pattern": "()?z?ß|\\||()+y+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:194",
+      "pattern": ".\\b( {0,1}?|本{3}|)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:209",
+      "pattern": "z+(?:\\?|)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:212",
+      "pattern": "((?:.*c*)*yz-)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:215",
+      "pattern": "^\\dz{0}(c\\W{2,}1{1}?\\$|[\\s])ß*?|z\\S|(?:){1,}-{1}[\\-ő]+9*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:242",
+      "pattern": "()+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:248",
+      "pattern": "(?:[\\s]|c?1)x\\W|(?:9(.?\\^?)(?:c)0+)(a+y??(||)*?0)*\\].*?|(){3,}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:254",
+      "pattern": ".*|a\\s((?:|a*aa) {0,}(\\S{1,3}[^\\\\9😀]??||))*?|91+?.",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:287",
+      "pattern": "x?()*\\s*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:300",
+      "pattern": "(?:)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:301",
+      "pattern": "|\\d+0\\D(\\w{0} x ?|( ?|.1*|)*?(?:c|.*)*?)|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:308",
+      "pattern": "(b*x{3,4}?c|)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:328",
+      "pattern": "()*?|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:369",
+      "pattern": "y+(.{2,3}){3}[\\d0-1y-~]c|(||)*(?:1.?[é😀]).|\\s",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:392",
+      "pattern": "9\\S+?-*(?:|x?.*)+|.*$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:397",
+      "pattern": "[c-e1-6](?:y?\\b1*)*\\s{3,}?\\*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:399",
+      "pattern": "[1]|.(?:[1-6xz-~]{1,3}[9-:]{3,5}||[x-y]*.?[^9-:1\\s]*?ß)+?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:422",
+      "pattern": "^1{0,0}()*|日",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:431",
+      "pattern": "(.*?(a?9?1|\\W*z|)\\{{3,4}[by-}\\s]{2,2}|日(\\W\\{*ű日|y*9+?|)+)y+zz{2,4}?|[9-;]+ {1}[^\\d\\w]+|$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:468",
+      "pattern": "^b{2,3}(ű?é(?:ű*?)*){0,2}?|本9",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:491",
+      "pattern": ".*?(?:x{0,}|.+c?-{1,}|(?:x1\\b1?||))*[y]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:515",
+      "pattern": "(a*日|)+\\$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:522",
+      "pattern": "^1?.*(?:)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:562",
+      "pattern": "\\d+.*(?:)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:565",
+      "pattern": "^(.+[a-c\\wő]0z)c(?:( )*([^\\w]*?)+)(|z??.)+|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:567",
+      "pattern": "^9*\\]?()*|(\\\\{0,} \\?([c-e]*[\\wx-{])*|cy\\s+)*[b-d\\w0-2]|_*z+c+\\w",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:579",
+      "pattern": "^([-ő]??)+\\w?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:587",
+      "pattern": "a*? (|(\\Sz_.)*(\\w\\{*){1,}|)+?x+?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:604",
+      "pattern": "||(|(?:|1*)+9{1,2})+\\D\\*(?:b{0})",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:627",
+      "pattern": "()+|(0?)\\S.|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:656",
+      "pattern": "()*x{0,0}?-.+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:678",
+      "pattern": "^(ő\\d*c*?(\\Dő本{3,}[\\d本]*|)|)+?[^c-g]?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:692",
+      "pattern": "()*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:696",
+      "pattern": "1.?\\s日|9\\$ (0*(y*?))*|c\\{",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:705",
+      "pattern": "(?:😀{2}\\S *|0|\\d(|\\D+\\d{2,}.|)+(?:1*[^y-{]-ű+?|))*.+9",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:739",
+      "pattern": ".{3,}(?:9|[^日]*?|)*|\\+1.😀|\\b$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:748",
+      "pattern": "(()+\\sa+)(?:|x(0{0,2}?b+[^x-y]{3}|本[\\w]日)(?:|1űz{2,}😀?|b*[x-z])([\\\\][\\w\\]ß]{1,2})|.*\\s(?:0*?[a-c1-4\\d]b{2} )z)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:770",
+      "pattern": "xb(ű*?)+?\\d",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:793",
+      "pattern": "|\\S(|\\Bc|\\s()[b-dx-yb-c]{0,0})(?: {1}|)*x|.*c1\\s?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:796",
+      "pattern": "\\D(?:)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:797",
+      "pattern": "[z-}z-\\]](?:|1.|(|y|0)){1,}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:801",
+      "pattern": "((?:9{3,4}?1*|_?\\s{3,4}){3,4}(|日)+\\b)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:802",
+      "pattern": "[\\s1-2\\d]{3,}(?:.()).|\\D|y(0*?|ő+|c\\d?.+)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:806",
+      "pattern": "\\D{0,}(\\D+?(|[1-40-2][\\d]?aő*?)+| \\.{3}?1{1,}| \\d.\\W{2,4})+?_c",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:814",
+      "pattern": "b(|[\\\\\\d\\d]??\\B[\\s\\dy-z]b{2,}?|(|\\+)\\$a\\w*)+\\}| ().*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:822",
+      "pattern": "()*.{3}$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:823",
+      "pattern": "|[^日b-f]{1}(?:)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:827",
+      "pattern": "0*é?😀*|z{2}(?:(|1a\\W)*\\d)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:828",
+      "pattern": "^(?:[\\s][^1-5][\\^\\^c-d]{1,}|z?(|y+b?)*(\\b[\\^9-:z-~]{2})?|\\d{3,4}.?c?).*|$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:838",
+      "pattern": "91(.+?)|b*()(b{2,}?[a-f1z](z{3,4}\\b)|.*?[1-2b-f]*|(c?ß)*\\S?b*.)+0|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:849",
+      "pattern": "b?()*\\.*a",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:851",
+      "pattern": "x[a\\-](?:){1,}b?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:855",
+      "pattern": ".(?:\\? (|ßa)+?)[\\\\]?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:887",
+      "pattern": "(?:1*)*?b[\\w].|()?\\B9|\\b",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:927",
+      "pattern": "x+[űß]||[x-} ](?:|😀[^a-bßa]+|){3,}?$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:944",
+      "pattern": "(?:|\\.(|-\\}[^\\\\]|9\\(1)(?:ßx*||\\?*c{3}.)|(\\^){0,}?[^\\^\\\\][y\\db]*0)*\\D{0,}_[z]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:950",
+      "pattern": "([^-] |\\b[y-|]{2}[^9\\w]+?|[b-f]?1.?.+)*(b(1  |\\[?a本+c|0*)*|\\d?_(?:1[^c-f]_ű|\\sa?\\$+_+|- *_[\\^😀])*[a]?){1,3}[x-yyy-~].",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:953",
+      "pattern": " ((_+-*\\S?|0.\\s+|)\\})?|((y[y-{][c-g\\wb]*.))?(?:1*)*?-*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:959",
+      "pattern": "|((|\\s|[😀]*?z??\\){2,})*(?:z)*?.{2,}|[^\\s\\-]) *[^\\s][az-]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:968",
+      "pattern": "(?:([^\\sé_])*[^ca\\w]*[0-2]|c1*?|(?:\\^[^\\]y-|9-;]{3}|c{3,}){3})[1-59-;ő](|9 .\\]*){2,}?1$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:978",
+      "pattern": "\\({1,}😀*?y|-+.(?:[^é]?){1,}(\\S{1,}\\S)$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:990",
+      "pattern": ".{0,2}\\db(-{1,}[\\s0-4z-]+(?:)+?(?:é))$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:991",
+      "pattern": "(?:xb\\w本|)+?\\S\\W|[^1-3\\w\\w]{0}?b*ß{1,2}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1001",
+      "pattern": "|((. *[ő\\w]{2,}|\\}y)?.()*y{0,})\\w{0}(?:😀)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1018",
+      "pattern": "((){3,}_(😀{2,} \\D[0-3z-{]*)?)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1020",
+      "pattern": "|(()*(?:\\ső?本)?)*?.\\b[é\\^]+?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1047",
+      "pattern": "(|(|aa)\\{(){1,}|\\)*\\Wű[9-<])x([\\sz-~]{2})*c",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1077",
+      "pattern": "(9()*?1|(c0日*?.*)*-+?|)+c[1-2]*$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1080",
+      "pattern": "\\.(.*-||\\])??\\w??(|\\D|y)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1083",
+      "pattern": "^|(|)*[本a-e]{2}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1084",
+      "pattern": "^(| \\w)*本{0}?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1095",
+      "pattern": "[^c-d9x-}]*()*\\d",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1107",
+      "pattern": "é|(?:)*?(1[\\w])+[^1-30-4\\w]|[bz-{](b(\\w.?||)[z-}b-g](űa{1,2}xb))😀?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1110",
+      "pattern": "😀z((?:\\+a?_|)|[😀]+-y|)|\\W*\\**?0*|()*c*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1113",
+      "pattern": "(|b{0,1}?_ő*|\\W*.y)_\\*(?:){0,}| {1}\\b",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1145",
+      "pattern": "-\\B(?:|\\D*?c+[^xz-|]+b)* ",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1153",
+      "pattern": "-+.0|_a(?:|)|(?:(?:)*.*_.)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1155",
+      "pattern": "xa{2,3}(?:yy|_+?.?c*(?:|z+0*?é0){0,}?)?1$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1162",
+      "pattern": "\\D(?:[9-=\\d]{1}\\W|(?:[őx-{a-f]*[^űé]??)(?:b*)*[zb-c9]0|c(?:.?[^ß]本)+)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1203",
+      "pattern": "^y+?(日[^a-b](?:9??.+\\.||[y-~\\w]{1,}?b {1,}?[\\d])+).?z*$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1215",
+      "pattern": "(?:)*$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1224",
+      "pattern": ".(?:|_{2}?őc|ő9+?\\W*)+[9-;]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1257",
+      "pattern": "|y.[y-za-e](?:)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1290",
+      "pattern": "(y*(\\S+z[c-ey-{y-|]+?[é]*| [x-y\\\\😀]*9)+.|(){2,}[\\w\\^]?[1\\dy]{2}?|(?:[^\\]a-fy]c{2,3}1)?(?:)[y-zűa]*b+?)0+?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1294",
+      "pattern": "^(\\D*(-{0,}?.?.)\\d+é|\\S(?:0?\\W+\\$+?x{2,4}|)?(?:9)|)??(?:\\s+[zé]??()*|\\s+?a[^😀]?())*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1296",
+      "pattern": ".((|éb*?)*?).[z9]{1,}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1298",
+      "pattern": "c9??y||\\w*(?:c*?)*a",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1307",
+      "pattern": "9{1,}ő(?:.*本*\\Dz||(1?.)?(?:_+a|xc)+)+-+?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1360",
+      "pattern": "|y{1,}|(.\\w(é*ő)|.[本1-5] ??.|\\s{2}9*(?:)*[1-2]?)+?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1364",
+      "pattern": ".{3,}?((9{1,}?|\\W1*a{3,4}😀{2}|\\\\+0+\\^*z)(\\w+\\{{1}?|\\w{1}\\*.{2,4}ß)|[őy-za-d]*){2,} ((-){1,3}?\\**9)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1412",
+      "pattern": "[9-;\\w]*()*a",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1414",
+      "pattern": ".a{1}?[x-|]|(a *|)*?.{1,}|\\|.\\s{3}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1418",
+      "pattern": "(?:(?:|0.+\\}))*?\\s*_-",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1459",
+      "pattern": "^|\\S?(?:y*(|.{0,2}?c0[0]|0*[^\\da-c])?(\\D{1,}.{1,1}a*b)+)?\\w(a*|1(?:)*.+?(_{2,}\\S{0,0}a?z)|z(?:\\dß*- *|[\\^]??_日1?|b{0,}_c)()\\B)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1472",
+      "pattern": "|.|[x-}ű]0()+_+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1515",
+      "pattern": "(?:){3,}é",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1533",
+      "pattern": "^(.{0,0})*?é",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1545",
+      "pattern": "|(|\\d?y?.)*\\w+\\.[b\\w]|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1579",
+      "pattern": "(|)+9+|\\w+?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1590",
+      "pattern": "^(\\s(?:\\Dz)1(?: ||1?\\w)*)\\D[9->9-<a-f]b",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1593",
+      "pattern": "|.{2,2}\\W*(|\\b)+$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1596",
+      "pattern": "[cb-g]\\d(?:)*?||_$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1626",
+      "pattern": "^|()+[0-1]*|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1631",
+      "pattern": "\\^||(){2,}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1638",
+      "pattern": "|é+(){1,}xc|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1665",
+      "pattern": "(?: {2,}()(|[^é]z|[x]c+?)+(z)|本\\W_*9)z?0?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1734",
+      "pattern": "\\S[a-c\\s\\w]-(?:[^z-}b]本|)+?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1739",
+      "pattern": "x(0+|b\\D|b+z+?)? |(9([^\\w\\s\\s]| *日*\\\\*)*_{1,1}|x+a1)0a\\D{0,2}?$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1740",
+      "pattern": "(?:[^1-2a-d]?|9\\^?[b-cc-g]{1}|1xz*b+)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1748",
+      "pattern": "^\\W-?()+| ??.?|\\.._+9",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1776",
+      "pattern": "((9{0,0}-x||c){3,3}_[\\sx-}日]z)()+-.{0}|c??$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1826",
+      "pattern": "(?:\\]😀日.*||)\\s+?b{2,}|(?:| ?(-\\W*)+(?:x*[0-4]*||y?)*([z-}\\\\]{2,}|)*|a*(?:_z+?_+x)?[\\s0](bű\\+||\\)))?|_[\\w\\-1-3]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1852",
+      "pattern": "^([y-z]\\sx)+y(y()*[b-cy-{]+)9*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1855",
+      "pattern": "yy\\s(.*?.*[^\\^](?:)+)$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1865",
+      "pattern": "^.*a(?:[^\\s]+?..+0+|1?a[9-=]*|[^1-4]*.*)*\\b",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1885",
+      "pattern": ".[\\d]\\]{1}?(9?)*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1892",
+      "pattern": "(||\\\\y9+(y-\\D[^c-e]*|\\Wzx{1,})*)\\B\\w+?|-+(|_*\\W\\d|(|z?0ß)*é*xc)?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1930",
+      "pattern": "((?:)+?(|.*y*0[\\^\\d\\]]?))[^0-3\\\\]z|_*.ű",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1941",
+      "pattern": "-b\\S+?(?:é*){0,}?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1943",
+      "pattern": "\\B()*?(?:(\\S*a.+😀*?)){2,3}?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1945",
+      "pattern": "(?:(?:\\d?\\D|\\b|[z本\\-].\\d{2,3}b*)x1(?:[ő1-5😀]){0,})(|11_)*|(z){0}\\S[^本0-59-:]*😀+?|(?:)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1957",
+      "pattern": "(?:é+?( {2,}?0*.é*)?_{0,2}?(?:-*[^\\^z]-+?){3}?|(?: *)*|.)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1958",
+      "pattern": ".+(0|)+()?|z",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1966",
+      "pattern": "(?: {3}(?:)+){3,5}b*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:1982",
+      "pattern": "(|.bb.+|\\$[\\-](?:\\d{0,2}c_.)?)*|1",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:2017",
+      "pattern": "bű本(?:)*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:2041",
+      "pattern": "b(x{3,}|0*|)*|\\s[😀\\\\]_+ß+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:2048",
+      "pattern": "\\S((?:.)*(0.+.+x)??|[\\wy-~])*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:2068",
+      "pattern": "(1+?.|0??[\\-] |(?:é{0,}|[9-;]\\W|z*)+()\\()[z-]{0}?$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:2078",
+      "pattern": "(?:y[x-z\\d]*-\\W)?(?:){1,}9+?|1(?:[日\\\\]😀*a?[-])|\\|*[z]$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:2095",
+      "pattern": "c+(?:)*()",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed1.jsonl:2103",
+      "pattern": "^(本|9(?:)*\\W{2,3}.+|)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:23",
+      "pattern": "(a*)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:24",
+      "pattern": "(a*)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:31",
+      "pattern": "(|a)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:96",
+      "pattern": "\\b*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:99",
+      "pattern": "(",
+      "error": "missing )"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:100",
+      "pattern": "[a",
+      "error": "missing ]"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:101",
+      "pattern": "a{2,1}",
+      "error": "bad repeat"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:150",
+      "pattern": "\\D((?:z {1,}?)?[\\w])(?:)*c",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:188",
+      "pattern": "^(|y[a-c1-3y]*?[^é]?| ?){1,}_*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:204",
+      "pattern": "|(?:9(|[^1-6]-)*\\s?)\\s*y|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:205",
+      "pattern": "(?:){1,}.0??",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:216",
+      "pattern": "((0\\|*|\\$[\\d]é+本|)?\\sx\\W|(é+|){1,}\\(+?-?)*|b*a-(?:y\\b[1]??)??",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:218",
+      "pattern": "^[^c-hß]+ő*|(||)*11",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:224",
+      "pattern": "^|.+([^b-fc-d1-3](?:1x{2,}?_é|\\D*b)|())ß(?:b{2,}b(?:_*.*\\s*?|\\D.*?)+|a😀{3}\\{|(\\By.{3}|z[^1-2ß]ß*?|[^y-|]))*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:226",
+      "pattern": "y()*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:233",
+      "pattern": "0\\+(?:[^\\\\0-2b-f])[^\\s]?|(|(){1}(?:.1?\\s*?a|)?本.)*-.*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:237",
+      "pattern": "1{1}[é\\sé]()*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:248",
+      "pattern": "(?:)+0*\\S|a\\S?[^b-d\\w]{0}(?:  ?(?:本){3,}){0,}?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:309",
+      "pattern": "[0-1]c()*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:314",
+      "pattern": "(?:)*ű",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:322",
+      "pattern": "^(?:|_)+.|\\S*9().",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:332",
+      "pattern": "(?:\\b|[éy-~].)*c*-|(?:)??(?:|b*(yb{1,1}?c+)\\[?\\b){1,3}[^x-}\\^9-;]\\W|()+z\\]{2,3}(.(?:1+zx1)*z)??",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:346",
+      "pattern": ".||-(?:)+$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:347",
+      "pattern": ".??(ű+(?:z+?||.[😀]??)*)+?_",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:362",
+      "pattern": "( *)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:363",
+      "pattern": "[\\w]*\\B1|\\^(-*()😀?)+[é]*|b.1*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:364",
+      "pattern": "ő\\W||(?:-(?:)+?(x-+| )+(?:\\D+\\W|c+[0\\s])|\\?y+).(?:-{1,}\\[+ {3}?|c\\(c*(z+|.[\\s]z?|.9{2,}))*(?:.+(?:ay)*x?z*?)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:388",
+      "pattern": ".((||[y-|y-zc-g]\\++x* +?)*(?: 日c)*? +\\w?)*-{2,}||0?\\|{0,2}?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:409",
+      "pattern": "|-{3,}[b-cb-c]((?:)+(?:[\\s\\d\\w] y{0,0})+|\\(\\W?[_0][0-3a-e]{2,3}?){0,}\\S",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:416",
+      "pattern": "|0(c|\\.[ßy-}0-4].|(?:|[^\\d])+\\B){3}9+\\s",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:418",
+      "pattern": "ß{1}(?: ?)*?|\\(?.(?:).",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:424",
+      "pattern": "0本?[é]{0,}| őy+x+|_{1,}a*()*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:437",
+      "pattern": "ß[^9-<]{2,2}||\\S([^b-d](?:-)+[\\s]{1,3}|)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:466",
+      "pattern": ".*(😀z*?[\\-]*)(y*?[\\w]()+c||(?:[éz-{\\^]{3,})+?)\\s||.",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:504",
+      "pattern": "|本(|(?:1bß*)[0\\d]\\d.|(?:0))|\\S(x?)+(?:(?:x本\\w){1}){2,2}1",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:519",
+      "pattern": "(|(-z{3,}[\\s日]*\\B|)+_+\\b\\W)?1{2,4}(?:y?[\\s ß])b+|(.?😀).[z-{\\s0-1]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:521",
+      "pattern": "[b-f\\s]()+9*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:524",
+      "pattern": "9\\s|c(?:x*([^a-fz\\^]|\\.bx??)_?_*)|c\\D+ő+([z-|y-}\\w]{2,}\\d|)*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:530",
+      "pattern": "(?:)+?\\Sa[z-{]|(?:|z*\\d*?){1,1}[9->]*?.{0,1}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:543",
+      "pattern": "^[^ß\\^]|x_*(?:)*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:561",
+      "pattern": "|0{1,}1\\B[\\d]*|0[^\\db-g]?.(?:)*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:571",
+      "pattern": "^(|x|\\))*b*\\dz+|[c-d\\w日]{1,}0?\\S+y",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:605",
+      "pattern": "(\\d*b1|1{0}[^\\d-]|y+zz{3,})1*?(\\d*)+|x.??[xc-h][-]{0,}|.{3}(?:😀a_{2,3}|9{2,3})*?é(\\\\\\S\\d_|[c-e]+?)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:608",
+      "pattern": "(?:a*?){0,}?(|)((?:09*_|y{1,}?|)(?:9+?|1*[1-5b-d]*?|😀)+ű{2,}?\\b)[\\-]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:619",
+      "pattern": "é*.+x+日|((\\wb+.\\s)(b\\W\\\\|\\)|)*(\\w[^z-{]{1,2}))?-*|()*[^09-=]+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:621",
+      "pattern": ".*([c-g日]|\\W+([ß]*)*?z{3})ß*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:636",
+      "pattern": "c+?\\.(\\w{3,4}\\D{0}|\\w*?(a+x+?z9?)| *?)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:642",
+      "pattern": "-(?:1[z-1-5\\w]b|(?: ?[^ \\w ]?)*)*[😀]{0}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:653",
+      "pattern": "ß+\\w.|(\\W\\W{0,}?|9b|(a\\w[^b-e]+))+?()+0{3,5}|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:664",
+      "pattern": "^(?:|é\\b|){0}?\\W_|(.)*?[^\\\\]*[^\\wő]*(.z?.*c||)*?$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:692",
+      "pattern": "(?:)*z{1,2}\\(*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:750",
+      "pattern": "(?:\\S(?:[0-2c-h][x-|]*?a+ )+[^9-;](?:[\\-\\d\\s]||[a-c日\\w])|)+|\\b$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:752",
+      "pattern": "^ (\\|*){0,}\\s|(?:)x\\s[\\\\]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:762",
+      "pattern": "c?(\\?()+\\D|a\\[)\\w+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:783",
+      "pattern": "\\b()+?|.",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:786",
+      "pattern": "日{3,4}?|.*?.+?(?:y{3,4}ű+? *()+)1|a.*?z+(?:(9{1,}?_)*([9-<]|a*?0b).?|)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:809",
+      "pattern": "^(){3,}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:818",
+      "pattern": "(?:1z)(.|)*x|(1😀+()_|.|x\\w[\\\\\\\\\\w])*|z(ű.*?)[0-4x-|]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:822",
+      "pattern": "(\\D+?[\\s\\w]\\b)|(?:(?:.*x日|).*?(?:😀*.é*.|){1,}?)\\w*y(\\d?z+\\D\\D)|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:826",
+      "pattern": "x(|)+\\w",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:839",
+      "pattern": ".c|(?:)*c \\S",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:855",
+      "pattern": "(?:)*b?[\\w]+1|[^1].*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:879",
+      "pattern": "^c?[\\d][z-]|()+?zy *|-c+$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:903",
+      "pattern": "^(|\\+*?ß+(_*[^9])c*|\\W_.)+?\\wb+||[\\s\\d\\w]9.[\\\\9-;\\-]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:976",
+      "pattern": "|\\|*((?:|1😀|ű*\\}*日+_?)*)\\W|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:982",
+      "pattern": "(|y(\\b\\.ő9|b* ?9+|本\\d{0,}.{3}?).9)*x?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:987",
+      "pattern": "1*\\W|-?.*(||😀[ß1-5-]+😀x*){3,}[\\w]$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1009",
+      "pattern": "^(?:(?:[^\\\\a-e]\\\\|\\d|.+😀)*?||( b||[z-\\\\-].[^\\s\\s\\w]本)*[őy\\w](_a* c){3,4})+(?:_*|\\W*?(?:\\?||\\S日*)\\$)y.",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1056",
+      "pattern": "^[^😀\\d]{0}(?:本 |c\\[|[x-z](.{2,}1{0}a{0,}|日\\d|)*[y]*()+)0|\\|ő+ *?\\W+?|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1063",
+      "pattern": "^.{3}(?:(?:\\d)?)*?(ű|[\\d]*日+|\\d)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1081",
+      "pattern": "^b*x| c*|.x ?(..(y*)*|9+|.{2}日0(x{0,1} -[b-d]{1,1}))",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1084",
+      "pattern": "(?:_?-*0{0})*\\d+[\\w](-+y+[\\-\\w\\-])",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1099",
+      "pattern": "()*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1108",
+      "pattern": "\\B(\\{z())[\\wba-e]|__*[aa-d]()*|\\W?.+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1109",
+      "pattern": "|(é[ő\\s]+日?-|)+.00",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1124",
+      "pattern": "(.||\\s*()+b){3,}_őz$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1148",
+      "pattern": "^\\](1\\s{2}[z\\^]-+) *|ű.*(_+本c{0,}(\\D1){1,3}|.+y{2,}b|本(?:)a*\\w){3}(|[z-~\\w\\-]?(){1}(a*\\S)+_{2}?)+?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1152",
+      "pattern": "1[\\dűc-g]{0,}?_*.||z*(?:z*?|本)+?z.",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1178",
+      "pattern": "^|xű+?(?:|\\b.*.*(\\Wb{0,0}\\}\\S{2,})|0-本*?)+|\\D\\d*\\W_",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1187",
+      "pattern": "-??((?:\\Wx\\w?\\|)?1*|0??\\w[^\\wb-ga-f]|(?:\\D\\S|| {3,3})*?[\\s_\\w].)??|\\]0*日_",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1198",
+      "pattern": "^\\D*a{2}\\s\\+|(?:).* +?|\\W{1}(xz(?:|1)+?)日*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1222",
+      "pattern": "(\\B){3,}\\s{2}1{1}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1230",
+      "pattern": "|[\\d]|(?:[9-=\\d]?本()*)a$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1235",
+      "pattern": "((.+?[^y-{\\]é]{2,}b{1}.)*[y-|0-1a-b]+(?:)+)(([1-5ő😀]){0,2}| )+||\\{[^y-z]{1,2}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1249",
+      "pattern": "-(([a-cű\\w]*?\\}ő*|)||\\S(?:-)\\D[本z-}b-e])* -*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1277",
+      "pattern": "(?:.[\\d\\d][^1-3](?:\\D+)|| )*?[-]+.+|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1288",
+      "pattern": "(1.*([^0]*.\\]*||1*?\\(*a)+)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1298",
+      "pattern": "[0-1]\\.|9{1,}\\D?(){2}(||0a{0,}?-)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1308",
+      "pattern": "^.[^ű\\s1-5]( [a-ca-c1-5][0é\\d].|.?)*?|a{1}9a*|[z-1]y",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1310",
+      "pattern": "|(?:)[^0-11-6\\-]?.(9[\\d]{2}(?:9{0}? \\B)?|(?:)|.(?:.{3,5}|.{0,0}c*😀+|[\\w9-<][\\wc-dx-y].{3}?)-*?(z*)){1,}|[^\\d]b",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1331",
+      "pattern": "(-+\\(|)+[y-~x]\\B$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1342",
+      "pattern": "\\Sß|-{2,3}?[\\w\\-0-3]*(?:\\D*|)*\\{*|1\\d{2,}?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1343",
+      "pattern": "\\[|(c(x{0,}.*)+.|\\S|-)*(0{2,}| *?1|)+0y",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1363",
+      "pattern": "\\S()*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1415",
+      "pattern": "(?:(\\W*?[1-5]*| ?|[0\\dz-][^1-5]1)9?|9{1,2}?[_]b*?|0*?()*?)+?9*[^日\\w]??[^\\d\\w]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1427",
+      "pattern": "(?:[\\w\\d]*[本y]+?)[-y-~]-|((0\\s*)*||b+ ()+?)*ß$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1446",
+      "pattern": "😀(0|){0,}z[1\\d]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1457",
+      "pattern": " +(z??(z[c-fx]|.{0}?.*){2,}1){1,3}.|(){1}\\D*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1514",
+      "pattern": "\\W(?:\\W{0}0*本*)+|b|[^\\d](?:9+[\\w本])+_x*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1521",
+      "pattern": "日(?:\\S[^\\d9-=\\s]9.)_((0*😀*c?\\b)??x*(|[\\w]+_.*?-+|y\\D)?\\S*|)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1523",
+      "pattern": "^[^y-{]||(?:){2,}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1544",
+      "pattern": "z\\b(?:|(c|z{0}本c*)+?()+)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1548",
+      "pattern": "[^y-}]{3,3}(?:0?(ű+?[1-6]\\d+?|)*?.)([0-2\\]\\]]*b(ßű😀{2,}.{2})*?|\\\\[\\w ]{2,2}|\\)??x\\.)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1551",
+      "pattern": "\\b(\\S\\.\\|*1|(y)*(?:é_*|日*\\}日[a-d\\d]*|)*?|[a-e\\w\\d]{2,}?(|_[\\-b-ec])?.+?)*a$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1559",
+      "pattern": "^((?:a.|.\\S\\S\\+*|本x\\d{3,4}?b)*日*-|b??(?:|[c-gb][z-{c-f][\\d])*[ű]*.|\\W+)|.()?[^\\sß\\]]|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1573",
+      "pattern": "[c-h](\\}本+\\B|)+ő*|[^a\\sc-d]\\s[^\\wb]+(?:(\\S{2,2}?1[x\\dz-|]|))*$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1587",
+      "pattern": "\\?*xa*|()+[^őő]*1+\\]|[9-: ]*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1590",
+      "pattern": "[^0]*|[\\s]((9?-*)+|(|)??)+(?:[y-}b-gz-{]+\\B9*?0*?)9|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1623",
+      "pattern": "(.\\|1-?|x(?:b1 )*1a{1,1}|本(?:|a*)*?(_0ő| ){1,}[a-d_b-c]*).\\?{2}?\\d",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1638",
+      "pattern": "\\S|\\d+?.*.(z[\\s][1-2a-f]+?|[^c]?.* |a*)+|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1644",
+      "pattern": "()*[é].0",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1645",
+      "pattern": "\\b(?:)*|zc|b\\b$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1655",
+      "pattern": "([y-z\\-](?:c*c |[b-d\\]]b+?|y[x-y\\s]x9)*(?:|\\Béz|x\\D+)*)$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1670",
+      "pattern": "[^é\\\\\\d]| |(|[0-3a-d\\w].+|\\^*)*$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1673",
+      "pattern": "|\\sx([^éb-d]+.+\\}|[a](?:ű{2,2}||\\(_)+a)+\\w|((z*\\S9)ű.\\w)+.",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1684",
+      "pattern": "-{3}[^x-zß]+z|-*?\\Dc(?:)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1685",
+      "pattern": "0*_(9*)+?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1723",
+      "pattern": "^(|)+\\s[^a-f]z$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1726",
+      "pattern": "\\W{2,3}?x*1(\\s0)|\\W*ű(z|(-*|日[a-f]0*\\s*|0日1??\\})+)(?:.+9){3,5}?|(本*1é)\\w_",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1738",
+      "pattern": "[zx-}]1|(?:([^a]?||_)*_ {1,1}\\W)+|( *(?:ß_+?yb{2,3}|😀日a\\w|.\\w\\*[0-2 ])+.*?|([\\w-].b+b|y|[^😀0-1z-~]..b{2,}?).+\\d?\\D?|ű{1}\\D *)ő*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1748",
+      "pattern": "(?:)*$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1774",
+      "pattern": "\\s\\Bx|.c\\D((.*)*?){3}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1783",
+      "pattern": "([9-<\\s]{2,3}.(y*y)(?:)+|.\\|){2,}(1?? ..+?|é??1[\\w1-5a-f])a",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1800",
+      "pattern": "[\\d_]|(😀+|\\D\\[-(?: |[^é]+|😀?\\d)){2}(?:[éx-|\\]]?ax*?b)(?:a+(?:|_\\Ba*)*?\\B)?|((\\D{3}?xc|\\s)*a*)y",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1804",
+      "pattern": "\\[?.(.(09?é{3,5}\\d)*?(?:1??-{2,2}?|0*ő[0-1]\\b))(?:(?:\\D*?){1,}yő{0,}\\{?|(yba+)*.*a|-+?.c )$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1839",
+      "pattern": "(ű *?)*(?:\\W)(.\\*?(?:|1*9{2}\\B|a?😀*?)*.)(?:[x\\w9]*\\B\\)a{3}){0,}?|(?:)\\bß*?.*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1873",
+      "pattern": "-(?:\\D?(z{1}[^\\w\\w]{0}é)日)?c\\w{3,}|x*?(?:){1,}z|0[z-{]\\B",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1875",
+      "pattern": "(|(|b+?_{0})+(?:)+.|)(|é(?:)*\\W*?|b*c+\\D\\)*?)c*.||(?:)+y",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1886",
+      "pattern": "|[^\\\\]*()+?\\b",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1891",
+      "pattern": "[b-gz-~]{0,}?|\\w+((|ß_[\\w\\w]|y+\\w*\\){2})*é{2,4}ű.)y+\\*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1902",
+      "pattern": "()+?[ß]??(日.-*?c*?|x_[日0-5\\w])",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1936",
+      "pattern": "[1-6]+[^\\w\\da-c]\\B((\\]*|z *\\dß?|z*\\W*x?[ő9]+)[1-6]??.+)|(c*(\\dy?|\\d{3}-+_9|\\W\\s){0,}( 9y?c{0}|-{3}.{3,4}\\b|bx){1,2}?|[é]|()){1,}?_+_0??",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1967",
+      "pattern": "y0||.(?:ß|\\d|\\d)?\\D+(?:)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1993",
+      "pattern": "()* \\S|(?:[\\dy-z]{2,}){1,}?.|[0-51-39-<](?:)+.\\w$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:1999",
+      "pattern": "\\W(?:[\\sz-{ ])*(?:|()(?:-[őő9-:]+|[^ő]yb?x){2,3}.{0}\\D|)+?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2012",
+      "pattern": "(?:\\S?c()+.*?){3,3}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2013",
+      "pattern": "|(?:\\D-{1,1}|\\d[^\\s]{3,}[\\\\](1|)?)😀(?:a{0}ß*\\?.{2,3}?|([\\]]*ű*?😀+)(\\{+-?))*|([\\wa-ec]+1*(|\\^0| 0\\W)+[z]).",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2022",
+      "pattern": "(?:[^\\sa-bc-f]*|_.-??x|0)?()*éa+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2038",
+      "pattern": "((9*)*[9-<x-}日]?.)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2043",
+      "pattern": "|[^1-49-;1]{2,2}? |\\W(?:(y+a1||日*)+?\\S{1})a\\b$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2065",
+      "pattern": "(\\w+0{1,2}\\D{2}-?||y\\Wß*[z-{]*?)[😀](\\w?(.*)*[ß \\w]+?|9|😀1??[9-=\\s])+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2073",
+      "pattern": "(1??){3,}-*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2075",
+      "pattern": "_()*\\Dc",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2091",
+      "pattern": "\\W??([\\w1-5c-d]?){1,}?()+()",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2093",
+      "pattern": ".*[b-f]9|b*.+(?:||[\\s](?:\\s*|\\?|x){1,3}){2,}|9+\\s",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2105",
+      "pattern": "1*([a-c]{3,3}\\d+[\\w\\w]*?本||(9c0+1*)*?)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2129",
+      "pattern": "9*?_*?(|\\w[9-:\\w]-??)0{1}|(?:|(.+\\{*|\\$* {3,}?|\\d)+\\w(?:-|))()*本?é",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2133",
+      "pattern": "日+ *[9-<](?:1+(?:|1*-|-{0,}\\[+)+\\W{3,3}?)|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2135",
+      "pattern": "y*a|((\\d😀\\w1)+|ő{1,}?\\d+-|[c_\\]]{0,0}(-)?.y)0((_[\\\\😀]\\.)\\s?)([^0-4_\\^]()*[y-|z\\w]){0,1}$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2159",
+      "pattern": "()*?[^😀\\w]y",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2162",
+      "pattern": "\\W\\W\\^*|c*?(?:c??()y.|)*?(?:)*?_|9z[a-b]+[y-{\\s]{0,1}?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2173",
+      "pattern": ".+\\|* {2,2}?|\\D|\\b\\S()+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2200",
+      "pattern": "|b|c(|)(?:(?:b)[1]+?(?:\\D*)+?|(c0+?|)+\\D??(_?.)*)?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2211",
+      "pattern": "(?:\\S{0,}?([\\d]0*?b?z*)*)*0\\s",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2225",
+      "pattern": "(?:-[\\-ß_]?.?z|(?:\\s*| x+ {0}?|\\]*.+)*)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2237",
+      "pattern": "^\\**[^1-5]+( *?)*|[^9-=]?(?:_?ß-(\\s+[9])+)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2275",
+      "pattern": "(?:0[^ya-b]*b(cxcb)|\\s|){3,}?x\\(+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2276",
+      "pattern": "(?:|x[\\]y]|b{1}?(z+?\\s??|.bé)*(?:[0x-}]x-))*?\\Dx(?:1*日*-{3}?)*?|(?:\\Da[^é]?)c??z?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2281",
+      "pattern": "(-?( |)?.*|c.??)*|-",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2305",
+      "pattern": "_{1,2}[^x-ya-d\\]]+(?:(é.b\\w|)*9.{0}(yő+[b-d\\s]*😀?))??y",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2313",
+      "pattern": "^(z_.)[y-zy-{é]y(?:|.{1}?(c{0,}x)[😀9-<]_{0}|\\w{3}z(9)\\w)*|zc+x*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2333",
+      "pattern": "^|\\S.(?:)*?\\s",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2335",
+      "pattern": "ő+(|(?:)*){3}|$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2350",
+      "pattern": "((x|)*😀)+1",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2360",
+      "pattern": "\\d(x\\s-*(?:b. ?|[y]{2,3}?.|)*)|a\\W",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2375",
+      "pattern": "(?:)*?\\B",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2379",
+      "pattern": "(){3}x-(yb*(?:|xa)?)|ő{3,3}\\b\\b|日z{0,}(\\s*|(\\(0||)+?(?:\\}\\||\\$+?|)?)[a-f\\\\]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2400",
+      "pattern": "\\Dé{2,}y+(0(ű??)+?|.?00+\\S+)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2413",
+      "pattern": "^.(?:)*?x\\W",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2445",
+      "pattern": ".{3}(){2,}([b-f]*?0c[x-|a-f]||.0.)|1$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2447",
+      "pattern": "^(?:1*(ß?.+.))c0?_|()+?.{3,4}$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2448",
+      "pattern": "^ ?(\\B.+[😀0\\\\]|[^\\db-g日]y ) ?|0+\\\\*(?:.?(?:|)+?)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2449",
+      "pattern": "(?:)*?ő{2,}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2462",
+      "pattern": "^ß*?(a*?\\d|x*())()+|$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2471",
+      "pattern": "\\+(?:z??){1,} +|\\W\\S",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2480",
+      "pattern": "^[^9-:\\s9]*(?: *|[^1-51-5]*(?:|\\D+)[\\^b-f]ß*?)*[\\d\\]ß]_+|(ay|).[c-d]|(?:)9",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2486",
+      "pattern": "(?:)*9_$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2518",
+      "pattern": "^()+[1-4本]{3}(|(?:\\.[\\\\0-1]+[^c-g\\wx-y])*)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2526",
+      "pattern": "-(?:y*)(9+日-(?:\\|?[x-{][\\\\9->z-]*|y+?ű*|)|(|ő{1,1}?.*)*|\\{\\D*(日[a-fz-{]*?.[\\d\\s\\s]{1,}?|c\\]\\]|[ő0-2]+)*\\w)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2552",
+      "pattern": "(?:日{0,2}本*|.+..|.*(?:cb|\\$?)(\\.*b|\\d日{3} *|))*\\S{1}[^ű]0$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2588",
+      "pattern": "|(?:){2,4}?-c?()*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2630",
+      "pattern": "((\\?0{2}.?[y-~a-b]|\\){0,}?y)1?-|(?:){2,}\\Bz-+)9(y[^\\-0-1]?b()) ",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2639",
+      "pattern": "^[ő\\^]ß(?:|\\W[1-5本\\d]()+)?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2648",
+      "pattern": "a()*[b]_{3}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2661",
+      "pattern": "[1-4c-f](|(|b*本\\\\_*)*?|é+[_\\^0])*y|(?:.[\\s])0*[^ű日本]*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2682",
+      "pattern": "(?:)[\\-]{3,}?|0??(?:|[^日]\\D{0}?[^ű\\dc-h]ß*)*ß{0}x|é0[\\sb-g]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2689",
+      "pattern": "|_|()+😀?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2693",
+      "pattern": "ő(1*b*(?:.b\\?)?||0{3,5})+[本]",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2701",
+      "pattern": "[1]0{3}(?:|y|c(\\b))+\\w+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2721",
+      "pattern": "^()+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2729",
+      "pattern": "\\{()*?[1]|a",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2737",
+      "pattern": "^(?:(|9{1,}\\^)+c(?:a*)[b-féy-z]?)zz\\d{1,}?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2759",
+      "pattern": "b[😀]()*?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2765",
+      "pattern": "| ((.)[y-|x-|]+\\(|-.|\\W{0,}).((?:\\}x\\B)(?:\\S*?b)( 日\\w*)(?:c?x?)+)*|[\\\\]{3}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2769",
+      "pattern": "(1?[x-}b-cß](.{0,})[z-]+?||[9]{0,}(?:z{3})*)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2771",
+      "pattern": "^(y??)*x{0,0}?(|.*?(y*\\Wc[^b-c])a{3}\\$+)\\?|😀z{3,3}? *a|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2802",
+      "pattern": "\\w.{1,2}(?:(?:-|0|\\{+[^y-z][^9\\s]b*)\\w|c[a-b😀x-}]*?|(.|日0*|)+){3,}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2807",
+      "pattern": "^|[_z-}\\d]+|(😀\\W1|[z-~\\d\\w]*?)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2808",
+      "pattern": "9((?:x-??😀*|x0*1{1,}1{1,3}|)*?.*b.?|(.?x\\[*\\w{1,2})|x)b{0}(?:(\\d+?-\\+)[\\^1-3\\w])",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2829",
+      "pattern": "\\Bß.{1,}(()){1,}$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2863",
+      "pattern": " ??.(?:[ű0-4y]*0a(_.\\w1)||[^z-~9]*\\B\\D{0,2}?)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2875",
+      "pattern": " ??|((?:[z-|]z)+9x?||\\bz{0,1}[^90-5]z)+?\\d(?:b|[^9-<9->]\\$\\s+1)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2881",
+      "pattern": "((日*\\w)1-\\})ß?([\\sx][\\^a-e]*y?.|\\)*)+",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2888",
+      "pattern": "\\b|\\D(?:|é9*(?:0)[\\s本])*|(?:|-{3,3}\\S+c\\w|-*)?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2891",
+      "pattern": "\\+(?:x|[^c-g0-1\\^]\\d|)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2899",
+      "pattern": "|.+\\}+(?:)+|.\\D*\\)([^1-3x-{]9日|\\}+_+)",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2904",
+      "pattern": "(z)(a+日*?.(?:||)*?)*(?:|[x-z\\wz]?\\S+\\d(_😀?[\\d]+.?)|ű)+?([ű]*.{0,}?é.+|)*?|\\W+_",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2906",
+      "pattern": "1z?|(-b*\\^|\\D*?)*?\\W0|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2924",
+      "pattern": " {1,2}\\+0*(?:[^0-1x-}]?9|(c日*1){1}.{0,}(?:\\d\\D{0,2}1)c)|-((?:.)b\\W+?()*){1,3}|",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2936",
+      "pattern": "((z+[^\\-])*)+|(?:z{2}.\\W)*|(?:.{3}?z[\\-]|é+(?:\\wc\\\\.| *ő| _*)9+ő+|.z{3,}\\^*?)(z{1}(\\[ ??c))?",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2937",
+      "pattern": "(c*?|1.|[^y]_{2}\\d{0,1}?\\d)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2938",
+      "pattern": "|(?:\\S?\\w(b.|)+)(?:|\\**?_ *)|.(?:x\\Wx{2,4}y)?x",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2939",
+      "pattern": "()*.",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2949",
+      "pattern": "(a(\\s_x)()*ű)??\\d?9*?_{0,}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:2998",
+      "pattern": "[y-~b-d]|(é?()*\\W|\\D*b*)_",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:3001",
+      "pattern": "((?:z|)\\]?||.\\w*ő\\w+?)(x*?é{2,4}\\S-|(1y[9-<y]|-űc\\d|){2}.c*?|)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:3009",
+      "pattern": ".{0,}(?:)+(.?)+|y  {2,4}",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:3012",
+      "pattern": "(?:([^y-zy-}ő]\\){2}?)+(?:\\w)||b*_{3,}[\\s\\s\\w](z{1,3}?)+?)*?b.*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:3038",
+      "pattern": "^(?:ő|(\\W?)a*?|\\d(?:)+)*(?:(?:. ?.|a+?|[x-{\\^z-}]))(0+(y1?0??||0)?[x-}z-}]*(\\b)?|.?_|x)ő",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:3041",
+      "pattern": ".(|(?:)*\\w *|\\\\?[a0-51-3]*)-z?$",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:3044",
+      "pattern": "\\D*(?:()+?)?\\d|y[ß9-:ß]*1*?(a*||(?:\\$😀*.+)?(y* *))",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:3052",
+      "pattern": "😀a\\${3,4}(?:\\w*|[^\\d]_*\\w{2,4}|)*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:3060",
+      "pattern": "()*|(?:[^日]|\\d.?\\D{1,}日{2}?)?|(?:(ű\\D\\{)|1){2,}?9",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:3069",
+      "pattern": "(?:)+xő-*",
+      "error": "unbounded repeat of nullable atom"
+    },
+    {
+      "name": "corpus_wb_seed7.jsonl:3085",
+      "pattern": "1?(|0{1,}?)(?:日\\B|)*||",
+      "error": "unbounded repeat of nullable atom"
+    }
+  ],
+  "variants": {
+    "baseline": {
+      "options": {},
+      "sizes": {
+        "cortex-m4": {
+          "flash": 546,
+          "linkedFlash": 548,
+          "text_rodata": 546,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 546,
+          "linkedFlash": 568,
+          "text_rodata": 546,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "equal": 7197,
+      "failures": [],
+      "resourceDifferences": [],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 117329
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 165885
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 19180
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 38256
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 2123
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 90820
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 5200
+        }
+      },
+      "sampleSizes": [
+        6,
+        14,
+        10,
+        18,
+        18,
+        26,
+        20,
+        28,
+        16,
+        24,
+        20,
+        28,
+        19,
+        27,
+        24,
+        32,
+        56,
+        64,
+        20,
+        28,
+        48,
+        56,
+        36,
+        44,
+        72,
+        80,
+        408,
+        416,
+        12,
+        20,
+        10,
+        18,
+        10,
+        18,
+        10,
+        18,
+        16,
+        24,
+        14,
+        22,
+        30,
+        38
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020705000a000a0100068008f3ff",
+        "020a00060161610a0100",
+        "020709000a00060161610a0100068008efff",
+        "020a000601616106016262060163630a0100",
+        "020711000a000601616106016262060163630a0100068008e7ff",
+        "020a000601617a0707000601617a08f6ff0a0100",
+        "020713000a000601617a0707000601617a08f6ff0a0100068008e5ff",
+        "020a000707000601616108f6ff0a0100",
+        "02070f000a000707000601616108f6ff0a0100068008e9ff",
+        "020a00060161610707000601616108f6ff0a0100",
+        "020713000a00060161610707000601616108f6ff0a0100068008e5ff",
+        "020a000703000807000601616108f3ff0a0100",
+        "020712000a000703000807000601616108f3ff0a0100068008e6ff",
+        "020a000601616107040006016161070400060161610a0100",
+        "020717000a000601616107040006016161070400060161610a0100068008e1ff",
+        "040a000a020707000601616108080006016161060162620a030719000a020707000601616108080006016161060162620a0308e4ff0a0100",
+        "040737000a000a020707000601616108080006016161060162620a030719000a020707000601616108080006016161060162620a0308e4ff0a0100068008c1ff",
+        "020a00030601666606016f6f06016f6f030a0100",
+        "020713000a00030601666606016f6f06016f6f030a0100068008e5ff",
+        "060a00010a020601617a0707000601617a08f6ff0a0306013d3d0a04060130390707000601303908f6ff0a05020a0100",
+        "06072f000a00010a020601617a0707000601617a08f6ff0a0306013d3d0a04060130390707000601303908f6ff0a05020a0100068008c9ff",
+        "020a00070f00060161610601626206016363080c000601787806016262060163630a0100",
+        "020723000a00070f00060161610601626206016363080c000601787806016262060163630a0100068008d5ff",
+        "020a00070f00060161610601626206016363080c00060178780601626206016363072100070f00060161610601626206016363080c0006017878060162620601636308dcff0a0100",
+        "020747000a00070f00060161610601626206016363080c00060178780601626206016363072100070f00060161610601626206016363080c0006017878060162620601636308dcff0a0100068008b1ff",
+        "020a000106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161020a0100",
+        "020797010a000106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161020a010006800861fe",
+        "020a000601c3a9c3a90a0100",
+        "02070b000a000601c3a9c3a90a0100068008edff",
+        "020a000601617a0a0100",
+        "020709000a000601617a0a0100068008efff",
+        "020a00060161620a0100",
+        "020709000a00060161620a0100068008efff",
+        "020a00068161610a0100",
+        "020709000a00068161610a0100068008efff",
+        "020a0006843039415a5f5f617a0a0100",
+        "02070f000a0006843039415a5f5f617a0a0100068008e9ff",
+        "020a000603415a5f5f617a0a0100",
+        "02070d000a000603415a5f5f617a0a0100068008ebff",
+        "020a00071100070700060161610804000601626208ecff060163630a0100",
+        "02071d000a00071100070700060161610804000601626208ecff060163630a0100068008dbff"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 261247
+      }
+    },
+    "char": {
+      "options": {
+        "char": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 562,
+          "linkedFlash": 564,
+          "text_rodata": 562,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 558,
+          "linkedFlash": 580,
+          "text_rodata": 558,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "equal": 7197,
+      "failures": [],
+      "resourceDifferences": [],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 107145
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 151529
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 13500
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 20148
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 2013
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 73500
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 4320
+        }
+      },
+      "sampleSizes": [
+        6,
+        14,
+        8,
+        16,
+        12,
+        20,
+        20,
+        28,
+        14,
+        22,
+        16,
+        24,
+        17,
+        25,
+        18,
+        26,
+        44,
+        52,
+        14,
+        22,
+        46,
+        54,
+        24,
+        32,
+        48,
+        56,
+        208,
+        216,
+        12,
+        20,
+        10,
+        18,
+        10,
+        18,
+        10,
+        18,
+        16,
+        24,
+        14,
+        22,
+        24,
+        32
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020705000a000a0100068008f3ff",
+        "020a000b610a0100",
+        "020707000a000b610a0100068008f1ff",
+        "020a000b610b620b630a0100",
+        "02070b000a000b610b620b630a0100068008edff",
+        "020a000601617a0707000601617a08f6ff0a0100",
+        "020713000a000601617a0707000601617a08f6ff0a0100068008e5ff",
+        "020a000705000b6108f8ff0a0100",
+        "02070d000a000705000b6108f8ff0a0100068008ebff",
+        "020a000b610705000b6108f8ff0a0100",
+        "02070f000a000b610705000b6108f8ff0a0100068008e9ff",
+        "020a000703000805000b6108f5ff0a0100",
+        "020710000a000703000805000b6108f5ff0a0100068008e8ff",
+        "020a000b610702000b610702000b610a0100",
+        "020711000a000b610702000b610702000b610a0100068008e7ff",
+        "040a000a020705000b610804000b610b620a030713000a020705000b610804000b610b620a0308eaff0a0100",
+        "04072b000a000a020705000b610804000b610b620a030713000a020705000b610804000b610b620a0308eaff0a0100068008cdff",
+        "020a00030b660b6f0b6f030a0100",
+        "02070d000a00030b660b6f0b6f030a0100068008ebff",
+        "060a00010a020601617a0707000601617a08f6ff0a030b3d0a04060130390707000601303908f6ff0a05020a0100",
+        "06072d000a00010a020601617a0707000601617a08f6ff0a030b3d0a04060130390707000601303908f6ff0a05020a0100068008cbff",
+        "020a000709000b610b620b630806000b780b620b630a0100",
+        "020717000a000709000b610b620b630806000b780b620b630a0100068008e1ff",
+        "020a000709000b610b620b630806000b780b620b630715000709000b610b620b630806000b780b620b6308e8ff0a0100",
+        "02072f000a000709000b610b620b630806000b780b620b630715000709000b610b620b630806000b780b620b6308e8ff0a0100068008c9ff",
+        "020a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a0100",
+        "0207cf000a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a010006800829ff",
+        "020a000601c3a9c3a90a0100",
+        "02070b000a000601c3a9c3a90a0100068008edff",
+        "020a000601617a0a0100",
+        "020709000a000601617a0a0100068008efff",
+        "020a00060161620a0100",
+        "020709000a00060161620a0100068008efff",
+        "020a00068161610a0100",
+        "020709000a00068161610a0100068008efff",
+        "020a0006843039415a5f5f617a0a0100",
+        "02070f000a0006843039415a5f5f617a0a0100068008e9ff",
+        "020a000603415a5f5f617a0a0100",
+        "02070d000a000603415a5f5f617a0a0100068008ebff",
+        "020a00070d000705000b610802000b6208f0ff0b630a0100",
+        "020717000a00070d000705000b610802000b6208f0ff0b630a0100068008e1ff"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 237339
+      }
+    },
+    "short": {
+      "options": {
+        "short": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 614,
+          "linkedFlash": 616,
+          "text_rodata": 614,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 586,
+          "linkedFlash": 608,
+          "text_rodata": 586,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_shi"
+        }
+      },
+      "equal": 7197,
+      "failures": [],
+      "resourceDifferences": [],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 103420
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 146169
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 18120
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 38100
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1837
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 79140
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 4544
+        }
+      },
+      "sampleSizes": [
+        6,
+        12,
+        10,
+        16,
+        18,
+        24,
+        18,
+        24,
+        14,
+        20,
+        18,
+        24,
+        16,
+        22,
+        22,
+        28,
+        50,
+        56,
+        20,
+        26,
+        44,
+        50,
+        34,
+        40,
+        66,
+        72,
+        408,
+        416,
+        12,
+        18,
+        10,
+        16,
+        10,
+        16,
+        10,
+        16,
+        16,
+        22,
+        14,
+        20,
+        26,
+        32
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020c050a000a010006800df5",
+        "020a00060161610a0100",
+        "020c090a00060161610a010006800df1",
+        "020a000601616106016262060163630a0100",
+        "020c110a000601616106016262060163630a010006800de9",
+        "020a000601617a0c060601617a0df80a0100",
+        "020c110a000601617a0c060601617a0df80a010006800de9",
+        "020a000c06060161610df80a0100",
+        "020c0d0a000c06060161610df80a010006800ded",
+        "020a00060161610c06060161610df80a0100",
+        "020c110a00060161610c06060161610df80a010006800de9",
+        "020a000c020d06060161610df60a0100",
+        "020c0f0a000c020d06060161610df60a010006800deb",
+        "020a00060161610c04060161610c04060161610a0100",
+        "020c150a00060161610c04060161610c04060161610a010006800de5",
+        "040a000a020c06060161610d0806016161060162620a030c160a020c06060161610d0806016161060162620a030de80a0100",
+        "040c310a000a020c06060161610d0806016161060162620a030c160a020c06060161610d0806016161060162620a030de80a010006800dc9",
+        "020a00030601666606016f6f06016f6f030a0100",
+        "020c130a00030601666606016f6f06016f6f030a010006800de7",
+        "060a00010a020601617a0c060601617a0df80a0306013d3d0a04060130390c06060130390df80a05020a0100",
+        "060c2b0a00010a020601617a0c060601617a0df80a0306013d3d0a04060130390c06060130390df80a05020a010006800dcf",
+        "020a000c0e0601616106016262060163630d0c0601787806016262060163630a0100",
+        "020c210a000c0e0601616106016262060163630d0c0601787806016262060163630a010006800dd9",
+        "020a000c0e0601616106016262060163630d0c0601787806016262060163630c1e0c0e0601616106016262060163630d0c0601787806016262060163630de00a0100",
+        "020c410a000c0e0601616106016262060163630d0c0601787806016262060163630c1e0c0e0601616106016262060163630d0c0601787806016262060163630de00a010006800db9",
+        "020a000106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161020a0100",
+        "020797010a000106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161020a010006800861fe",
+        "020a000601c3a9c3a90a0100",
+        "020c0b0a000601c3a9c3a90a010006800def",
+        "020a000601617a0a0100",
+        "020c090a000601617a0a010006800df1",
+        "020a00060161620a0100",
+        "020c090a00060161620a010006800df1",
+        "020a00068161610a0100",
+        "020c090a00068161610a010006800df1",
+        "020a0006843039415a5f5f617a0a0100",
+        "020c0f0a0006843039415a5f5f617a0a010006800deb",
+        "020a000603415a5f5f617a0a0100",
+        "020c0d0a000603415a5f5f617a0a010006800ded",
+        "020a000c0e0c06060161610d04060162620df0060163630a0100",
+        "020c190a000c0e0c06060161610d04060162620df0060163630a010006800de1"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 230536
+      }
+    },
+    "char_short": {
+      "options": {
+        "char": true,
+        "short": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 602,
+          "linkedFlash": 604,
+          "text_rodata": 602,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 586,
+          "linkedFlash": 608,
+          "text_rodata": 586,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "equal": 7197,
+      "failures": [],
+      "resourceDifferences": [],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 93132
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 131690
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 12440
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 19920
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1727
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 61820
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 3664
+        }
+      },
+      "sampleSizes": [
+        6,
+        12,
+        8,
+        14,
+        12,
+        18,
+        18,
+        24,
+        12,
+        18,
+        14,
+        20,
+        14,
+        20,
+        16,
+        22,
+        38,
+        44,
+        14,
+        20,
+        42,
+        48,
+        22,
+        28,
+        42,
+        48,
+        208,
+        216,
+        12,
+        18,
+        10,
+        16,
+        10,
+        16,
+        10,
+        16,
+        16,
+        22,
+        14,
+        20,
+        20,
+        26
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020c050a000a010006800df5",
+        "020a000b610a0100",
+        "020c070a000b610a010006800df3",
+        "020a000b610b620b630a0100",
+        "020c0b0a000b610b620b630a010006800def",
+        "020a000601617a0c060601617a0df80a0100",
+        "020c110a000601617a0c060601617a0df80a010006800de9",
+        "020a000c040b610dfa0a0100",
+        "020c0b0a000c040b610dfa0a010006800def",
+        "020a000b610c040b610dfa0a0100",
+        "020c0d0a000b610c040b610dfa0a010006800ded",
+        "020a000c020d040b610df80a0100",
+        "020c0d0a000c020d040b610df80a010006800ded",
+        "020a000b610c020b610c020b610a0100",
+        "020c0f0a000b610c020b610c020b610a010006800deb",
+        "040a000a020c040b610d040b610b620a030c100a020c040b610d040b610b620a030dee0a0100",
+        "040c250a000a020c040b610d040b610b620a030c100a020c040b610d040b610b620a030dee0a010006800dd5",
+        "020a00030b660b6f0b6f030a0100",
+        "020c0d0a00030b660b6f0b6f030a010006800ded",
+        "060a00010a020601617a0c060601617a0df80a030b3d0a04060130390c06060130390df80a05020a0100",
+        "060c290a00010a020601617a0c060601617a0df80a030b3d0a04060130390c06060130390df80a05020a010006800dd1",
+        "020a000c080b610b620b630d060b780b620b630a0100",
+        "020c150a000c080b610b620b630d060b780b620b630a010006800de5",
+        "020a000c080b610b620b630d060b780b620b630c120c080b610b620b630d060b780b620b630dec0a0100",
+        "020c290a000c080b610b620b630d060b780b620b630c120c080b610b620b630d060b780b620b630dec0a010006800dd1",
+        "020a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a0100",
+        "0207cf000a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a010006800829ff",
+        "020a000601c3a9c3a90a0100",
+        "020c0b0a000601c3a9c3a90a010006800def",
+        "020a000601617a0a0100",
+        "020c090a000601617a0a010006800df1",
+        "020a00060161620a0100",
+        "020c090a00060161620a010006800df1",
+        "020a00068161610a0100",
+        "020c090a00068161610a010006800df1",
+        "020a0006843039415a5f5f617a0a0100",
+        "020c0f0a0006843039415a5f5f617a0a010006800deb",
+        "020a000603415a5f5f617a0a0100",
+        "020c0d0a000603415a5f5f617a0a010006800ded",
+        "020a000c0a0c040b610d020b620df40b630a0100",
+        "020c130a000c0a0c040b610d020b620df40b630a010006800de7"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 206401
+      }
+    },
+    "star": {
+      "options": {
+        "char": true,
+        "star": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 702,
+          "linkedFlash": 704,
+          "text_rodata": 702,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 666,
+          "linkedFlash": 688,
+          "text_rodata": 666,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_shi"
+        }
+      },
+      "equal": 7194,
+      "failures": [],
+      "resourceDifferences": [
+        {
+          "name": "fused-budget/30",
+          "before": -1,
+          "after": 1,
+          "line": "-1 1 0"
+        },
+        {
+          "name": "fused-budget/40",
+          "before": -1,
+          "after": 1,
+          "line": "-1 1 0"
+        },
+        {
+          "name": "fused-budget/50",
+          "before": -1,
+          "after": 1,
+          "line": "-1 1 0"
+        }
+      ],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 102141
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 144095
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 13260
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 20148
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1881
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 72780
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 4152
+        }
+      },
+      "sampleSizes": [
+        6,
+        14,
+        8,
+        16,
+        12,
+        20,
+        20,
+        28,
+        8,
+        16,
+        10,
+        18,
+        17,
+        25,
+        18,
+        26,
+        44,
+        52,
+        14,
+        22,
+        46,
+        54,
+        24,
+        32,
+        48,
+        56,
+        208,
+        216,
+        12,
+        20,
+        10,
+        18,
+        10,
+        18,
+        10,
+        18,
+        16,
+        24,
+        14,
+        22,
+        24,
+        32
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020705000a000a0100068008f3ff",
+        "020a000b610a0100",
+        "020707000a000b610a0100068008f1ff",
+        "020a000b610b620b630a0100",
+        "02070b000a000b610b620b630a0100068008edff",
+        "020a000601617a0707000601617a08f6ff0a0100",
+        "020713000a000601617a0707000601617a08f6ff0a0100068008e5ff",
+        "020a000e610a0100",
+        "020707000a000e610a0100068008f1ff",
+        "020a000b610e610a0100",
+        "020709000a000b610e610a0100068008efff",
+        "020a000703000805000b6108f5ff0a0100",
+        "020710000a000703000805000b6108f5ff0a0100068008e8ff",
+        "020a000b610702000b610702000b610a0100",
+        "020711000a000b610702000b610702000b610a0100068008e7ff",
+        "040a000a020705000b610804000b610b620a030713000a020705000b610804000b610b620a0308eaff0a0100",
+        "04072b000a000a020705000b610804000b610b620a030713000a020705000b610804000b610b620a0308eaff0a0100068008cdff",
+        "020a00030b660b6f0b6f030a0100",
+        "02070d000a00030b660b6f0b6f030a0100068008ebff",
+        "060a00010a020601617a0707000601617a08f6ff0a030b3d0a04060130390707000601303908f6ff0a05020a0100",
+        "06072d000a00010a020601617a0707000601617a08f6ff0a030b3d0a04060130390707000601303908f6ff0a05020a0100068008cbff",
+        "020a000709000b610b620b630806000b780b620b630a0100",
+        "020717000a000709000b610b620b630806000b780b620b630a0100068008e1ff",
+        "020a000709000b610b620b630806000b780b620b630715000709000b610b620b630806000b780b620b6308e8ff0a0100",
+        "02072f000a000709000b610b620b630806000b780b620b630715000709000b610b620b630806000b780b620b6308e8ff0a0100068008c9ff",
+        "020a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a0100",
+        "0207cf000a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a010006800829ff",
+        "020a000601c3a9c3a90a0100",
+        "02070b000a000601c3a9c3a90a0100068008edff",
+        "020a000601617a0a0100",
+        "020709000a000601617a0a0100068008efff",
+        "020a00060161620a0100",
+        "020709000a00060161620a0100068008efff",
+        "020a00068161610a0100",
+        "020709000a00068161610a0100068008efff",
+        "020a0006843039415a5f5f617a0a0100",
+        "02070f000a0006843039415a5f5f617a0a0100068008e9ff",
+        "020a000603415a5f5f617a0a0100",
+        "02070d000a000603415a5f5f617a0a0100068008ebff",
+        "020a00070d000705000b610802000b6208f0ff0b630a0100",
+        "020717000a00070d000705000b610802000b6208f0ff0b630a0100068008e1ff"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 225099
+      }
+    },
+    "tail": {
+      "options": {
+        "tail": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 546,
+          "linkedFlash": 548,
+          "text_rodata": 546,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 546,
+          "linkedFlash": 568,
+          "text_rodata": 546,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "equal": 7197,
+      "failures": [],
+      "resourceDifferences": [],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 107551
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 153462
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 17860
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 38256
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1958
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 86870
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 4552
+        }
+      },
+      "sampleSizes": [
+        6,
+        14,
+        10,
+        18,
+        18,
+        26,
+        19,
+        27,
+        16,
+        24,
+        19,
+        27,
+        19,
+        27,
+        24,
+        32,
+        37,
+        45,
+        20,
+        28,
+        46,
+        54,
+        28,
+        36,
+        37,
+        45,
+        408,
+        416,
+        12,
+        20,
+        10,
+        18,
+        10,
+        18,
+        10,
+        18,
+        16,
+        24,
+        14,
+        22,
+        30,
+        38
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020705000a000a0100068008f3ff",
+        "020a00060161610a0100",
+        "020709000a00060161610a0100068008efff",
+        "020a000601616106016262060163630a0100",
+        "020711000a000601616106016262060163630a0100068008e7ff",
+        "020a000803000707000601617a08f6ff0a0100",
+        "020712000a000803000707000601617a08f6ff0a0100068008e6ff",
+        "020a000707000601616108f6ff0a0100",
+        "02070f000a000707000601616108f6ff0a0100068008e9ff",
+        "020a000803000707000601616108f6ff0a0100",
+        "020712000a000803000707000601616108f6ff0a0100068008e6ff",
+        "020a000703000807000601616108f3ff0a0100",
+        "020712000a000703000807000601616108f3ff0a0100068008e6ff",
+        "020a000601616107040006016161070400060161610a0100",
+        "020717000a000601616107040006016161070400060161610a0100068008e1ff",
+        "040a000803000719000a020707000601616108080006016161060162620a0308e4ff0a0100",
+        "040724000a000803000719000a020707000601616108080006016161060162620a0308e4ff0a0100068008d4ff",
+        "020a00030601666606016f6f06016f6f030a0100",
+        "020713000a00030601666606016f6f06016f6f030a0100068008e5ff",
+        "060a00010a020803000707000601617a08f6ff0a0306013d3d0a040803000707000601303908f6ff0a05020a0100",
+        "06072d000a00010a020803000707000601617a08f6ff0a0306013d3d0a040803000707000601303908f6ff0a05020a0100068008cbff",
+        "020a00070700060161610804000601787806016262060163630a0100",
+        "02071b000a00070700060161610804000601787806016262060163630a0100068008ddff",
+        "020a000803000719000707000601616108040006017878060162620601636308e4ff0a0100",
+        "020724000a000803000719000707000601616108040006017878060162620601636308e4ff0a0100068008d4ff",
+        "020a000106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161020a0100",
+        "020797010a000106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161020a010006800861fe",
+        "020a000601c3a9c3a90a0100",
+        "02070b000a000601c3a9c3a90a0100068008edff",
+        "020a000601617a0a0100",
+        "020709000a000601617a0a0100068008efff",
+        "020a00060161620a0100",
+        "020709000a00060161620a0100068008efff",
+        "020a00068161610a0100",
+        "020709000a00068161610a0100068008efff",
+        "020a0006843039415a5f5f617a0a0100",
+        "02070f000a0006843039415a5f5f617a0a0100068008e9ff",
+        "020a000603415a5f5f617a0a0100",
+        "02070d000a000603415a5f5f617a0a0100068008ebff",
+        "020a00071100070700060161610804000601626208ecff060163630a0100",
+        "02071d000a00071100070700060161610804000601626208ecff060163630a0100068008dbff"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 239392
+      }
+    },
+    "range": {
+      "options": {
+        "range": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 634,
+          "linkedFlash": 636,
+          "text_rodata": 634,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 598,
+          "linkedFlash": 620,
+          "text_rodata": 598,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_shi"
+        }
+      },
+      "equal": 7197,
+      "failures": [],
+      "resourceDifferences": [],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 111779
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 158146
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 16180
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 29202
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 2057
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 81830
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 4760
+        }
+      },
+      "sampleSizes": [
+        6,
+        14,
+        9,
+        17,
+        15,
+        23,
+        18,
+        26,
+        15,
+        23,
+        18,
+        26,
+        18,
+        26,
+        21,
+        29,
+        50,
+        58,
+        17,
+        25,
+        43,
+        51,
+        30,
+        38,
+        60,
+        68,
+        308,
+        316,
+        12,
+        20,
+        9,
+        17,
+        9,
+        17,
+        10,
+        18,
+        16,
+        24,
+        14,
+        22,
+        27,
+        35
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020705000a000a0100068008f3ff",
+        "020a000f61610a0100",
+        "020708000a000f61610a0100068008f0ff",
+        "020a000f61610f62620f63630a0100",
+        "02070e000a000f61610f62620f63630a0100068008eaff",
+        "020a000f617a0706000f617a08f7ff0a0100",
+        "020711000a000f617a0706000f617a08f7ff0a0100068008e7ff",
+        "020a000706000f616108f7ff0a0100",
+        "02070e000a000706000f616108f7ff0a0100068008eaff",
+        "020a000f61610706000f616108f7ff0a0100",
+        "020711000a000f61610706000f616108f7ff0a0100068008e7ff",
+        "020a000703000806000f616108f4ff0a0100",
+        "020711000a000703000806000f616108f4ff0a0100068008e7ff",
+        "020a000f61610703000f61610703000f61610a0100",
+        "020714000a000f61610703000f61610703000f61610a0100068008e4ff",
+        "040a000a020706000f61610806000f61610f62620a030716000a020706000f61610806000f61610f62620a0308e7ff0a0100",
+        "040731000a000a020706000f61610806000f61610f62620a030716000a020706000f61610806000f61610f62620a0308e7ff0a0100068008c7ff",
+        "020a00030f66660f6f6f0f6f6f030a0100",
+        "020710000a00030f66660f6f6f0f6f6f030a0100068008e8ff",
+        "060a00010a020f617a0706000f617a08f7ff0a030f3d3d0a040f30390706000f303908f7ff0a05020a0100",
+        "06072a000a00010a020f617a0706000f617a08f7ff0a030f3d3d0a040f30390706000f303908f7ff0a05020a0100068008ceff",
+        "020a00070c000f61610f62620f63630809000f78780f62620f63630a0100",
+        "02071d000a00070c000f61610f62620f63630809000f78780f62620f63630a0100068008dbff",
+        "020a00070c000f61610f62620f63630809000f78780f62620f6363071b00070c000f61610f62620f63630809000f78780f62620f636308e2ff0a0100",
+        "02073b000a00070c000f61610f62620f63630809000f78780f62620f6363071b00070c000f61610f62620f63630809000f78780f62620f636308e2ff0a0100068008bdff",
+        "020a00010f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f6161020a0100",
+        "020733010a00010f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f61610f6161020a0100068008c5fe",
+        "020a000601c3a9c3a90a0100",
+        "02070b000a000601c3a9c3a90a0100068008edff",
+        "020a000f617a0a0100",
+        "020708000a000f617a0a0100068008f0ff",
+        "020a000f61620a0100",
+        "020708000a000f61620a0100068008f0ff",
+        "020a00068161610a0100",
+        "020709000a00068161610a0100068008efff",
+        "020a0006843039415a5f5f617a0a0100",
+        "02070f000a0006843039415a5f5f617a0a0100068008e9ff",
+        "020a000603415a5f5f617a0a0100",
+        "02070d000a000603415a5f5f617a0a0100068008ebff",
+        "020a00070f000706000f61610803000f626208eeff0f63630a0100",
+        "02071a000a00070f000706000f61610803000f626208eeff0f63630a0100068008deff"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 248291
+      }
+    },
+    "all": {
+      "options": {
+        "char": true,
+        "short": true,
+        "star": true,
+        "tail": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 690,
+          "linkedFlash": 692,
+          "text_rodata": 690,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 690,
+          "linkedFlash": 712,
+          "text_rodata": 690,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uhi"
+        }
+      },
+      "equal": 7194,
+      "failures": [],
+      "resourceDifferences": [
+        {
+          "name": "fused-budget/30",
+          "before": -1,
+          "after": 1,
+          "line": "-1 1 0"
+        },
+        {
+          "name": "fused-budget/40",
+          "before": -1,
+          "after": 1,
+          "line": "-1 1 0"
+        },
+        {
+          "name": "fused-budget/50",
+          "before": -1,
+          "after": 1,
+          "line": "-1 1 0"
+        }
+      ],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 82338
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 117386
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 11480
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 19920
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1507
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 58880
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 3168
+        }
+      },
+      "sampleSizes": [
+        6,
+        12,
+        8,
+        14,
+        12,
+        18,
+        16,
+        22,
+        8,
+        14,
+        10,
+        16,
+        14,
+        20,
+        16,
+        22,
+        26,
+        32,
+        14,
+        20,
+        38,
+        44,
+        18,
+        24,
+        24,
+        30,
+        208,
+        216,
+        12,
+        18,
+        10,
+        16,
+        10,
+        16,
+        10,
+        16,
+        16,
+        22,
+        14,
+        20,
+        20,
+        26
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020c050a000a010006800df5",
+        "020a000b610a0100",
+        "020c070a000b610a010006800df3",
+        "020a000b610b620b630a0100",
+        "020c0b0a000b610b620b630a010006800def",
+        "020a000d020c060601617a0df80a0100",
+        "020c0f0a000d020c060601617a0df80a010006800deb",
+        "020a000e610a0100",
+        "020c070a000e610a010006800df3",
+        "020a000b610e610a0100",
+        "020c090a000b610e610a010006800df1",
+        "020a000c020d040b610df80a0100",
+        "020c0d0a000c020d040b610df80a010006800ded",
+        "020a000b610c020b610c020b610a0100",
+        "020c0f0a000b610c020b610c020b610a010006800deb",
+        "040a000d020c100a020c040b610d040b610b620a030dee0a0100",
+        "040c190a000d020c100a020c040b610d040b610b620a030dee0a010006800de1",
+        "020a00030b660b6f0b6f030a0100",
+        "020c0d0a00030b660b6f0b6f030a010006800ded",
+        "060a00010a020d020c060601617a0df80a030b3d0a040d020c06060130390df80a05020a0100",
+        "060c250a00010a020d020c060601617a0df80a030b3d0a040d020c06060130390df80a05020a010006800dd5",
+        "020a000c040b610d020b780b620b630a0100",
+        "020c110a000c040b610d020b780b620b630a010006800de9",
+        "020a000d020c0e0c040b610d020b780b620b630df00a0100",
+        "020c170a000d020c0e0c040b610d020b780b620b630df00a010006800de3",
+        "020a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a0100",
+        "0207cf000a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a010006800829ff",
+        "020a000601c3a9c3a90a0100",
+        "020c0b0a000601c3a9c3a90a010006800def",
+        "020a000601617a0a0100",
+        "020c090a000601617a0a010006800df1",
+        "020a00060161620a0100",
+        "020c090a00060161620a010006800df1",
+        "020a00068161610a0100",
+        "020c090a00068161610a010006800df1",
+        "020a0006843039415a5f5f617a0a0100",
+        "020c0f0a0006843039415a5f5f617a0a010006800deb",
+        "020a000603415a5f5f617a0a0100",
+        "020c0d0a000603415a5f5f617a0a010006800ded",
+        "020a000c0a0c040b610d020b620df40b630a0100",
+        "020c130a000c0a0c040b610d020b620df40b630a010006800de7"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 181720
+      }
+    },
+    "all_range": {
+      "options": {
+        "char": true,
+        "short": true,
+        "star": true,
+        "tail": true,
+        "range": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 718,
+          "linkedFlash": 720,
+          "text_rodata": 718,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 722,
+          "linkedFlash": 744,
+          "text_rodata": 722,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uhi"
+        }
+      },
+      "equal": 7194,
+      "failures": [],
+      "resourceDifferences": [
+        {
+          "name": "fused-budget/30",
+          "before": -1,
+          "after": 1,
+          "line": "-1 1 0"
+        },
+        {
+          "name": "fused-budget/40",
+          "before": -1,
+          "after": 1,
+          "line": "-1 1 0"
+        },
+        {
+          "name": "fused-budget/50",
+          "before": -1,
+          "after": 1,
+          "line": "-1 1 0"
+        }
+      ],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 81948
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 116898
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 11380
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 19920
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1496
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 58600
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 3168
+        }
+      },
+      "sampleSizes": [
+        6,
+        12,
+        8,
+        14,
+        12,
+        18,
+        15,
+        21,
+        8,
+        14,
+        10,
+        16,
+        14,
+        20,
+        16,
+        22,
+        26,
+        32,
+        14,
+        20,
+        36,
+        42,
+        18,
+        24,
+        24,
+        30,
+        208,
+        216,
+        12,
+        18,
+        9,
+        15,
+        9,
+        15,
+        10,
+        16,
+        16,
+        22,
+        14,
+        20,
+        20,
+        26
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020c050a000a010006800df5",
+        "020a000b610a0100",
+        "020c070a000b610a010006800df3",
+        "020a000b610b620b630a0100",
+        "020c0b0a000b610b620b630a010006800def",
+        "020a000d020c050f617a0df90a0100",
+        "020c0e0a000d020c050f617a0df90a010006800dec",
+        "020a000e610a0100",
+        "020c070a000e610a010006800df3",
+        "020a000b610e610a0100",
+        "020c090a000b610e610a010006800df1",
+        "020a000c020d040b610df80a0100",
+        "020c0d0a000c020d040b610df80a010006800ded",
+        "020a000b610c020b610c020b610a0100",
+        "020c0f0a000b610c020b610c020b610a010006800deb",
+        "040a000d020c100a020c040b610d040b610b620a030dee0a0100",
+        "040c190a000d020c100a020c040b610d040b610b620a030dee0a010006800de1",
+        "020a00030b660b6f0b6f030a0100",
+        "020c0d0a00030b660b6f0b6f030a010006800ded",
+        "060a00010a020d020c050f617a0df90a030b3d0a040d020c050f30390df90a05020a0100",
+        "060c230a00010a020d020c050f617a0df90a030b3d0a040d020c050f30390df90a05020a010006800dd7",
+        "020a000c040b610d020b780b620b630a0100",
+        "020c110a000c040b610d020b780b620b630a010006800de9",
+        "020a000d020c0e0c040b610d020b780b620b630df00a0100",
+        "020c170a000d020c0e0c040b610d020b780b620b630df00a010006800de3",
+        "020a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a0100",
+        "0207cf000a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a010006800829ff",
+        "020a000601c3a9c3a90a0100",
+        "020c0b0a000601c3a9c3a90a010006800def",
+        "020a000f617a0a0100",
+        "020c080a000f617a0a010006800df2",
+        "020a000f61620a0100",
+        "020c080a000f61620a010006800df2",
+        "020a00068161610a0100",
+        "020c090a00068161610a010006800df1",
+        "020a0006843039415a5f5f617a0a0100",
+        "020c0f0a0006843039415a5f5f617a0a010006800deb",
+        "020a000603415a5f5f617a0a0100",
+        "020c0d0a000603415a5f5f617a0a010006800ded",
+        "020a000c0a0c040b610d020b620df40b630a0100",
+        "020c130a000c0a0c040b610d020b620df40b630a010006800de7"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 180852
+      }
+    },
+    "short_shared": {
+      "options": {
+        "short": true,
+        "shared": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 618,
+          "linkedFlash": 620,
+          "text_rodata": 618,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 574,
+          "linkedFlash": 596,
+          "text_rodata": 574,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_shi"
+        }
+      },
+      "equal": 7197,
+      "failures": [],
+      "resourceDifferences": [],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 103420
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 146169
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 18120
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 38100
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1837
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 79140
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 4544
+        }
+      },
+      "sampleSizes": [
+        6,
+        12,
+        10,
+        16,
+        18,
+        24,
+        18,
+        24,
+        14,
+        20,
+        18,
+        24,
+        16,
+        22,
+        22,
+        28,
+        50,
+        56,
+        20,
+        26,
+        44,
+        50,
+        34,
+        40,
+        66,
+        72,
+        408,
+        416,
+        12,
+        18,
+        10,
+        16,
+        10,
+        16,
+        10,
+        16,
+        16,
+        22,
+        14,
+        20,
+        26,
+        32
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020c050a000a010006800df5",
+        "020a00060161610a0100",
+        "020c090a00060161610a010006800df1",
+        "020a000601616106016262060163630a0100",
+        "020c110a000601616106016262060163630a010006800de9",
+        "020a000601617a0c060601617a0df80a0100",
+        "020c110a000601617a0c060601617a0df80a010006800de9",
+        "020a000c06060161610df80a0100",
+        "020c0d0a000c06060161610df80a010006800ded",
+        "020a00060161610c06060161610df80a0100",
+        "020c110a00060161610c06060161610df80a010006800de9",
+        "020a000c020d06060161610df60a0100",
+        "020c0f0a000c020d06060161610df60a010006800deb",
+        "020a00060161610c04060161610c04060161610a0100",
+        "020c150a00060161610c04060161610c04060161610a010006800de5",
+        "040a000a020c06060161610d0806016161060162620a030c160a020c06060161610d0806016161060162620a030de80a0100",
+        "040c310a000a020c06060161610d0806016161060162620a030c160a020c06060161610d0806016161060162620a030de80a010006800dc9",
+        "020a00030601666606016f6f06016f6f030a0100",
+        "020c130a00030601666606016f6f06016f6f030a010006800de7",
+        "060a00010a020601617a0c060601617a0df80a0306013d3d0a04060130390c06060130390df80a05020a0100",
+        "060c2b0a00010a020601617a0c060601617a0df80a0306013d3d0a04060130390c06060130390df80a05020a010006800dcf",
+        "020a000c0e0601616106016262060163630d0c0601787806016262060163630a0100",
+        "020c210a000c0e0601616106016262060163630d0c0601787806016262060163630a010006800dd9",
+        "020a000c0e0601616106016262060163630d0c0601787806016262060163630c1e0c0e0601616106016262060163630d0c0601787806016262060163630de00a0100",
+        "020c410a000c0e0601616106016262060163630d0c0601787806016262060163630c1e0c0e0601616106016262060163630d0c0601787806016262060163630de00a010006800db9",
+        "020a000106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161020a0100",
+        "020797010a000106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161020a010006800861fe",
+        "020a000601c3a9c3a90a0100",
+        "020c0b0a000601c3a9c3a90a010006800def",
+        "020a000601617a0a0100",
+        "020c090a000601617a0a010006800df1",
+        "020a00060161620a0100",
+        "020c090a00060161620a010006800df1",
+        "020a00068161610a0100",
+        "020c090a00068161610a010006800df1",
+        "020a0006843039415a5f5f617a0a0100",
+        "020c0f0a0006843039415a5f5f617a0a010006800deb",
+        "020a000603415a5f5f617a0a0100",
+        "020c0d0a000603415a5f5f617a0a010006800ded",
+        "020a000c0e0c06060161610d04060162620df0060163630a0100",
+        "020c190a000c0e0c06060161610d04060162620df0060163630a010006800de1"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 230536
+      }
+    },
+    "char_short_shared": {
+      "options": {
+        "char": true,
+        "short": true,
+        "shared": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 606,
+          "linkedFlash": 608,
+          "text_rodata": 606,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 574,
+          "linkedFlash": 596,
+          "text_rodata": 574,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "equal": 7197,
+      "failures": [],
+      "resourceDifferences": [],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 93132
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 131690
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 12440
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 19920
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1727
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 61820
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 3664
+        }
+      },
+      "sampleSizes": [
+        6,
+        12,
+        8,
+        14,
+        12,
+        18,
+        18,
+        24,
+        12,
+        18,
+        14,
+        20,
+        14,
+        20,
+        16,
+        22,
+        38,
+        44,
+        14,
+        20,
+        42,
+        48,
+        22,
+        28,
+        42,
+        48,
+        208,
+        216,
+        12,
+        18,
+        10,
+        16,
+        10,
+        16,
+        10,
+        16,
+        16,
+        22,
+        14,
+        20,
+        20,
+        26
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020c050a000a010006800df5",
+        "020a000b610a0100",
+        "020c070a000b610a010006800df3",
+        "020a000b610b620b630a0100",
+        "020c0b0a000b610b620b630a010006800def",
+        "020a000601617a0c060601617a0df80a0100",
+        "020c110a000601617a0c060601617a0df80a010006800de9",
+        "020a000c040b610dfa0a0100",
+        "020c0b0a000c040b610dfa0a010006800def",
+        "020a000b610c040b610dfa0a0100",
+        "020c0d0a000b610c040b610dfa0a010006800ded",
+        "020a000c020d040b610df80a0100",
+        "020c0d0a000c020d040b610df80a010006800ded",
+        "020a000b610c020b610c020b610a0100",
+        "020c0f0a000b610c020b610c020b610a010006800deb",
+        "040a000a020c040b610d040b610b620a030c100a020c040b610d040b610b620a030dee0a0100",
+        "040c250a000a020c040b610d040b610b620a030c100a020c040b610d040b610b620a030dee0a010006800dd5",
+        "020a00030b660b6f0b6f030a0100",
+        "020c0d0a00030b660b6f0b6f030a010006800ded",
+        "060a00010a020601617a0c060601617a0df80a030b3d0a04060130390c06060130390df80a05020a0100",
+        "060c290a00010a020601617a0c060601617a0df80a030b3d0a04060130390c06060130390df80a05020a010006800dd1",
+        "020a000c080b610b620b630d060b780b620b630a0100",
+        "020c150a000c080b610b620b630d060b780b620b630a010006800de5",
+        "020a000c080b610b620b630d060b780b620b630c120c080b610b620b630d060b780b620b630dec0a0100",
+        "020c290a000c080b610b620b630d060b780b620b630c120c080b610b620b630d060b780b620b630dec0a010006800dd1",
+        "020a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a0100",
+        "0207cf000a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a010006800829ff",
+        "020a000601c3a9c3a90a0100",
+        "020c0b0a000601c3a9c3a90a010006800def",
+        "020a000601617a0a0100",
+        "020c090a000601617a0a010006800df1",
+        "020a00060161620a0100",
+        "020c090a00060161620a010006800df1",
+        "020a00068161610a0100",
+        "020c090a00068161610a010006800df1",
+        "020a0006843039415a5f5f617a0a0100",
+        "020c0f0a0006843039415a5f5f617a0a010006800deb",
+        "020a000603415a5f5f617a0a0100",
+        "020c0d0a000603415a5f5f617a0a010006800ded",
+        "020a000c0a0c040b610d020b620df40b630a0100",
+        "020c130a000c0a0c040b610d020b620df40b630a010006800de7"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 206401
+      }
+    },
+    "all_shared": {
+      "options": {
+        "char": true,
+        "short": true,
+        "star": true,
+        "tail": true,
+        "shared": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 686,
+          "linkedFlash": 688,
+          "text_rodata": 686,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 678,
+          "linkedFlash": 700,
+          "text_rodata": 678,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uhi"
+        }
+      },
+      "equal": 7194,
+      "failures": [],
+      "resourceDifferences": [
+        {
+          "name": "fused-budget/30",
+          "before": -1,
+          "after": 1,
+          "line": "-1 1 0"
+        },
+        {
+          "name": "fused-budget/40",
+          "before": -1,
+          "after": 1,
+          "line": "-1 1 0"
+        },
+        {
+          "name": "fused-budget/50",
+          "before": -1,
+          "after": 1,
+          "line": "-1 1 0"
+        }
+      ],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 82338
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 117386
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 11480
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 19920
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1507
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 58880
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 3168
+        }
+      },
+      "sampleSizes": [
+        6,
+        12,
+        8,
+        14,
+        12,
+        18,
+        16,
+        22,
+        8,
+        14,
+        10,
+        16,
+        14,
+        20,
+        16,
+        22,
+        26,
+        32,
+        14,
+        20,
+        38,
+        44,
+        18,
+        24,
+        24,
+        30,
+        208,
+        216,
+        12,
+        18,
+        10,
+        16,
+        10,
+        16,
+        10,
+        16,
+        16,
+        22,
+        14,
+        20,
+        20,
+        26
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020c050a000a010006800df5",
+        "020a000b610a0100",
+        "020c070a000b610a010006800df3",
+        "020a000b610b620b630a0100",
+        "020c0b0a000b610b620b630a010006800def",
+        "020a000d020c060601617a0df80a0100",
+        "020c0f0a000d020c060601617a0df80a010006800deb",
+        "020a000e610a0100",
+        "020c070a000e610a010006800df3",
+        "020a000b610e610a0100",
+        "020c090a000b610e610a010006800df1",
+        "020a000c020d040b610df80a0100",
+        "020c0d0a000c020d040b610df80a010006800ded",
+        "020a000b610c020b610c020b610a0100",
+        "020c0f0a000b610c020b610c020b610a010006800deb",
+        "040a000d020c100a020c040b610d040b610b620a030dee0a0100",
+        "040c190a000d020c100a020c040b610d040b610b620a030dee0a010006800de1",
+        "020a00030b660b6f0b6f030a0100",
+        "020c0d0a00030b660b6f0b6f030a010006800ded",
+        "060a00010a020d020c060601617a0df80a030b3d0a040d020c06060130390df80a05020a0100",
+        "060c250a00010a020d020c060601617a0df80a030b3d0a040d020c06060130390df80a05020a010006800dd5",
+        "020a000c040b610d020b780b620b630a0100",
+        "020c110a000c040b610d020b780b620b630a010006800de9",
+        "020a000d020c0e0c040b610d020b780b620b630df00a0100",
+        "020c170a000d020c0e0c040b610d020b780b620b630df00a010006800de3",
+        "020a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a0100",
+        "0207cf000a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a010006800829ff",
+        "020a000601c3a9c3a90a0100",
+        "020c0b0a000601c3a9c3a90a010006800def",
+        "020a000601617a0a0100",
+        "020c090a000601617a0a010006800df1",
+        "020a00060161620a0100",
+        "020c090a00060161620a010006800df1",
+        "020a00068161610a0100",
+        "020c090a00068161610a010006800df1",
+        "020a0006843039415a5f5f617a0a0100",
+        "020c0f0a0006843039415a5f5f617a0a010006800deb",
+        "020a000603415a5f5f617a0a0100",
+        "020c0d0a000603415a5f5f617a0a010006800ded",
+        "020a000c0a0c040b610d020b620df40b630a0100",
+        "020c130a000c0a0c040b610d020b620df40b630a010006800de7"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 181720
+      }
+    },
+    "escape": {
+      "options": {
+        "short": true,
+        "escape": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 564,
+          "linkedFlash": 564,
+          "text_rodata": 564,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 560,
+          "linkedFlash": 580,
+          "text_rodata": 560,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "equal": 7197,
+      "failures": [],
+      "resourceDifferences": [],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 103838
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 146707
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 18140
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 38364
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1837
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 79140
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 4544
+        }
+      },
+      "sampleSizes": [
+        6,
+        12,
+        10,
+        16,
+        18,
+        24,
+        18,
+        24,
+        14,
+        20,
+        18,
+        24,
+        16,
+        22,
+        22,
+        28,
+        50,
+        56,
+        20,
+        26,
+        44,
+        50,
+        34,
+        40,
+        66,
+        72,
+        408,
+        418,
+        12,
+        18,
+        10,
+        16,
+        10,
+        16,
+        10,
+        16,
+        16,
+        22,
+        14,
+        20,
+        26,
+        32
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "0207050a000a0100068008f5",
+        "020a00060161610a0100",
+        "0207090a00060161610a0100068008f1",
+        "020a000601616106016262060163630a0100",
+        "0207110a000601616106016262060163630a0100068008e9",
+        "020a000601617a07060601617a08f80a0100",
+        "0207110a000601617a07060601617a08f80a0100068008e9",
+        "020a0007060601616108f80a0100",
+        "02070d0a0007060601616108f80a0100068008ed",
+        "020a000601616107060601616108f80a0100",
+        "0207110a000601616107060601616108f80a0100068008e9",
+        "020a00070208060601616108f60a0100",
+        "02070f0a00070208060601616108f60a0100068008eb",
+        "020a00060161610704060161610704060161610a0100",
+        "0207150a00060161610704060161610704060161610a0100068008e5",
+        "040a000a02070606016161080806016161060162620a0307160a02070606016161080806016161060162620a0308e80a0100",
+        "0407310a000a02070606016161080806016161060162620a0307160a02070606016161080806016161060162620a0308e80a0100068008c9",
+        "020a00030601666606016f6f06016f6f030a0100",
+        "0207130a00030601666606016f6f06016f6f030a0100068008e7",
+        "060a00010a020601617a07060601617a08f80a0306013d3d0a040601303907060601303908f80a05020a0100",
+        "06072b0a00010a020601617a07060601617a08f80a0306013d3d0a040601303907060601303908f80a05020a0100068008cf",
+        "020a00070e060161610601626206016363080c0601787806016262060163630a0100",
+        "0207210a00070e060161610601626206016363080c0601787806016262060163630a0100068008d9",
+        "020a00070e060161610601626206016363080c060178780601626206016363071e070e060161610601626206016363080c06017878060162620601636308e00a0100",
+        "0207410a00070e060161610601626206016363080c060178780601626206016363071e070e060161610601626206016363080c06017878060162620601636308e00a0100068008b9",
+        "020a000106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161020a0100",
+        "02078097010a000106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161060161610601616106016161020a0100068008805ffe",
+        "020a000601c3a9c3a90a0100",
+        "02070b0a000601c3a9c3a90a0100068008ef",
+        "020a000601617a0a0100",
+        "0207090a000601617a0a0100068008f1",
+        "020a00060161620a0100",
+        "0207090a00060161620a0100068008f1",
+        "020a00068161610a0100",
+        "0207090a00068161610a0100068008f1",
+        "020a0006843039415a5f5f617a0a0100",
+        "02070f0a0006843039415a5f5f617a0a0100068008eb",
+        "020a000603415a5f5f617a0a0100",
+        "02070d0a000603415a5f5f617a0a0100068008ed",
+        "020a00070e07060601616108040601626208f0060163630a0100",
+        "0207190a00070e07060601616108040601626208f0060163630a0100068008e1"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 231492
+      }
+    },
+    "char_escape": {
+      "options": {
+        "char": true,
+        "short": true,
+        "escape": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 584,
+          "linkedFlash": 584,
+          "text_rodata": 584,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 576,
+          "linkedFlash": 596,
+          "text_rodata": 576,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "equal": 7197,
+      "failures": [],
+      "resourceDifferences": [],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 93444
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 132105
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 12460
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 20112
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1727
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 61820
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 3664
+        }
+      },
+      "sampleSizes": [
+        6,
+        12,
+        8,
+        14,
+        12,
+        18,
+        18,
+        24,
+        12,
+        18,
+        14,
+        20,
+        14,
+        20,
+        16,
+        22,
+        38,
+        44,
+        14,
+        20,
+        42,
+        48,
+        22,
+        28,
+        42,
+        48,
+        208,
+        218,
+        12,
+        18,
+        10,
+        16,
+        10,
+        16,
+        10,
+        16,
+        16,
+        22,
+        14,
+        20,
+        20,
+        26
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "0207050a000a0100068008f5",
+        "020a000b610a0100",
+        "0207070a000b610a0100068008f3",
+        "020a000b610b620b630a0100",
+        "02070b0a000b610b620b630a0100068008ef",
+        "020a000601617a07060601617a08f80a0100",
+        "0207110a000601617a07060601617a08f80a0100068008e9",
+        "020a0007040b6108fa0a0100",
+        "02070b0a0007040b6108fa0a0100068008ef",
+        "020a000b6107040b6108fa0a0100",
+        "02070d0a000b6107040b6108fa0a0100068008ed",
+        "020a00070208040b6108f80a0100",
+        "02070d0a00070208040b6108f80a0100068008ed",
+        "020a000b6107020b6107020b610a0100",
+        "02070f0a000b6107020b6107020b610a0100068008eb",
+        "040a000a0207040b6108040b610b620a0307100a0207040b6108040b610b620a0308ee0a0100",
+        "0407250a000a0207040b6108040b610b620a0307100a0207040b6108040b610b620a0308ee0a0100068008d5",
+        "020a00030b660b6f0b6f030a0100",
+        "02070d0a00030b660b6f0b6f030a0100068008ed",
+        "060a00010a020601617a07060601617a08f80a030b3d0a040601303907060601303908f80a05020a0100",
+        "0607290a00010a020601617a07060601617a08f80a030b3d0a040601303907060601303908f80a05020a0100068008d1",
+        "020a0007080b610b620b6308060b780b620b630a0100",
+        "0207150a0007080b610b620b6308060b780b620b630a0100068008e5",
+        "020a0007080b610b620b6308060b780b620b63071207080b610b620b6308060b780b620b6308ec0a0100",
+        "0207290a0007080b610b620b6308060b780b620b63071207080b610b620b6308060b780b620b6308ec0a0100068008d1",
+        "020a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a0100",
+        "020780cf000a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a01000680088027ff",
+        "020a000601c3a9c3a90a0100",
+        "02070b0a000601c3a9c3a90a0100068008ef",
+        "020a000601617a0a0100",
+        "0207090a000601617a0a0100068008f1",
+        "020a00060161620a0100",
+        "0207090a00060161620a0100068008f1",
+        "020a00068161610a0100",
+        "0207090a00068161610a0100068008f1",
+        "020a0006843039415a5f5f617a0a0100",
+        "02070f0a0006843039415a5f5f617a0a0100068008eb",
+        "020a000603415a5f5f617a0a0100",
+        "02070d0a000603415a5f5f617a0a0100068008ed",
+        "020a00070a07040b6108020b6208f40b630a0100",
+        "0207130a00070a07040b6108020b6208f40b630a0100068008e7"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 207128
+      }
+    },
+    "char_tail": {
+      "options": {
+        "char": true,
+        "tail": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 562,
+          "linkedFlash": 564,
+          "text_rodata": 562,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 558,
+          "linkedFlash": 580,
+          "text_rodata": 558,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "equal": 7197,
+      "failures": [],
+      "resourceDifferences": [],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 98819
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 141157
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 12720
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 20148
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1870
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 70250
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 3912
+        }
+      },
+      "sampleSizes": [
+        6,
+        14,
+        8,
+        16,
+        12,
+        20,
+        19,
+        27,
+        14,
+        22,
+        16,
+        24,
+        17,
+        25,
+        18,
+        26,
+        31,
+        39,
+        14,
+        22,
+        44,
+        52,
+        20,
+        28,
+        29,
+        37,
+        208,
+        216,
+        12,
+        20,
+        10,
+        18,
+        10,
+        18,
+        10,
+        18,
+        16,
+        24,
+        14,
+        22,
+        24,
+        32
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "020705000a000a0100068008f3ff",
+        "020a000b610a0100",
+        "020707000a000b610a0100068008f1ff",
+        "020a000b610b620b630a0100",
+        "02070b000a000b610b620b630a0100068008edff",
+        "020a000803000707000601617a08f6ff0a0100",
+        "020712000a000803000707000601617a08f6ff0a0100068008e6ff",
+        "020a000705000b6108f8ff0a0100",
+        "02070d000a000705000b6108f8ff0a0100068008ebff",
+        "020a000b610705000b6108f8ff0a0100",
+        "02070f000a000b610705000b6108f8ff0a0100068008e9ff",
+        "020a000703000805000b6108f5ff0a0100",
+        "020710000a000703000805000b6108f5ff0a0100068008e8ff",
+        "020a000b610702000b610702000b610a0100",
+        "020711000a000b610702000b610702000b610a0100068008e7ff",
+        "040a000803000713000a020705000b610804000b610b620a0308eaff0a0100",
+        "04071e000a000803000713000a020705000b610804000b610b620a0308eaff0a0100068008daff",
+        "020a00030b660b6f0b6f030a0100",
+        "02070d000a00030b660b6f0b6f030a0100068008ebff",
+        "060a00010a020803000707000601617a08f6ff0a030b3d0a040803000707000601303908f6ff0a05020a0100",
+        "06072b000a00010a020803000707000601617a08f6ff0a030b3d0a040803000707000601303908f6ff0a05020a0100068008cdff",
+        "020a000705000b610802000b780b620b630a0100",
+        "020713000a000705000b610802000b780b620b630a0100068008e5ff",
+        "020a000803000711000705000b610802000b780b620b6308ecff0a0100",
+        "02071c000a000803000711000705000b610802000b780b620b6308ecff0a0100068008dcff",
+        "020a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a0100",
+        "0207cf000a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a010006800829ff",
+        "020a000601c3a9c3a90a0100",
+        "02070b000a000601c3a9c3a90a0100068008edff",
+        "020a000601617a0a0100",
+        "020709000a000601617a0a0100068008efff",
+        "020a00060161620a0100",
+        "020709000a00060161620a0100068008efff",
+        "020a00068161610a0100",
+        "020709000a00068161610a0100068008efff",
+        "020a0006843039415a5f5f617a0a0100",
+        "02070f000a0006843039415a5f5f617a0a0100068008e9ff",
+        "020a000603415a5f5f617a0a0100",
+        "02070d000a000603415a5f5f617a0a0100068008ebff",
+        "020a00070d000705000b610802000b6208f0ff0b630a0100",
+        "020717000a00070d000705000b610802000b6208f0ff0b630a0100068008e1ff"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 218950
+      }
+    },
+    "char_escape_tail": {
+      "options": {
+        "char": true,
+        "short": true,
+        "escape": true,
+        "tail": true
+      },
+      "sizes": {
+        "cortex-m4": {
+          "flash": 584,
+          "linkedFlash": 584,
+          "text_rodata": 584,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 576,
+          "linkedFlash": 596,
+          "text_rodata": 576,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "equal": 7197,
+      "failures": [],
+      "resourceDifferences": [],
+      "bySuite": {
+        "corpus_wb_seed1.jsonl": {
+          "cases": 1961,
+          "baselineBytes": 117329,
+          "candidateBytes": 85266
+        },
+        "corpus_wb_seed7.jsonl": {
+          "cases": 2878,
+          "baselineBytes": 165885,
+          "candidateBytes": 121721
+        },
+        "witness": {
+          "cases": 420,
+          "baselineBytes": 19180,
+          "candidateBytes": 11660
+        },
+        "relocation": {
+          "cases": 102,
+          "baselineBytes": 38256,
+          "candidateBytes": 20112
+        },
+        "malformed": {
+          "cases": 88,
+          "baselineBytes": 2123,
+          "candidateBytes": 1595
+        },
+        "generated": {
+          "cases": 1600,
+          "baselineBytes": 90820,
+          "candidateBytes": 59120
+        },
+        "resource": {
+          "cases": 148,
+          "baselineBytes": 5200,
+          "candidateBytes": 3280
+        }
+      },
+      "sampleSizes": [
+        6,
+        12,
+        8,
+        14,
+        12,
+        18,
+        16,
+        22,
+        12,
+        18,
+        14,
+        20,
+        14,
+        20,
+        16,
+        22,
+        26,
+        32,
+        14,
+        20,
+        38,
+        44,
+        18,
+        24,
+        24,
+        30,
+        208,
+        218,
+        12,
+        18,
+        10,
+        16,
+        10,
+        16,
+        10,
+        16,
+        16,
+        22,
+        14,
+        20,
+        20,
+        26
+      ],
+      "sampleHex": [
+        "020a000a0100",
+        "0207050a000a0100068008f5",
+        "020a000b610a0100",
+        "0207070a000b610a0100068008f3",
+        "020a000b610b620b630a0100",
+        "02070b0a000b610b620b630a0100068008ef",
+        "020a00080207060601617a08f80a0100",
+        "02070f0a00080207060601617a08f80a0100068008eb",
+        "020a0007040b6108fa0a0100",
+        "02070b0a0007040b6108fa0a0100068008ef",
+        "020a000b6107040b6108fa0a0100",
+        "02070d0a000b6107040b6108fa0a0100068008ed",
+        "020a00070208040b6108f80a0100",
+        "02070d0a00070208040b6108f80a0100068008ed",
+        "020a000b6107020b6107020b610a0100",
+        "02070f0a000b6107020b6107020b610a0100068008eb",
+        "040a00080207100a0207040b6108040b610b620a0308ee0a0100",
+        "0407190a00080207100a0207040b6108040b610b620a0308ee0a0100068008e1",
+        "020a00030b660b6f0b6f030a0100",
+        "02070d0a00030b660b6f0b6f030a0100068008ed",
+        "060a00010a02080207060601617a08f80a030b3d0a04080207060601303908f80a05020a0100",
+        "0607250a00010a02080207060601617a08f80a030b3d0a04080207060601303908f80a05020a0100068008d5",
+        "020a0007040b6108020b780b620b630a0100",
+        "0207110a0007040b6108020b780b620b630a0100068008e9",
+        "020a000802070e07040b6108020b780b620b6308f00a0100",
+        "0207170a000802070e07040b6108020b780b620b6308f00a0100068008e3",
+        "020a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a0100",
+        "020780cf000a00010b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b610b61020a01000680088027ff",
+        "020a000601c3a9c3a90a0100",
+        "02070b0a000601c3a9c3a90a0100068008ef",
+        "020a000601617a0a0100",
+        "0207090a000601617a0a0100068008f1",
+        "020a00060161620a0100",
+        "0207090a00060161620a0100068008f1",
+        "020a00068161610a0100",
+        "0207090a00068161610a0100068008f1",
+        "020a0006843039415a5f5f617a0a0100",
+        "02070f0a0006843039415a5f5f617a0a0100068008eb",
+        "020a000603415a5f5f617a0a0100",
+        "02070d0a000603415a5f5f617a0a0100068008ed",
+        "020a00070a07040b6108020b6208f40b630a0100",
+        "0207130a00070a07040b6108020b6208f40b630a0100068008e7"
+      ],
+      "uniqueCorpusPrograms": {
+        "programs": 3587,
+        "baseline": 261247,
+        "candidate": 188867
+      }
+    }
+  },
+  "baselineVM": {
+    "cortex-m4": {
+      "flash": 546,
+      "linkedFlash": 548,
+      "text_rodata": 546,
+      "data": 0,
+      "bss": 0,
+      "undefinedSymbols": ""
+    },
+    "cortex-m0plus": {
+      "flash": 538,
+      "linkedFlash": 560,
+      "text_rodata": 538,
+      "data": 0,
+      "bss": 0,
+      "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+    }
+  },
+  "baselineCompiler": {
+    "cortex-m4": {
+      "flash": 2250,
+      "linkedFlash": 2250,
+      "text_rodata": 2250,
+      "data": 0,
+      "bss": 0,
+      "undefinedSymbols": ""
+    },
+    "cortex-m0plus": {
+      "flash": 2382,
+      "linkedFlash": 2384,
+      "text_rodata": 2382,
+      "data": 0,
+      "bss": 0,
+      "undefinedSymbols": ""
+    }
+  },
+  "baselineCombined": {
+    "cortex-m4": {
+      "flash": 2796,
+      "linkedFlash": 2798,
+      "text_rodata": 2796,
+      "data": 0,
+      "bss": 0,
+      "undefinedSymbols": ""
+    },
+    "cortex-m0plus": {
+      "flash": 2920,
+      "linkedFlash": 2944,
+      "text_rodata": 2920,
+      "data": 0,
+      "bss": 0,
+      "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+    }
+  },
+  "compilerVariants": {
+    "baseline": {
+      "sizes": {
+        "cortex-m4": {
+          "flash": 2250,
+          "linkedFlash": 2250,
+          "text_rodata": 2250,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 2382,
+          "linkedFlash": 2384,
+          "text_rodata": 2382,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        }
+      },
+      "combined": {
+        "cortex-m4": {
+          "flash": 2796,
+          "linkedFlash": 2798,
+          "text_rodata": 2796,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 2928,
+          "linkedFlash": 2952,
+          "text_rodata": 2928,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "compared": 3309,
+      "failures": []
+    },
+    "char": {
+      "sizes": {
+        "cortex-m4": {
+          "flash": 2292,
+          "linkedFlash": 2292,
+          "text_rodata": 2292,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 2426,
+          "linkedFlash": 2428,
+          "text_rodata": 2426,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        }
+      },
+      "combined": {
+        "cortex-m4": {
+          "flash": 2854,
+          "linkedFlash": 2858,
+          "text_rodata": 2854,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 2984,
+          "linkedFlash": 3008,
+          "text_rodata": 2984,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "compared": 3309,
+      "failures": []
+    },
+    "range": {
+      "sizes": {
+        "cortex-m4": {
+          "flash": 2296,
+          "linkedFlash": 2296,
+          "text_rodata": 2296,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 2432,
+          "linkedFlash": 2434,
+          "text_rodata": 2432,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        }
+      },
+      "combined": {
+        "cortex-m4": {
+          "flash": 2930,
+          "linkedFlash": 2934,
+          "text_rodata": 2930,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 3030,
+          "linkedFlash": 3052,
+          "text_rodata": 3030,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_shi"
+        }
+      },
+      "compared": 3309,
+      "failures": []
+    },
+    "char_range": {
+      "sizes": {
+        "cortex-m4": {
+          "flash": 2318,
+          "linkedFlash": 2318,
+          "text_rodata": 2318,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 2450,
+          "linkedFlash": 2452,
+          "text_rodata": 2450,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        }
+      },
+      "combined": {
+        "cortex-m4": {
+          "flash": 2964,
+          "linkedFlash": 2966,
+          "text_rodata": 2964,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 3060,
+          "linkedFlash": 3084,
+          "text_rodata": 3060,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_shi"
+        }
+      },
+      "compared": 3309,
+      "failures": []
+    },
+    "short": {
+      "sizes": {
+        "cortex-m4": {
+          "flash": 2250,
+          "linkedFlash": 2250,
+          "text_rodata": 2250,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 2382,
+          "linkedFlash": 2384,
+          "text_rodata": 2382,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        }
+      },
+      "combined": {
+        "cortex-m4": {
+          "flash": 3378,
+          "linkedFlash": 3380,
+          "text_rodata": 3378,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 3478,
+          "linkedFlash": 3520,
+          "text_rodata": 3478,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_shi\n         U __gnu_thumb1_case_uqi"
+        }
+      },
+      "compared": 3309,
+      "failures": []
+    },
+    "char_short": {
+      "sizes": {
+        "cortex-m4": {
+          "flash": 2292,
+          "linkedFlash": 2292,
+          "text_rodata": 2292,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 2426,
+          "linkedFlash": 2428,
+          "text_rodata": 2426,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        }
+      },
+      "combined": {
+        "cortex-m4": {
+          "flash": 3408,
+          "linkedFlash": 3412,
+          "text_rodata": 3408,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 3522,
+          "linkedFlash": 3544,
+          "text_rodata": 3522,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "compared": 3309,
+      "failures": []
+    },
+    "star": {
+      "sizes": {
+        "cortex-m4": {
+          "flash": 2292,
+          "linkedFlash": 2292,
+          "text_rodata": 2292,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 2426,
+          "linkedFlash": 2428,
+          "text_rodata": 2426,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        }
+      },
+      "combined": {
+        "cortex-m4": {
+          "flash": 3526,
+          "linkedFlash": 3530,
+          "text_rodata": 3526,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 3590,
+          "linkedFlash": 3632,
+          "text_rodata": 3590,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_shi\n         U __gnu_thumb1_case_uqi"
+        }
+      },
+      "compared": 3309,
+      "failures": []
+    },
+    "char_short_star": {
+      "sizes": {
+        "cortex-m4": {
+          "flash": 2292,
+          "linkedFlash": 2292,
+          "text_rodata": 2292,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 2426,
+          "linkedFlash": 2428,
+          "text_rodata": 2426,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        }
+      },
+      "combined": {
+        "cortex-m4": {
+          "flash": 3650,
+          "linkedFlash": 3654,
+          "text_rodata": 3650,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 3738,
+          "linkedFlash": 3780,
+          "text_rodata": 3738,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uhi\n         U __gnu_thumb1_case_uqi"
+        }
+      },
+      "compared": 3309,
+      "failures": []
+    },
+    "escape": {
+      "sizes": {
+        "cortex-m4": {
+          "flash": 2250,
+          "linkedFlash": 2250,
+          "text_rodata": 2250,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 2382,
+          "linkedFlash": 2384,
+          "text_rodata": 2382,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        }
+      },
+      "combined": {
+        "cortex-m4": {
+          "flash": 3384,
+          "linkedFlash": 3384,
+          "text_rodata": 3384,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 3450,
+          "linkedFlash": 3476,
+          "text_rodata": 3450,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "compared": 3309,
+      "failures": []
+    },
+    "char_escape": {
+      "sizes": {
+        "cortex-m4": {
+          "flash": 2292,
+          "linkedFlash": 2292,
+          "text_rodata": 2292,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 2426,
+          "linkedFlash": 2428,
+          "text_rodata": 2426,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        }
+      },
+      "combined": {
+        "cortex-m4": {
+          "flash": 3446,
+          "linkedFlash": 3448,
+          "text_rodata": 3446,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": ""
+        },
+        "cortex-m0plus": {
+          "flash": 3510,
+          "linkedFlash": 3536,
+          "text_rodata": 3510,
+          "data": 0,
+          "bss": 0,
+          "undefinedSymbols": "U __gnu_thumb1_case_uqi"
+        }
+      },
+      "compared": 3309,
+      "failures": []
+    }
+  },
+  "snapshotSHA256": {
+    "src/re.c": "392ef8ede1d9a16687839db7298645fe33fc9f7d0de058a3c90df219c4be7b3d",
+    "src/re.h": "b105549d42455dece44520d2f8c59ea921cfa76145e59eec4bb3e328fbe94eb4",
+    "src/re_bytecode.h": "ce68b79f342857e32d05a072f6b8c0b4a6e6e177689f6134841cbaeb7099d8d1",
+    "tools/re_compile.js": "6f47dc0d1435b55717da6b65eff840baac7728ed1ff3617ac0c0b45beaa4f1f3",
+    "research/spikes/c-compiler/re_compile.c": "61eb0f4c875350201beba2e1019da415ce27644529209c72b6619329b052ce54",
+    "tests/corpus/corpus_wb_seed1.jsonl": "07285cd121fa5b3b4529023a25431973f25732faf015c1d9c42395d58b115032",
+    "tests/corpus/corpus_wb_seed7.jsonl": "f6026f751d056e8bdc36cbb1a0cfcb3e70244aa502b4cdf9f2ba70db1bb8933f"
+  }
+}

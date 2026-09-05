@@ -1,0 +1,48 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/wregex/wrx_comp.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/wregex
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/wregex/wrx_comp.c
+cortex-m4  (thumb2, gcc 10.3): text=5633 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=5489 data=0 bss=0
+x86-64     (clang 21):         text=9505 data=0
+-- cortex-m4 per-function (bytes):
+    4144  .text.element
+     738  .text.wrx_comp
+     146  .text.list
+     146  .text.duplicate
+     126  .text.next_state
+      82  .text.create_bv
+      79  .rodata.element.str1.1
+      78  .text.push_seg
+      28  .text.invert_bv
+      24  .text.transition.isra.0
+      22  .text.weaken.isra.0
+      20  .text.pop_seg
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/wregex/wrx_exec.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/wregex
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/wregex/wrx_exec.c
+cortex-m4  (thumb2, gcc 10.3): text=1260 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=1302 data=0 bss=0
+x86-64     (clang 21):         text=2769 data=0
+-- cortex-m4 per-function (bytes):
+    1132  .text.wrx_exec
+     108  .text.push
+      20  .text.free_stack
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/wregex/wrx_err.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/wregex
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/wregex/wrx_err.c
+cortex-m4  (thumb2, gcc 10.3): text=550 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=550 data=0 bss=0
+x86-64     (clang 21):         text=565 data=0
+-- cortex-m4 per-function (bytes):
+     415  .rodata.str1.1
+      76  .rodata.CSWTCH.1
+      36  .text.wrx_error
+      23  .rodata.wrx_error.str1.1
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/wregex/wrx_free.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/wregex
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/wregex/wrx_free.c
+cortex-m4  (thumb2, gcc 10.3): text=62 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=60 data=0 bss=0
+x86-64     (clang 21):         text=106 data=0
+-- cortex-m4 per-function (bytes):
+      62  .text.wrx_free
+

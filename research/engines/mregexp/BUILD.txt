@@ -1,0 +1,37 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/mregexp/mregexp.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/mregexp
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/mregexp/mregexp.c
+cortex-m4  (thumb2, gcc 10.3): text=2550 data=0 bss=100
+cortex-m0+ (thumb1, gcc 10.3): text=2568 data=0 bss=100
+x86-64     (clang 21):         text=7410 data=0
+-- cortex-m4 per-function (bytes):
+     964  .text.compile
+     232  .text.calc_compiled_len
+     132  .text.mregexp_compile
+     114  .text.mregexp_all_matches
+     104  .text.mregexp_match
+      96  .text.append_class
+      80  .text.utf8_char_width
+      76  .text.mregexp_capture
+      66  .text.utf8_valid
+      64  .text.cap_node_count
+      62  .text.or_is_match
+      62  .text.class_is_match
+      54  .text.quant_is_match
+      52  .text.utf8_peek
+      50  .text.parse_digit
+      48  .text.append_quant
+      40  .text.is_match
+      36  .text.mregexp_free
+      36  .text.char_is_match
+      30  .text.cap_is_match
+      28  .text.anchor_begin_is_match
+      24  .text.throw_compile_exception
+      24  .text.any_is_match
+      20  .rodata.utf8_peek_mods
+      16  .text.utf8_next
+      12  .text.mregexp_error
+      12  .text.anchor_end_is_match
+       6  .text.start_is_match
+       6  .text.mregexp_captures_len
+       4  .text.mregexp_check_utf8
+

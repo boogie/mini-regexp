@@ -1,0 +1,50 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/libregexp/regcomp.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/libregexp
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/libregexp/regcomp.c
+cortex-m4  (thumb2, gcc 10.3): text=2159 data=0 bss=468
+cortex-m0+ (thumb1, gcc 10.3): text=2079 data=0 bss=468
+x86-64     (clang 21):         text=3596 data=752
+-- cortex-m4 per-function (bytes):
+     604  .text.regcomp1
+     336  .text.evaluntil
+     328  .text.bldcclass
+     124  .text.operator
+     120  .rodata.bldcclass.str1.1
+      72  .text.operand
+      72  .text.nextc
+      64  .text.popand
+      60  .text.pushator
+      55  .rodata.evaluntil.str1.1
+      46  .rodata.operator.str1.1
+      40  .text.pushand
+      36  .text.cant
+      35  .rodata.regcomp1.str1.1
+      32  .text.rcerror
+      28  .text.newinst
+      24  .rodata.pushator.str1.1
+      23  .rodata.pushand.str1.1
+      21  .rodata.popand.str1.1
+      15  .rodata.cant.str1.1
+       8  .text.regcompnl9
+       8  .text.regcomplit9
+       8  .text.regcomp9
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/libregexp/regexec.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/libregexp
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/libregexp/regexec.c
+cortex-m4  (thumb2, gcc 10.3): text=736 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=738 data=0 bss=0
+x86-64     (clang 21):         text=1220 data=0
+-- cortex-m4 per-function (bytes):
+     516  .text.regexec1
+     220  .text.regexec9
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/libregexp/regaux.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/libregexp
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/libregexp/regaux.c
+cortex-m4  (thumb2, gcc 10.3): text=340 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=342 data=0 bss=0
+x86-64     (clang 21):         text=513 data=0
+-- cortex-m4 per-function (bytes):
+     100  .text._renewthread
+      80  .text._rrenewemptythread
+      80  .text._renewmatch
+      80  .text._renewemptythread
+

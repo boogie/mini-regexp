@@ -1,0 +1,13 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/pikevm/pike.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/pikevm/pike.c
+cortex-m4  (thumb2, gcc 10.3): text=4846 data=256 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=5218 data=256 bss=0
+x86-64     (clang 21):         text=8830 data=256
+-- cortex-m4 per-function (bytes):
+    2224  .text.startup.main
+    1872  .text.compilecode
+     348  .text.re_dumpcode
+     217  .rodata.re_dumpcode.str1.1
+     153  .rodata.main.str1.1
+      32  .text.isword.isra.0
+

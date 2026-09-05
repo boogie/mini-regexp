@@ -1,0 +1,108 @@
+{
+ "label": "verify:audit",
+ "toolchain": "arm-none-eabi-gcc 10.3.1 (GNU Arm Embedded 10.3-2021.10), Apple clang 21.0.0; tools/measure.sh flags unchanged; all commands re-run from each engine's BUILD.txt; audit artefacts in /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/audit (trc_audit.sh, lua_audit2.sh, lua_wrap_search.c, probe.sh, rerun2_*.txt)",
+ "audited": [
+  {
+   "name": "tiny-regex-c",
+   "reproduced": true,
+   "their_m4_text": 1140,
+   "my_m4_text": 1140,
+   "exclusion_ok": true,
+   "corrected_m4_text": 1162,
+   "my_whole_file": {
+    "m4": 1532,
+    "m0plus": 1482,
+    "x86": 2645
+   },
+   "my_engine_only": {
+    "m4_no_re_match": 1140,
+    "m4_with_re_match": 1162,
+    "x86_no_re_match": 2154,
+    "x86_with_re_match": 2190
+   },
+   "difftest_fair": "FAIR. Driver 23 lines: re_matchp() is a native search-anywhere API (probe 'b' on 'xab' -> match 2 3); engine has no captures and no -i, driver ignores -i (documented). Re-run corpus_seed1: pass=1224 fail=857 timeouts=0 (identical to claim); PROTOCOL corpus_wb_seed1 (2103 cases, 190 \\b patterns): pass=1230 fail=865.",
+   "notes": "Whole file re.c reproduces bit-exactly (1532/1482/2645). Exclusion of re_print verified by objdump -r: .rodata (68 B types[] table) and .rodata.str1.1 (140 B names) are referenced ONLY from re_print / that table; ld -r --gc-sections -u re_compile -u re_matchp keeps exactly 1140 B, matching the claim. The only nit: re_match (22 B) is the library's public one-shot API (compile+search), not test/debug code, so it should be inside the engine number -> 1162 B (+1.9%). Not counted anywhere: newlib _ctype_ table 257 B (isdigit/isalpha/isspace in matchone/matchcharclass/matchalphanum), i.e. ~1.42 KB flash if nothing else links ctype. x86 engine-only from nm deltas = 2154 (their 2153; 1 B alignment)."
+  },
+  {
+   "name": "re1.5 (pfalcon) recursiveloop set as compiled by micropython/extmod/modre.c",
+   "reproduced": true,
+   "their_m4_text": 1530,
+   "my_m4_text": 1530,
+   "exclusion_ok": true,
+   "corrected_m4_text": 1530,
+   "my_whole_file": {
+    "m4": 1530,
+    "m0plus": 1558,
+    "x86": 2706,
+    "fork_m4": 1532,
+    "fork_x86": 2735
+   },
+   "difftest_fair": "FAIR. Driver 36 lines: search is native (is_anchored=0 uses the RSplit/Any/Jmp prefix), captures native (Save slots; probe '(a)(b)' on 'xab' -> match 1 3 | 1 1 2 | 2 2 3), -i ignored because the engine has no flag (documented). Re-run corpus_seed1: upstream pass=982 fail=1099 timeouts=1 group_spans_checked=80; fork pass=1733 fail=348 timeouts=1 (both identical to claims). corpus_wb_seed1: upstream pass=1010 fail=1085; fork pass=1766 fail=329 timeouts=3.",
+   "notes": "mp_all.c (compilecode.c+recursiveloop.c+charclass.c in one TU, re1_5_fatal(x)=assert(!x)) reproduces 1530 exactly; per-function list identical. I verified in the fetched modre.c (lines 503-510) that this is precisely what MicroPython compiles, and that -DNDEBUG turns the assert-based fatal path into nothing, so the number is the release-build number. Two small things the number omits: (a) re1_5_stack_chk() is an empty macro here (re1.5.h:52) while modre.c maps it to mp_cstack_check() -> one call per recursiveloop() entry (~4-8 B call site, the checker itself is runtime code); (b) memmove from libc. Excluded files (dumpcode.c, alternate back-ends, main.c) are correctly outside the MicroPython set. Note {n,m} is absent (upstream: 'error'; fork: '{' literal -> probe 'a{2}' on 'xaaa' -> nomatch)."
+  },
+  {
+   "name": "subreg",
+   "reproduced": true,
+   "their_m4_text": 1704,
+   "my_m4_text": 1704,
+   "exclusion_ok": true,
+   "corrected_m4_text": 1704,
+   "my_whole_file": {
+    "m4": 1704,
+    "m0plus": 1556,
+    "x86": 2536
+   },
+   "difftest_fair": "FAIR WITH ADAPTATION (documented). subreg has no search API and no end-of-match report, so the driver wraps the pattern as [(?i)](?:PAT)(.*) and scans start positions leftmost-first, taking the match end from the start of the trailing (.*) capture; -i uses the engine's own inline (?i) (native, probe '-i AB' on 'xab' -> match 1 3); captures native. The trick is sound only because subreg's quantifiers/alternation are possessive/atomic (they never give back), which the driver does not alter: probe '(a|ab)c' on 'abc' -> nomatch is the engine's semantics, not the driver's. Re-run corpus_seed1: pass=1489 fail=592 timeouts=15 group_spans_checked=47 (identical to claim); corpus_wb_seed1: pass=1495 fail=600 timeouts=19. The 15-19 timeouts are engine hangs (infinite loop on empty-match repetition, reproduced by the agent through the raw API).",
+   "notes": "Whole-file subreg.c reproduces bit-exactly; all 12 functions are engine code, nothing excluded, zero libc symbols (nm -u empty). The M0+ < M4 oddity (1556 vs 1704) reproduces too. Caveat for comparison: 1704 B buys no compile step at all (pattern re-parsed on every match attempt, so the driver's start-position scan re-parses the pattern n+1 times), no {n,m}, no lazy quantifiers, no search, and adds lookahead/(?i)/\\h/\\! that the target spec does not need."
+  },
+  {
+   "name": "lua-lstrlib (Lua 5.4.9 lstrlib.c pattern matcher)",
+   "reproduced": true,
+   "their_m4_text": 1393,
+   "my_m4_text": 1397,
+   "exclusion_ok": false,
+   "corrected_m4_text": 1481,
+   "my_whole_file": {
+    "m4": 9641,
+    "m0plus": 9603,
+    "x86": 15186
+   },
+   "my_engine_only": {
+    "m4_matcher_only_via_thunk_wrapper": 1397,
+    "m4_matcher_plus_search_loop": 1481,
+    "m0plus_matcher_plus_search_loop": 1425,
+    "x86_matcher_only": 2200,
+    "x86_matcher_plus_search_loop": 2330,
+    "x86_incl_257B_rodata_strings_like_their_2457": 2587
+   },
+   "difftest_fair": "MOSTLY FAIR, one over-credit. Search loop = copy of str_find_aux (engine's own), captures native from MatchState, but -i is EMULATED BY THE DRIVER (letters expanded to [xX] sets during the regex->Lua-pattern translation); the engine has no case-insensitive mode. Credit is small: with -i dropped (audit/lua_cli_noi) pass=806 vs 809 on corpus_seed1 and 814 vs 817 on corpus_wb_seed1 (most -i cases also hit '|' or {n,m}, which the driver refuses as 'error unsupported'). The translation (\\d->%d, \\w->[%w_], a+?->aa-, (?:..) dropped) is a purely syntactic mapping and adds no matching power. Re-run corpus_seed1: pass=809 fail=1272 timeouts=0 group_spans_checked=14 (identical to claim); corpus_wb_seed1: pass=817 fail=1278.",
+   "notes": "The 1393 sum reproduces (my thunk wrapper + ld -r --gc-sections gives 1397 = 1393 + 4 B thunk, same 11 sections). But the exclusion is NOT like-for-like with the other engines: tiny-regex-c's re_matchp and re1.5's RSplit prefix INCLUDE the search-anywhere loop, whereas here the search loop (in str_find_aux) and prepstate/reprepstate were excluded. Adding only that loop, copied verbatim with no Lua API (audit/lua_wrap_search.c, 88 B on M4), gives 1481 B M4 / 1425 M0+ / 2330 x86 text (2587 incl. the 257 B of error strings the way their 2457 counts them). Excluding the Lua-API capture pushers (push_captures etc.) is fine. Still outside the number: luaL_error (the only error path, longjmp through lua_State; 8 call sites), memcmp (back-references) and newlib _ctype_ (257 B). The corrected 1481 is +6.3% over the claim, i.e. outside the 2% band, but it is a scope correction, not a measurement error."
+  }
+ ],
+ "difftest_rerun_summary": {
+  "corpus_seed1 (what all agents used)": {
+   "tiny-regex-c": "1224/2081",
+   "re1.5 upstream": "982/2081 (1 timeout)",
+   "re1.5 mp fork": "1733/2081 (1 timeout)",
+   "subreg": "1489/2081 (15 timeouts)",
+   "lua-lstrlib": "809/2081",
+   "lua-lstrlib -i dropped": "806/2081"
+  },
+  "corpus_wb_seed1 (PROTOCOL.md current, 2103 cases, 190 \\b/\\B patterns)": {
+   "tiny-regex-c": "1230/2095",
+   "re1.5 upstream": "1010/2095 (1 timeout)",
+   "re1.5 mp fork": "1766/2095 (3 timeouts)",
+   "subreg": "1495/2095 (19 timeouts)",
+   "lua-lstrlib": "817/2095",
+   "lua-lstrlib -i dropped": "814/2095"
+  }
+ },
+ "x86_over_m4_ratio": {
+  "tiny-regex-c": "2153/1140 = 1.89 (corrected 2190/1162 = 1.88; whole file 2645/1532 = 1.73)",
+  "re1.5": "2706/1530 = 1.77 (fork 2735/1532 = 1.79)",
+  "subreg": "2536/1704 = 1.49",
+  "lua-lstrlib": "2457/1393 = 1.76 (corrected 2587/1481 = 1.75)",
+  "summary": "x86-64 clang -Os text is 1.5-1.9x the Cortex-M4 Thumb-2 text; mean of the four 1.72. A 1000-2000 B M4 target corresponds to roughly 1.5-3.7 KB on x86-64."
+ },
+ "systemic_issues": "(1) All four size numbers and all five difftest pass counts reproduce bit-exactly with the same toolchain (GNU Arm Embedded 10.3-2021.10 / Apple clang 21) - measurement is deterministic and BUILD.txt files are sufficient. (2) 'Engine-only' scopes are not like-for-like: tiny-regex-c and re1.5 include compile + search-anywhere entry; lua-lstrlib's 1393 excludes the search loop (corrected 1481) and has no compile step; subreg has no compile step at all (re-parses the pattern per match attempt). Recommend one rule: count compile (if any) + the smallest search(pat,text)->span entry, and list libc/runtime deps beside the number. (3) External flash not in any number: newlib _ctype_ 257 B (tiny-regex-c, lua), memmove (re1.5), luaL_error/longjmp + memcmp (lua). tiny-regex-c really costs ~1.4 KB if ctype is not otherwise linked. (4) The corpus changed after the measurements: PROTOCOL.md now names corpus_wb_seed1.jsonl (2103 cases, 190 \\b patterns) but every measure:*.json used corpus_seed1.jsonl (2088 cases, 4 \\b patterns); the pass counts move by +6..+33 (see difftest_rerun_summary). Results should state the corpus file. (5) Driver over-credit: lua driver emulates -i (worth 3 cases); subreg driver supplies the search loop and infers match end via a trailing (.*) group - sound only because the engine is possessive; both are documented in the agents' caveats. (6) -DNDEBUG erases assert-based fatal paths (re1.5's re1_5_fatal -> no code), consistent with MicroPython release builds but it flatters engines that have no real error reporting. (7) Minor: tiny-regex-c's public re_match wrapper (22 B) was excluded as 'API glue'; per PROTOCOL only test/main/demo/dump/debug code is excludable, so 1162 is the strict number. (8) x86 'text' from size(1) includes __const/__cstring while nm-delta per-function figures cover __text only; the agents handled this consistently but it is a trap for future measurements. (9) subreg's 15-19 corpus timeouts are real engine hangs (empty-match repetition) - each costs the 2 s timeout, so its difftest takes ~40-80 s."
+}

@@ -1,0 +1,69 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/compilecode.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/compilecode.c
+cortex-m4  (thumb2, gcc 10.3): text=1102 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=1126 data=0 bss=0
+x86-64     (clang 21):         text=1949 data=0
+-- cortex-m4 per-function (bytes):
+     966  .text._compilecode
+      88  .text.re1_5_compilecode
+      48  .text.re1_5_sizecode
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/charclass.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/charclass.c
+cortex-m4  (thumb2, gcc 10.3): text=126 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=126 data=0 bss=0
+x86-64     (clang 21):         text=154 data=0
+-- cortex-m4 per-function (bytes):
+      74  .text._re1_5_namedclassmatch
+      52  .text._re1_5_classmatch
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/backtrack.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/backtrack.c
+cortex-m4  (thumb2, gcc 10.3): text=477 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=469 data=0 bss=0
+x86-64     (clang 21):         text=849 data=0
+-- cortex-m4 per-function (bytes):
+     448  .text.re1_5_backtrack
+      29  .rodata.re1_5_backtrack.str1.1
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/recursiveloop.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/recursiveloop.c
+cortex-m4  (thumb2, gcc 10.3): text=336 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=328 data=0 bss=0
+x86-64     (clang 21):         text=586 data=0
+-- cortex-m4 per-function (bytes):
+     296  .text.recursiveloop
+      26  .text.re1_5_recursiveloopprog
+      14  .rodata.recursiveloop.str1.1
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/pike.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/pike.c
+cortex-m4  (thumb2, gcc 10.3): text=680 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=638 data=0 bss=0
+x86-64     (clang 21):         text=1090 data=0
+-- cortex-m4 per-function (bytes):
+     396  .text.re1_5_pikevm
+     284  .text.addthread
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/sub.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/sub.c
+cortex-m4  (thumb2, gcc 10.3): text=126 data=0 bss=4
+cortex-m0+ (thumb1, gcc 10.3): text=128 data=0 bss=4
+x86-64     (clang 21):         text=224 data=0
+-- cortex-m4 per-function (bytes):
+      58  .text.update
+      36  .text.newsub
+      24  .text.decref
+       8  .text.incref
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/util.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/re1.5/util.c
+cortex-m4  (thumb2, gcc 10.3): text=99 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=99 data=0 bss=0
+x86-64     (clang 21):         text=136 data=0
+-- cortex-m4 per-function (bytes):
+      36  .text.mal
+      32  .text.re1_5_fatal
+      17  .rodata.re1_5_fatal.str1.1
+      14  .rodata.mal.str1.1
+

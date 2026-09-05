@@ -1,0 +1,20 @@
+# Reference code-size measurements for the language survey (Cortex-M4, -Os, PROTOCOL measure.sh). All sources
+# are shallow git clones under $S/survey/src (see $S/survey/src/clone.sh). Logs: measure_all.log, measure2.log, mquickjs.log
+cd $S/survey/src
+$S/tools/measure.sh tiny-regex-c/re.c -Itiny-regex-c                                   # text=1532
+$S/tools/measure.sh slre/slre.c -Islre                                                 # text=1946
+$S/tools/measure.sh micropython/lib/re1.5/compilecode.c   -Imicropython/lib/re1.5 -include stdbool.h -DMP_FALLTHROUGH=   # 1080
+$S/tools/measure.sh micropython/lib/re1.5/recursiveloop.c -Imicropython/lib/re1.5 -include stdbool.h -DMP_FALLTHROUGH=   # 336
+$S/tools/measure.sh micropython/lib/re1.5/charclass.c     -Imicropython/lib/re1.5 -include stdbool.h -DMP_FALLTHROUGH=   # 150  => re1.5 engine 1566
+$S/tools/measure.sh tasmota-berry/re1.5/{compilecode,recursiveloop,charclass}.c -Itasmota-berry/re1.5 -include stdbool.h -DMP_FALLTHROUGH= -DTASMOTA  # 1102+336+126=1564
+$S/tools/measure.sh quickjs/libregexp.c -Iquickjs                                      # text=13334 (needs libunicode: 49046)
+$S/tools/measure.sh quickjs/libunicode.c -Iquickjs                                     # text=49046
+$S/tools/measure.sh lua/lstrlib.c -Ilua                                                # text=9731 whole string lib; pattern fns (match,str_find_aux,str_gsub,gmatch*,classend,match_class,matchbracketclass,singlematch,*capture*,str_match + their rodata) = ~2995
+$S/tools/measure.sh janet/src/core/peg.c -Ijanet/src/include -Ijanet/src/conf -Ijanet/src/core -DJANET_NO_DYNAMIC_MODULES  # text=12541 data=48
+$S/tools/measure.sh squirrel/sqstdlib/sqstdrex.cpp -Isquirrel/include -Isquirrel/sqstdlib -fno-exceptions -fno-rtti  # text=3144 (T-Rex; x86 clang step fails on -std=gnu99 for C++, ARM numbers valid)
+$S/tools/measure.sh jimtcl/jimregexp.c -Ijimtcl -Istubs/jim -DJIM_REGEXP               # text=5166 (stubs/jim: empty jimautoconf.h/jim-config.h)
+(cd mquickjs && make mquickjs_atom.h)   # generates atom header with host gcc
+$S/tools/measure.sh mquickjs/mquickjs.c -Imquickjs                                     # whole engine text=68089; sum of lre_*/re_* fns = 6480, js_regexp* builtins = 905
+# Espruino: generated headers for the LINUX board, then compiled the regexp wrapper alone
+(cd espruino && python3 scripts/build_platform_config.py LINUX ../stubs/espruino-linux/platform_config.h && python3 scripts/build_pininfo.py LINUX ../stubs/espruino-linux/jspininfo.c ../stubs/espruino-linux/jspininfo.h)
+(cd espruino && $S/tools/measure.sh src/jswrap_regexp.c -Isrc -I../stubs/espruino-linux -Igen -Itargets/linux -DLINUX -include stdint.h -include stdbool.h)  # text=2267

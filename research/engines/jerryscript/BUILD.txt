@@ -1,0 +1,8 @@
+# JerryScript (git master 2026-09-04) cross build, Cortex-M4 (cmake/toolchain_mcu_stm32f4.cmake), MinSizeRel (-Os), no LTO
+cd $S/survey/src/jerryscript
+python3 tools/build.py --toolchain=cmake/toolchain_mcu_stm32f4.cmake --builddir=$S/engines/jerryscript/re1 --jerry-cmdline=OFF --jerry-port=OFF --jerry-ext=OFF --jerry-math=OFF --lto=OFF --error-messages=OFF --compile-flag=-DJERRY_BUILTIN_REGEXP=1   # OK
+python3 tools/build.py ... --builddir=$S/engines/jerryscript/re0 ... --compile-flag=-DJERRY_BUILTIN_REGEXP=0   # FAILS: ecma-builtin-regexp-string-iterator-prototype.c:168 'iterated_string' (regexp iterator not guarded), see build0.log
+arm-none-eabi-size -t re1/lib/libjerry-core.a | tail -1      # text=253707 total
+arm-none-eabi-size re1/lib/libjerry-core.a | grep -E 're-compiler|re-parser|re-bytecode|ecma-regexp-object|ecma-builtin-regexp'
+#  1409 ecma-builtin-regexp-prototype, 328 regexp-string-iterator-prototype, 354 ecma-builtin-regexp, 7996 ecma-regexp-object (executor),
+#   432 re-bytecode, 312 re-compiler, 3042 re-parser  => 13873 bytes regexp-related (5.5% of jerry-core)

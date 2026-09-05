@@ -1,0 +1,19 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/libre/re.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/libre
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/libre/re.c
+cortex-m4  (thumb2, gcc 10.3): text=1722 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=1772 data=0 bss=0
+x86-64     (clang 21):         text=4272 data=0
+-- cortex-m4 per-function (bytes):
+     656  .text.regexp
+     392  .text.tonfa
+     178  .text.domatch
+     122  .text.re_compile
+     122  .text.charmatch
+      58  .text.addstate
+      48  .text.searchclass
+      42  .text.re_match
+      36  .text.transition.isra.0
+      36  .text.freere
+      20  .text.re_free
+      12  .text.classcmp
+

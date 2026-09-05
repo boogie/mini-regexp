@@ -1,0 +1,23 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/tiny-rex/src/trex.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/tiny-rex/src/trex.c
+cortex-m4  (thumb2, gcc 10.3): text=2660 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=2570 data=0 bss=0
+x86-64     (clang 21):         text=5064 data=0
+-- cortex-m4 per-function (bytes):
+     700  .text.trex_element
+     672  .text.trex_matchnode
+     404  .text.trex_matchcclass
+     224  .text.trex_charnode
+     114  .text.trex_searchrange
+     110  .text.trex_list
+     110  .text.trex_compile
+      76  .text.trex_parsenumber
+      74  .text.trex_newnode
+      44  .text.trex_match
+      34  .text.trex_search
+      34  .text.trex_free
+      30  .text.trex_getsubexp
+      24  .text.trex_expect
+       6  .text.trex_error
+       4  .text.trex_getsubexpcount
+

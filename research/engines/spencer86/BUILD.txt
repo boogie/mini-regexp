@@ -1,0 +1,24 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regexp.old/regexp.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regexp.old
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/regexp.old/regexp.c
+cortex-m4  (thumb2, gcc 10.3): text=2751 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=2759 data=0 bss=0
+x86-64     (clang 21):         text=5051 data=0
+-- cortex-m4 per-function (bytes):
+     932  .text.regbranch
+     500  .text.regmatch
+     248  .text.regcomp
+     240  .text.reg
+     168  .rodata.regbranch.str1.1
+     152  .text.regexec
+      75  .rodata.regmatch.str1.1
+      69  .rodata.reg.str1.1
+      53  .rodata.regcomp.str1.1
+      52  .text.regtry
+      52  .text.reginsert
+      48  .text.regtail
+      42  .rodata.regexec.str1.1
+      34  .text.regnode
+      30  .text.regoptail
+      30  .text.regnext
+      26  .text.regc
+

@@ -1,0 +1,10 @@
+# Duktape 2.7.0 regexp engine size, Cortex-M4 -Os (PROTOCOL measure.sh), measured from the release tarball's
+# src-separate/ files (https://duktape.org/duktape-2.7.0.tar.xz). tools/configure.py of 2.7.0 fails under python3
+# ("TypeError: cannot use a string pattern on a bytes-like object") and git-master configure needs node src-tools,
+# so the with/without-DUK_USE_REGEXP_SUPPORT whole-engine delta was NOT measured; per-file numbers below instead.
+D=/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/duktape/duktape-2.7.0
+$S/tools/measure.sh $D/src-separate/duk_regexp_compiler.c -I$D/src-separate   # text=2786
+$S/tools/measure.sh $D/src-separate/duk_regexp_executor.c -I$D/src-separate   # text=2011
+$S/tools/measure.sh $D/src-separate/duk_bi_regexp.c       -I$D/src-separate   # text=794 (RegExp builtin glue)
+$S/tools/measure.sh $D/src-separate/duk_unicode_support.c -I$D/src-separate   # see measure.log for duk_unicode_re_* functions
+$S/tools/measure.sh $D/src-separate/duk_unicode_tables.c  -I$D/src-separate   # see measure.log for duk_unicode_re_ranges_* tables

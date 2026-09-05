@@ -1,0 +1,18 @@
+# slre (cesanta/slre) build + measurement log
+# All paths relative to $S = /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad
+# Source: https://github.com/cesanta/slre  commit b92b363aa7a7814b8d224f1007503802d702872a (2026-08-26 "Fix typo in README documentation reference")
+cd $S/engines/slre
+git clone --depth 1 https://github.com/cesanta/slre.git src
+# engine core = src/slre.c (+ src/slre.h); unit_test.c is NOT measured. slre.c has no debug/test code when SLRE_DEBUG is undefined (DBG() expands to nothing).
+sh $S/tools/measure.sh src/slre.c            # -> measure_slre.txt  (cortex-m4 text=1946 data=0 bss=0; m0+ text=2054; x86-64 text=3713)
+# Cortex-M4 object for nm -u and stack usage (same flags as measure.sh):
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -fstack-usage -c src/slre.c -o slre_m4.o
+arm-none-eabi-nm -u slre_m4.o                # -> _ctype_ strchr strlen
+arm-none-eabi-nm -S --size-sort slre_m4.o    # per-function sizes
+cat slre_m4.su                               # stack: slre_match 2480, bar 88, doh 40, match_op 8, get_op_len 8, op_len 0
+# ARM sizeof(struct regex_info) = 0x974 = 2420 bytes (bracket_pair 16, branch 8):
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -Os -w -c szarm.c -o szarm.o && arm-none-eabi-nm -S szarm.o | grep sz_
+# host driver (CLI contract from PROTOCOL.md) + differential test:
+cc -O1 -Wall -Wextra -std=c99 -o driver driver.c src/slre.c
+python3 $S/tools/difftest.py ./driver $S/tools/corpus_seed1.jsonl 3000 > difftest_full.txt   # cases=2088 checked=2081 pass=1089 fail=992 timeouts=0
+python3 classify2.py $S > classify2_out.txt   # failure classification by construct

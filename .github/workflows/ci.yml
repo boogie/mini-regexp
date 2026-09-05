@@ -1,0 +1,66 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  size-and-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: toolchains
+        run: sudo apt-get update && sudo apt-get install -y gcc-arm-none-eabi clang python3
+      - name: size gate (Cortex-M4, -Os)
+        run: |
+          tools/measure.sh src/re.c | tee size.txt
+          text=$(grep -m1 '^cortex-m4' size.txt | sed 's/.*text=\([0-9]*\).*/\1/')
+          echo "cortex-m4 text=$text"
+          test "$text" -le 600
+          ! grep -q $'\tdynamic$' size.txt
+          u4=$(awk '$0=="-- cortex-m4 undefined symbols:"{f=1;next} /^-- /{f=0} f' size.txt)
+          if [ -n "$u4" ]; then echo "undefined symbols on cortex-m4: $u4"; exit 1; fi
+          u0=$(awk '$0=="-- cortex-m0plus undefined symbols:"{f=1;next} /^-- /{f=0} f' size.txt)
+          if [ -n "$u0" ]; then
+            echo "::warning::cortex-m0plus pulls libgcc helpers: $u0"
+            echo "  Thumb-1 emits a switch jump table; -fno-jump-tables removes it for +48 B."
+            echo "  Open decision, see DECISIONS.md."
+          fi
+      - name: compiler and VM tests
+        run: |
+          node --check tools/re_compile.js
+          node --check tools/annotate_corpus.js
+          node tools/test_nullable_repeat.js
+          cc -std=c99 -Wall -Wextra -Werror -O1 -fsanitize=address,undefined \
+            -o tinyre_vm_adapter research/spikes/compiler-vm/corpus_adapter.c src/re.c
+          TINYRE_VM_ADAPTER="$PWD/tinyre_vm_adapter" node research/spikes/compiler-vm/test.js
+          cc -std=c99 -Wall -Wextra -Werror -O1 -fsanitize=address,undefined \
+            -o test_tinyre_vm research/spikes/compiler-vm/test_vm.c src/re.c
+          ./test_tinyre_vm
+          cc -std=c99 -Wall -Wextra -Werror -O1 -fsanitize=address,undefined \
+            -o test_c_compiler research/spikes/c-compiler/test.c \
+            research/spikes/c-compiler/re_compile.c
+          ./test_c_compiler
+          cc -std=c99 -Wall -Wextra -Werror -O2 -o tinyre_c_compiler \
+            research/spikes/c-compiler/driver.c research/spikes/c-compiler/re_compile.c
+          TINYRE_C_COMPILER="$PWD/tinyre_c_compiler" node research/spikes/c-compiler/test.js
+      - name: corpus annotations
+        run: |
+          node tools/annotate_corpus.js tests/corpus/corpus_wb_seed1.jsonl tests/corpus/corpus_wb_seed7.jsonl
+          git diff --exit-code -- tests/corpus
+      - name: differential tests
+        run: |
+          cc -std=c99 -Wall -Wextra -Werror -O2 \
+            -o tinyre_vm_adapter research/spikes/compiler-vm/corpus_adapter.c src/re.c
+          TINYRE_VM_ADAPTER="$PWD/tinyre_vm_adapter" \
+            python3 tools/difftest.py --batch research/spikes/compiler-vm/corpus_adapter.js \
+            tests/corpus/corpus_wb_seed1.jsonl
+          TINYRE_VM_ADAPTER="$PWD/tinyre_vm_adapter" \
+            python3 tools/difftest.py --batch research/spikes/compiler-vm/corpus_adapter.js \
+            tests/corpus/corpus_wb_seed7.jsonl
+      - name: differential tests without tail sharing
+        run: |
+          # The tail-sharing pass must not change what a program matches, only its size.
+          # Both corpora have to stay green with the pass disabled as well.
+          for corpus in tests/corpus/corpus_wb_seed1.jsonl tests/corpus/corpus_wb_seed7.jsonl; do
+            TINYRE_NO_TAIL=1 TINYRE_VM_ADAPTER="$PWD/tinyre_vm_adapter" \
+              python3 tools/difftest.py --batch research/spikes/compiler-vm/corpus_adapter.js "$corpus"
+          done

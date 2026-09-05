@@ -1,0 +1,175 @@
+# tiny-regex-c build/measure log  (commit f2632c6d9ed25272987471cdb8b70395c2460bdb, 2024-10-25)
+# git clone --depth 1 https://github.com/kokke/tiny-regex-c src
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/tiny-regex-c/src/re.c -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/tiny-regex-c/src
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/tiny-regex-c/src/re.c
+cortex-m4  (thumb2, gcc 10.3): text=1532 data=0 bss=280
+cortex-m0+ (thumb1, gcc 10.3): text=1482 data=0 bss=280
+x86-64     (clang 21):         text=2645 data=520
+-- cortex-m4 per-function (bytes):
+     348  .text.re_compile
+     312  .text.matchpattern
+     216  .text.matchcharclass
+     156  .text.matchone
+     144  .text.re_print
+     140  .rodata.str1.1
+      80  .text.re_matchp
+      68  .rodata
+      28  .text.matchalphanum
+      22  .text.re_match
+      18  .rodata.re_print.str1.1
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/tiny-regex-c/analyze_m4.sh
+-- arm-none-eabi-nm -u re_m4.o (external deps):
+         U _ctype_
+         U memcpy
+         U printf
+         U putchar
+-- arm-none-eabi-nm -S --size-sort re_m4.o:
+00000000 00000016 T re_match
+00000000 0000001c t matchalphanum
+00000000 00000028 b ccl_buf.0
+00000000 00000050 T re_matchp
+00000000 00000090 T re_print
+00000000 0000009c t matchone
+00000000 000000d8 t matchcharclass
+00000000 000000f0 b re_compiled.1
+00000000 00000138 t matchpattern
+00000000 0000015c T re_compile
+-- relocations that reference .rodata* (which function owns the tables):
+RELOCATION RECORDS FOR [.text.matchalphanum]:
+RELOCATION RECORDS FOR [.text.matchcharclass]:
+RELOCATION RECORDS FOR [.text.matchone]:
+RELOCATION RECORDS FOR [.text.matchpattern]:
+RELOCATION RECORDS FOR [.text.re_matchp]:
+RELOCATION RECORDS FOR [.text.re_compile]:
+RELOCATION RECORDS FOR [.text.re_match]:
+RELOCATION RECORDS FOR [.text.re_print]:
+00000080 R_ARM_ABS32       .rodata
+00000084 R_ARM_ABS32       .rodata.re_print.str1.1
+00000088 R_ARM_ABS32       .rodata.re_print.str1.1
+0000008c R_ARM_ABS32       .rodata.re_print.str1.1
+RELOCATION RECORDS FOR [.rodata]:
+00000000 R_ARM_ABS32       .rodata.str1.1
+00000004 R_ARM_ABS32       .rodata.str1.1
+00000008 R_ARM_ABS32       .rodata.str1.1
+0000000c R_ARM_ABS32       .rodata.str1.1
+00000010 R_ARM_ABS32       .rodata.str1.1
+00000014 R_ARM_ABS32       .rodata.str1.1
+00000018 R_ARM_ABS32       .rodata.str1.1
+0000001c R_ARM_ABS32       .rodata.str1.1
+00000020 R_ARM_ABS32       .rodata.str1.1
+00000024 R_ARM_ABS32       .rodata.str1.1
+00000028 R_ARM_ABS32       .rodata.str1.1
+0000002c R_ARM_ABS32       .rodata.str1.1
+00000030 R_ARM_ABS32       .rodata.str1.1
+00000034 R_ARM_ABS32       .rodata.str1.1
+00000038 R_ARM_ABS32       .rodata.str1.1
+0000003c R_ARM_ABS32       .rodata.str1.1
+00000040 R_ARM_ABS32       .rodata.str1.1
+-- newlib ctype.h macros:
+90:#define __ctype_lookup(__c) ((__CTYPE_PTR+sizeof(""[__c]))[(int)(__c)])
+121:#define __ctype_lookup_l(__c,__l) ((__locale_ctype_ptr_l(__l)+sizeof(""[__c]))[(int)(__c)])
+-- cross-check: --gc-sections link keeping only what re_compile+re_matchp reach (ctype table stubbed):
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.10/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld: /var/folders/r7/d9gygvn10c304g1wbzbd87780000gn/T//ccOkAJsl.o: in function `matchalphanum':
+re.c:(.text.matchalphanum+0x18): undefined reference to `_ctype_'
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.10/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld: /var/folders/r7/d9gygvn10c304g1wbzbd87780000gn/T//ccOkAJsl.o: in function `matchcharclass':
+re.c:(.text.matchcharclass+0xd4): undefined reference to `_ctype_'
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.10/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld: /var/folders/r7/d9gygvn10c304g1wbzbd87780000gn/T//ccOkAJsl.o: in function `matchone':
+re.c:(.text.matchone+0x98): undefined reference to `_ctype_'
+collect2: error: ld returned 1 exit status
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/tiny-regex-c/analyze_m4b.sh
+-- which functions reference memcpy/printf/putchar/_ctype_:
+   1 [.text.matchalphanum]: _ctype_
+   1 [.text.matchcharclass]: _ctype_
+   1 [.text.matchone]: _ctype_
+   1 [.text.re_print]: memcpy
+   3 [.text.re_print]: printf
+   3 [.text.re_print]: putchar
+-- newlib _ctype_ table size (from libc.a of this toolchain):
+/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.10/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a
+00000000 00000101 R _ctype_
+         U _ctype_
+-- cross-check: --gc-sections link keeping only what re_compile+re_matchp reach (_ctype_ stubbed as 257 B):
+   text	   data	    bss	    dec	    hex	filename
+   1427	      0	    281	   1708	    6ac	gc.elf
+00008474 0000001c T _start
+00008000 0000001c t matchalphanum
+00018594 00000028 b ccl_buf.0
+000082c8 00000050 T re_matchp
+000080f4 0000009c t matchone
+0000801c 000000d8 t matchcharclass
+000185bc 000000f0 b re_compiled.1
+00008492 00000101 R _ctype_
+00008190 00000138 t matchpattern
+00008318 0000015c T re_compile
+
+# --- host driver builds (plain cc = Apple clang 21, arm64, char is SIGNED here) ---
+$ cc -O1 -w -Isrc  -o driver driver.c src/re.c
+$ cc -O1 -w -Isrc -funsigned-char -o driver_uc driver.c src/re.c
+$ cc -O1 -w -Isrc -DRE_DOT_MATCHES_NEWLINE=0 -o driver_dot0 driver.c src/re.c
+$ cc -O1 -w -Isrc -funsigned-char -DRE_DOT_MATCHES_NEWLINE=0 -o driver_uc_dot0 driver.c src/re.c
+-- cortex-m0+ per-section:
+     338  .text.matchpattern
+     312  .text.re_compile
+     216  .text.matchcharclass
+     140  .rodata.str1.1
+     132  .text.re_print
+     128  .text.matchone
+      82  .text.re_matchp
+      68  .rodata
+      28  .text.matchalphanum
+      20  .text.re_match
+      18  .rodata.re_print.str1.1
+-- x86-64 sections (size -m):
+Segment : 3176
+	Section (__TEXT, __text): 2419
+	Section (__DATA, __bss): 520 (zerofill)
+	Section (__TEXT, __const): 208
+	Section (__TEXT, __cstring): 18
+	total 3165
+total 3176
+-- x86-64 symbols (nm -n, sizes = deltas):
+                 U __DefaultRuneLocale
+                 U ___maskrune
+                 U _printf
+                 U _putchar
+0000000000000000 T _re_match
+0000000000000024 T _re_matchp
+00000000000000a9 T _re_compile
+0000000000000379 t _matchpattern
+0000000000000552 T _re_print
+0000000000000638 t _matchone
+0000000000000750 t _matchcharclass
+000000000000091e t _matchalphanum
+0000000000000974 s l_.str
+000000000000097b s l_.str.1
+000000000000097f s l_.str.2
+0000000000000985 s l_.str.3
+0000000000000989 s l_.str.4
+0000000000000996 s l_.str.5
+000000000000099b s l_.str.6
+00000000000009a0 s l_.str.7
+00000000000009a5 s l_.str.8
+00000000000009b0 s l_.str.9
+00000000000009bf s l_.str.10
+00000000000009c5 s l_.str.11
+00000000000009cf s l_.str.12
+00000000000009d5 s l_.str.13
+00000000000009df s l_.str.14
+00000000000009ea s l_.str.15
+00000000000009f9 s l_.str.16
+0000000000000a00 s l___const.re_print.types.rel
+0000000000000a60 b _re_compile.re_compiled
+0000000000000c40 b _re_compile.ccl_buf
+
+# --- differential test (corpus_seed1.jsonl, Python re oracle) ---
+$ python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py ./driver /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/corpus_seed1.jsonl 0     # plain cc build (PRIMARY)
+#   -> cases=2088 checked=2081 pass=1224 fail=857 timeouts=0
+$ python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py ./driver_uc /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/corpus_seed1.jsonl 0  # -funsigned-char (matches ARM target char)
+#   -> pass=1231 fail=850
+$ python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py ./driver_dot0 ... # -DRE_DOT_MATCHES_NEWLINE=0 -> pass=1226 fail=855
+$ python3 /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/difftest.py ./driver_uc_dot0 ... # both -> pass=1233 fail=848
+$ python3 classify.py ./driver /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/corpus_seed1.jsonl ./driver_uc   # -> classify_primary.txt, driver.classify.json
+$ time ./driver 'a*a*a*a*a*a*a*a*b' 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'   # 1.97 s -> exponential backtracking

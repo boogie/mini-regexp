@@ -1,0 +1,371 @@
+{
+ "label": "verify:claims",
+ "date": "2026-09-04",
+ "verdicts": [
+  {
+   "claim": "MicroPython re/ure engine is lib/re1.5 (compilecode.c, recursiveloop.c, charclass.c) + extmod/modre.c glue",
+   "verdict": "confirmed",
+   "url": "https://github.com/micropython/micropython/blob/master/extmod/modre.c",
+   "correction": "modre.c:44 '#include \"lib/re1.5/re1.5.h\"', :237/278/338 call re1_5_recursiveloopprog; lib/re1.5/ holds exactly those files (local clone 7f8aa2d, 2026-09-04)"
+  },
+  {
+   "claim": "py/mpconfig.h:2003 '#define MICROPY_PY_RE (MICROPY_CONFIG_ROM_LEVEL_AT_LEAST_EXTRA_FEATURES)'; ROM levels documented at :86-92 with CORE='constrained flash, e.g. STM32L072', BASIC='small on-device flash, e.g. STM32F411', EXTRA='medium on-device flash'",
+   "verdict": "confirmed",
+   "url": "https://github.com/micropython/micropython/blob/master/py/mpconfig.h",
+   "correction": "exact line 2003; level comments at lines 85-95 (EXTRA = 'Enable convenience features (medium on-device flash, e.g. STM32F405)')"
+  },
+  {
+   "claim": "ports/nrf/mpconfigport.h:33-45 puts nRF51822+SoftDevice at MINIMUM ('less flash/ram available') and nRF52832 at BASIC (no re); nRF52840 EXTRA",
+   "verdict": "confirmed",
+   "url": "https://github.com/micropython/micropython/blob/master/ports/nrf/mpconfigport.h",
+   "correction": "comment reads 'If SoftDevice is used there is less flash/ram available for application'"
+  },
+  {
+   "claim": "MicroPython issue #3403 pfalcon: 'ure's idea is to be minimal' / re-pcre 'there're no immediate size constraints there'",
+   "verdict": "confirmed",
+   "url": "https://github.com/micropython/micropython/issues/3403#issuecomment-340692416",
+   "correction": "verbatim via GitHub API; issue opened by abencomo 2017-10-31 (named groups), closed 2022 for inactivity"
+  },
+  {
+   "claim": "re1.5 README: 'sticking to the minimal code size and memory use', 'intended for use in highly constrained, e.g. embedded, environments'",
+   "verdict": "confirmed",
+   "url": "https://github.com/pfalcon/re1.5"
+  },
+  {
+   "claim": "re1.5 engine measures 1566 B text on Cortex-M4 -Os (compilecode 1080 + recursiveloop 336 + charclass 150)",
+   "verdict": "confirmed",
+   "url": "https://github.com/micropython/micropython/tree/master/lib/re1.5",
+   "correction": "re-run of $S/tools/measure.sh reproduces 1080/336/150"
+  },
+  {
+   "claim": "CircuitPython uses the 'same re1.5', 1566 B",
+   "verdict": "refuted",
+   "url": "https://github.com/adafruit/circuitpython/blob/main/lib/re1.5/compilecode.c",
+   "correction": "CircuitPython's lib/re1.5 is a modified copy (compilecode.c +248/-214 lines vs MicroPython, e.g. adds an unescape() for \\a\\b\\f\\n\\r\\t\\v; re1.5.h also differs). Measured Cortex-M4 -Os: compilecode 1190 + recursiveloop 336 + charclass 150 = 1676 B (+110 B, 7%). Same engine family, not the same bytes."
+  },
+  {
+   "claim": "py/circuitpy_mpconfig.mk:512 'CIRCUITPY_RE ?= $(CIRCUITPY_FULL_BUILD)'; :55-56 'Smaller builds can be forced for resource constrained chips (typically SAMD21s without external flash) by setting CIRCUITPY_FULL_BUILD=0'",
+   "verdict": "confirmed",
+   "url": "https://github.com/adafruit/circuitpython/blob/main/py/circuitpy_mpconfig.mk",
+   "correction": "exact lines 512 and 55-57 (clone 9209e83, 2026-09-03)"
+  },
+  {
+   "claim": "ports/atmel-samd/mpconfigport.mk:24-49 'Some of these are on by default with CIRCUITPY_FULL_BUILD, but don't fit in 256kB of flash' ... 'CIRCUITPY_RE ?= 0' inside ifeq samd21; blues_cygnet:67 'CIRCUITPY_RE = 0'; 55 boards FULL_BUILD=0; 75 samd21 boards",
+   "verdict": "confirmed",
+   "url": "https://github.com/adafruit/circuitpython/blob/main/ports/atmel-samd/mpconfigport.mk",
+   "correction": "recounted: 55 mpconfigboard.mk files with CIRCUITPY_FULL_BUILD = 0, 75 with CHIP_FAMILY = samd21"
+  },
+  {
+   "claim": "Berry in Tasmota: be_re_lib.c 'Regex using re1.5', #include ../../re1.5/re1.5.h; berry-lang/berry core has no regex at all",
+   "verdict": "confirmed",
+   "url": "https://github.com/arendst/Tasmota/blob/development/lib/libesp32/berry/default/be_re_lib.c",
+   "correction": "header 'Regex using re1.5' + include verified on GitHub and in local copy; grep of berry-lang/berry src/ and default/ (clone 6e6e621) finds 0 regex/re1.5 mentions"
+  },
+  {
+   "claim": "Tasmota re1.5 copy measures 1102+336+126 = 1564 B",
+   "verdict": "confirmed",
+   "url": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/src/tasmota-berry/re1.5/",
+   "correction": "re-measured 1102/336/126 with -DTASMOTA"
+  },
+  {
+   "claim": "Espruino src/jswrap_regexp.c is 476 lines; measures 2267 B (matchhere 560, matchcharacter 536, exec 464, constructor 308)",
+   "verdict": "confirmed",
+   "url": "https://github.com/espruino/Espruino/blob/master/src/jswrap_regexp.c",
+   "correction": "wc -l = 476; re-measured 2267 with identical per-function sizes (clone bffc6d0, 2026-09-04)"
+  },
+  {
+   "claim": "src/jsutils.h:41-58 '#ifdef SAVE_ON_FLASH ... #define ESPR_NO_REGEX 1 ... #define ESPR_NO_REGEX_OPTIMISE 1'; jsparse.c:1826 'RegEx not supported in this build'",
+   "verdict": "confirmed",
+   "url": "https://github.com/espruino/Espruino/blob/master/src/jsutils.h",
+   "correction": "block is lines 41-61 (ESPR_NO_REGEX at :52, ESPR_NO_REGEX_OPTIMISE at :59); jsparse.c message is at line 1827 in current master (off by one)"
+  },
+  {
+   "claim": "15 of 71 Espruino boards/*.py set SAVE_ON_FLASH (BANGLEJS, ESPRUINOBOARD, MICROBIT1/2, NRF51822DK, NUCLEOF401RE/F411RE, PICO_R1_3, PIXLJS, STM32VLDISCOVERY...), i.e. compile RegExp out",
+   "verdict": "refuted",
+   "url": "https://github.com/espruino/Espruino/tree/master/boards",
+   "correction": "Only 4 of 71 board files set 'SAVE_ON_FLASH=1': HYSTM32_28.py:30, MICROBIT1.py:35, NRF51822DK.py:35, STM32VLDISCOVERY.py:28. The other 11 files that merely contain the string set only -DSAVE_ON_FLASH_MATH or -DESPR_SAVE_ON_FLASH_JIT (NUCLEOF401RE/F411RE/F767ZI have even that commented out). Makefile:340 adds -DSAVE_ON_FLASH only 'ifdef SAVE_ON_FLASH' (the STM32.make hack applies to the bootloader build only). So ESPR_NO_REGEX (jsutils.h:52) fires on 4 boards; BANGLEJS, ESPRUINOBOARD, MICROBIT2, PICO_R1_3, PIXLJS keep RegExp. 15 -> 4."
+  },
+  {
+   "claim": "boards/PICO_R1_3.py:51 '-DESPR_NO_REGEX_OPTIMISE=1 # strip out regex optimisations to free some flash space'; ESP8266_BOARD/MDBT42Q/PIXLJS '# save some storage space'",
+   "verdict": "confirmed",
+   "url": "https://github.com/espruino/Espruino/blob/master/boards/PICO_R1_3.py",
+   "correction": "exact; also PIXLJS_WIZ.py:67. Note these boards strip the optimisation only, RegExp itself stays in"
+  },
+  {
+   "claim": "Espruino 1v95 release (discussions/149): RegExp 'on all official Espruino boards (and many others, if there's enough memory)'",
+   "verdict": "confirmed",
+   "url": "https://github.com/orgs/espruino/discussions/149",
+   "correction": "verbatim: 'They're here - finally! On all official Espruino boards (and many others, if there's enough memory)'"
+  },
+  {
+   "claim": "Gordon Williams (discussions/166): 'not actually that much more code (it's not a 100% full-featured regex, but should be enough for basic stuff)'",
+   "verdict": "confirmed",
+   "url": "https://github.com/orgs/espruino/discussions/166",
+   "correction": "verbatim, by gfwilliams"
+  },
+  {
+   "claim": "Duktape 2.7.0 regexp = duk_regexp_compiler.c 2786 + duk_regexp_executor.c 2011 + duk_bi_regexp.c 794 = 5591 B; plus duk_unicode_re_* helpers ~250 B and re_canon_bitmap 256 B (~6.1 kB); whole-engine delta not built",
+   "verdict": "confirmed",
+   "url": "https://duktape.org/duktape-2.7.0.tar.xz",
+   "correction": "2786/2011/794 re-measured from src-separate; the ~250 B helper and 256 B bitmap figures are NOT in measure.log (which only records the failed whole-engine builds) - that part is unverified"
+  },
+  {
+   "claim": "Duktape DUK_USE_REGEXP_SUPPORT.yaml tags 'ecmascript, lowmemory', 'Enable support for regular expressions (recommended)'; low-memory.rst 'Duktape compiles to around 200-210kB of code (x86)' and 'If you don't need regexp support, use: #undef DUK_USE_REGEXP_SUPPORT'; no kB figure for regexp",
+   "verdict": "confirmed",
+   "url": "https://github.com/svaarala/duktape/blob/master/config/config-options/DUK_USE_REGEXP_SUPPORT.yaml",
+   "correction": "yaml verbatim; low-memory.rst lines 20 and 233-235 (clone 50af773)"
+  },
+  {
+   "claim": "QuickJS libregexp.c is 3448 lines, 13334 B text; libunicode.c 49046 B; always compiled in",
+   "verdict": "confirmed",
+   "url": "https://github.com/bellard/quickjs/blob/master/libregexp.c",
+   "correction": "wc -l 3448 (clone 04be246, 2026-06-16); re-measured 13334 / 49046; no REGEXP config gate in quickjs.c/quickjs.h/Makefile"
+  },
+  {
+   "claim": "mquickjs: whole mquickjs.c 68089 B; regexp core lre_*/re_* 6480 B + js_regexp* 905 B = 7385 B; README 'The whole engine requires about 100 kB of ROM (ARM Thumb-2 code) including the C library'",
+   "verdict": "confirmed",
+   "url": "https://github.com/bellard/mquickjs",
+   "correction": "re-measured 68089; per-function sum lre_/re_ = 6480, js_regexp* = 905; README quote verbatim; README also states regexp 'case folding only works with ASCII characters' and '/./ matches a unicode code point'"
+  },
+  {
+   "claim": "JerryScript regexp objects 13873 B of 253707 B jerry-core text (MinSizeRel, stm32f4 toolchain); -DJERRY_BUILTIN_REGEXP=0 fails to build at ecma-builtin-regexp-string-iterator-prototype.c:168",
+   "verdict": "confirmed",
+   "url": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/jerryscript/BUILD.txt",
+   "correction": "from the recorded build logs (not rebuilt): build1 exit 0, build0 exit 2 with first errors at ecma-builtin-regexp-string-iterator-prototype.c:64/69 (undeclared ECMA_OBJECT_CLASS_REGEXP_STRING_ITERATOR / ecma_regexp_string_iterator_t), i.e. same file, earlier line than :168"
+  },
+  {
+   "claim": "JerryScript docs list JERRY_REGEXP_STRICT_MODE / JERRY_REGEXP_DUMP_BYTE_CODE (01.CONFIGURATION.md) and JERRY_BUILTIN_REGEXP (profiles/README.md) without size numbers",
+   "verdict": "confirmed",
+   "url": "https://github.com/jerryscript-project/jerryscript/blob/master/docs/01.CONFIGURATION.md",
+   "correction": "01.CONFIGURATION.md:129-141; jerry-core/profiles/README.md:80-81; no kB figures found"
+  },
+  {
+   "claim": "mJS README: 'On 32-bit ARM mJS engine takes about 50k of flash memory, and less than 1k of RAM'; no explicit regex quote",
+   "verdict": "confirmed",
+   "url": "https://github.com/cesanta/mjs",
+   "correction": "size quote verbatim (README.md:15). Correction to 'no explicit regex quote': the README does name RegExp among dropped features: 'No standard library. No String, Number, RegExp, Date, Function, etc.'"
+  },
+  {
+   "claim": "V7 README: 'Compiled static size is in 40k - 120k range'; features.md '-DV7_BUILD_PROFILE=1 - Build minimal configuration: disable Date, UTF8, RegExp'",
+   "verdict": "confirmed",
+   "url": "https://github.com/cesanta/v7",
+   "correction": "README.md:11 verbatim; docs/build-options/features.md:5 verbatim; V7 is deprecated in favour of mJS"
+  },
+  {
+   "claim": "slre.c measures 1946 B text (Cortex-M4 -Os)",
+   "verdict": "confirmed",
+   "url": "https://github.com/cesanta/slre",
+   "correction": "re-measured 1946"
+  },
+  {
+   "claim": "Lua lstrlib.c 9731 B whole; pattern functions + rodata ~2995 B; PiL 20.1: 'A typical implementation of POSIX regexp takes more than 4,000 lines of code. This is bigger than all Lua standard libraries together. ... pattern matching in Lua has less than 500 lines'",
+   "verdict": "confirmed",
+   "url": "https://www.lua.org/pil/20.1.html",
+   "correction": "re-measured 9731; pattern/match/gsub/gmatch/find function+rodata sum = 3001 B (my selection); PiL quotes verbatim"
+  },
+  {
+   "claim": "Squirrel sqstdrex.cpp measures 3144 B (T-Rex)",
+   "verdict": "confirmed",
+   "url": "https://github.com/albertodemichelis/squirrel/blob/master/sqstdlib/sqstdrex.cpp",
+   "correction": "re-measured 3144"
+  },
+  {
+   "claim": "Jim Tcl jimregexp.c measures 5166 B and supports UTF-8 and {n,m}",
+   "verdict": "confirmed",
+   "url": "https://github.com/msteveb/jimtcl/blob/master/jimregexp.c",
+   "correction": "re-measured 5166 (-DJIM_REGEXP); 25 utf8 references and a case '{' brace parser at :213"
+  },
+  {
+   "claim": "Wren issue #120 (2015): edsrzf 'Regular expressions are probably out, since they'd either require a dependency or a complicated implementation'; munificent 'I do worry it would add a lot of code to Wren, but maybe it won't be too bad'; #933 (2021) still open",
+   "verdict": "confirmed",
+   "url": "https://github.com/wren-lang/wren/issues/120#issuecomment-70418523",
+   "correction": "both quotes verbatim (opening post 2015-01-17, comment 70418523); #120 closed; #933 '[Feature Request] Regular expressions' opened 2021-03-04 by txgruppi, still open, no size discussion"
+  },
+  {
+   "claim": "Janet peg.c measures 12541 B text + 48 B data; docs: 'Janet has no built-in regex module because PEGs offer a superset of the functionality of regular expressions.'",
+   "verdict": "confirmed",
+   "url": "https://janet-lang.org/docs/peg.html",
+   "correction": "re-measured 12541/48; quote verbatim"
+  },
+  {
+   "claim": "uLisp: no evidence (ulisp.com unreachable: ECONNREFUSED)",
+   "verdict": "refuted",
+   "url": "http://www.ulisp.com/show?3L",
+   "correction": "ulisp.com is reachable now (HTTP 200). The Language reference page (show?3L, 143 kB) contains 0 occurrences of 'regex'/'regular expression', so the substantive conclusion ('no regex, no stated reason') stands; only the 'unreachable' note is stale"
+  },
+  {
+   "claim": "Toit: 'port of Dartino JS-compatible regexps written in Toit'; toit/lib has no regexp",
+   "verdict": "confirmed",
+   "url": "https://github.com/erikcorry/toit-dartino-regexp",
+   "correction": "README: 'a work-in-progress port of the Dartino regexps (JavaScript compatible) to Toit', 'reasonably compatible' but 'very slow' (Erik Corry). It is a third-party package (pkg.toit.io), not part of toitlang/toit: grep of toit/lib and toit/src (clone 8211273) finds 0 regexp hits"
+  },
+  {
+   "claim": "AtomVM issue quotes tiny-regex-c 'text 2404 ... re.o'; UncleGrumpy 'looks perfect for microcontrollers ... attractive on any constrained environment'; bettio 'doesn't seem to support utf8, and we do use utf8', prefers pure-Erlang NFA 'in a reasonable amount of code'; petermm 'a substantial part of PCRE2 on top of some minimal regex lib like tiny-regex-c, for a few kBs'",
+   "verdict": "confirmed",
+   "url": "https://github.com/atomvm/AtomVM/issues/1636",
+   "correction": "issue #1636 'Regex support' (jgonet, 2025-04-24, open). UncleGrumpy comment 3555550714 quotes the tiny-regex-c README size table (text 2404); bettio comment 3996725034 verbatim: 'in a reasonsable amount of code we can compile the regex to a NFA' (sic); petermm comment 4000342697 verbatim"
+  },
+  {
+   "claim": "TinyGo docs table: regexp importable yes, passes tests no; regexp/syntax passes",
+   "verdict": "confirmed",
+   "url": "https://tinygo.org/docs/reference/lang-support/stdlib/",
+   "correction": "regexp: importable yes / passes tests no ('FAIL regexp 1.109s'); regexp/syntax: yes / yes"
+  },
+  {
+   "claim": "regex-lite README: 'regex-lite 0.1.0: 0.73s compile time, 94KB relative size increase' vs 'regex 1.9.0: 1.93s compile time, 565KB relative size increase'; 'primary purpose ... unhappy with the binary size and compilation time of the primary regex crate'",
+   "verdict": "confirmed",
+   "url": "https://github.com/rust-lang/regex/blob/master/regex-lite/README.md",
+   "correction": "verbatim (README.md:90, :103-104)"
+  },
+  {
+   "claim": "mruby doc language.md:187: 'Regular expressions require an external gem such as mruby-regexp-pcre or mruby-onig-regexp. Without a regexp gem, Regexp literals (/pattern/) are not available.'",
+   "verdict": "confirmed",
+   "url": "https://github.com/mruby/mruby/blob/master/doc/guides/language.md",
+   "correction": "file is doc/guides/language.md, line 187 (clone 50514b2)"
+  },
+  {
+   "claim": "PicoC README: 'core C source code is around 3500 lines', 'only takes a few k of code space'",
+   "verdict": "confirmed",
+   "url": "https://gitlab.com/zsaleeba/picoc/-/raw/master/README",
+   "correction": "README lines 8-10 verbatim ('The core C source code is around 3500 lines of code' / 'it only takes a few k of code space'); the GitHub repo is a 92-byte stub pointing to GitLab"
+  },
+  {
+   "claim": "Zerynth, Pawn, AngelScript, Gravity, Lily, Ring, Elk: 'no evidence' entries",
+   "verdict": "unverified",
+   "url": "https://github.com/cesanta/elk",
+   "correction": "not checked in this pass (no primary source fetched); treated as unverified rather than wrong"
+  },
+  {
+   "claim": "Reference sizes (Cortex-M4 -Os text): tiny-regex-c 1532; re1.5 1566; slre 1946; Espruino 2267; Lua ~2995; T-Rex 3144; Jim 5166; Duktape 5591; mquickjs 7385; Janet PEG 12541; QuickJS 13334 (+49046); JerryScript 13873",
+   "verdict": "confirmed",
+   "url": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/survey-refs/BUILD.txt",
+   "correction": "every number except JerryScript re-run today with measure.sh and reproduced exactly; JerryScript taken from the recorded cross-build log"
+  },
+  {
+   "claim": "Engines are '1-5% of their hosts' (Duktape ~200 kB, mquickjs 68-100 kB, JerryScript 254 kB)",
+   "verdict": "refuted",
+   "url": "https://github.com/bellard/mquickjs",
+   "correction": "Using the survey's own numbers: Duktape ~6.1/205 kB = 3%; JerryScript 13873/253707 = 5.5%; mquickjs 7385/68089 = 10.8% (7.4% of the README's 100 kB incl. libc). Range is 3-11%, not 1-5%"
+  },
+  {
+   "claim": "ISA density own measurement: Xtensa LX6 = 0.94-1.31x Thumb-2 (median ~1.12x), RV32IMC = 1.26-1.45x, RV32IM = 1.65-1.99x; dre with -mlongcalls 2129 -> 2325 B = 1.23x",
+   "verdict": "confirmed",
+   "url": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/spikes/size_tricks/isa_compare2.sh",
+   "correction": "re-ran isa_compare2.sh (arm gcc 10.3.1, xtensa-esp32-elf-gcc 8.4.0, riscv32-esp-elf-gcc 12.2.0): current dre.c 1886 -> xtensa 2129 (1.13x), rv32imc 2404 (1.27x), rv32im 3336 (1.77x); re.c 1.12/1.39/1.87; compilecode 1.17/1.45/1.99; charclass 1.31/1.43/1.65; -mlongcalls 2325 (=1.23x of 1886). isa_compare2.out's dre row (m4=1906, 1.12x) was an earlier dre.c revision"
+  },
+  {
+   "claim": "RISC-V ISA spec 20191213 ch.16: 'Typically, 50%-60% of the RISC-V instructions in a program can be replaced with RVC instructions, resulting in a 25%-30% code-size reduction'; mentions 'ARM Thumb2, microMIPS, PowerPC VLE' without a cross-ISA figure",
+   "verdict": "confirmed",
+   "url": "https://github.com/riscv/riscv-isa-manual/releases/tag/Ratified-IMAFDQC",
+   "correction": "verbatim in extracted text (riscv.txt:7591-7593, :7689)"
+  },
+  {
+   "claim": "Perotti et al. CARRV 2020 Table 1: ARM-Thumb2 209,696 B vs RV32IMC 233,628 B (+11.41%) on 3GPP IoT code and 1766 vs 1966 B (+11.33%) on Embench, GCC 7.x, -Os -ffunction-sections -fdata-sections, Cortex-M3; push/pop extension cuts the gap to 7.7%/5.8%",
+   "verdict": "confirmed",
+   "url": "https://carrv.github.io/2020/papers/CARRV2020_paper_12_Perotti.pdf",
+   "correction": "numbers verbatim (paper text: ARM GCC 7.2, -mcpu=cortex-m3 -Os -ffunction-sections -fdata-sections). Two corrections: the table is labelled Table 5 in the extracted PDF text, and the push/pop figures are 5.80% for the 3GPP/IoT code and 7.70% for Embench (survey lists them in the opposite order)"
+  },
+  {
+   "claim": "Weaver & McKee ICCD 2009: 'up to a factor of three difference in code sizes from ISA alone', with compilers 'a factor of two in code density'; Thumb-2/Xtensa/RISC-V not measured",
+   "verdict": "confirmed",
+   "url": "https://web.eece.maine.edu/~vweaver/papers/iccd09/iccd09_density.pdf",
+   "correction": "both phrases verbatim (weaver.txt:56, :1226); Thumb-2 appears only in related work (Phelan citation)"
+  },
+  {
+   "claim": "Waterman MS thesis (UCB EECS-2011-63): Thumb-2 ~7% smaller than RVC on SPEC CPU2006; 'the most optimal ARM solution ... is 99% of the RISC-V program using compressed instructions'",
+   "verdict": "unverified",
+   "url": "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2011/EECS-2011-63.html",
+   "correction": "www2.eecs.berkeley.edu and people.eecs.berkeley.edu refused the connection (curl exit 000 / ECONNREFUSED); no copy fetched"
+  },
+  {
+   "claim": "esphome issue #9827: RISC-V C3 firmware 'around twice the size' of Xtensa is an uncontrolled anecdote",
+   "verdict": "confirmed",
+   "url": "https://github.com/esphome/esphome/issues/9827",
+   "correction": "verbatim 'The code size is always around twice the size for the C3 as for the V2 plugs'; compares ESP32-C3 (esp32-c3-devkitm-1) with ESP8285 (ESP8266-class Xtensa LX106, different SDK); closed as not planned with no analysis"
+  },
+  {
+   "claim": "Cadence Xtensa LX7 material claims only '16- and 24-bit ... instruction encoding ... highly efficient code', no numbers",
+   "verdict": "unverified",
+   "url": "https://www.cadence.com/",
+   "correction": "not fetched in this pass (survey already flagged it as search-snippet only)"
+  },
+  {
+   "claim": "Leftmost-first semantics: perlre 'the first alternative found for which the entire expression matches, is the one that is chosen'; (a|ab)(c|bcd)(d*) on 'abcd' gives 'a','bcd','' (POSIX would give 'ab','cd','')",
+   "verdict": "confirmed",
+   "url": "https://perldoc.perl.org/perlre",
+   "correction": "perlre sentence verbatim (Alternatives are tried from left to right...); Python 3, Perl 5.34 and Node all return ('a','bcd','')"
+  },
+  {
+   "claim": "ECMAScript RepeatMatcher lazy rule 'If greedy is false, then Let z be continue(matchState). If z is not failure, return z. Return m(xr, d).' and empty-match rule 'If min = 0 and y's [[EndIndex]] = matchState's [[EndIndex]], return failure' preventing the infinite loop on /(a*)*/",
+   "verdict": "confirmed",
+   "url": "https://tc39.es/ecma262/",
+   "correction": "both step texts verbatim in the spec (RepeatMatcher steps and the note citing /(a*)*/.exec(\"b\")); note number not checked"
+  },
+  {
+   "claim": "Observable difference: JS /(a*)*/.exec('b') leaves group 1 undefined; Python/Perl give group 1 = '' at (0,0)",
+   "verdict": "confirmed",
+   "url": "https://tc39.es/ecma262/",
+   "correction": "node: undefined; python3 re.match(r'(a*)*','b').span(1) = (0,0); perl 5.34: g1=\"\" at pos 0"
+  },
+  {
+   "claim": "Captures in repeated groups: ECMAScript Note 'Step 4 of the RepeatMatcher clears Atom's captures each time Atom is repeated' -> /(z)((a+)?(b+)?(c))*/.exec('zaacbbbcac') group 4 undefined; Perl/Python keep last ('bbb')",
+   "verdict": "confirmed",
+   "url": "https://tc39.es/ecma262/",
+   "correction": "spec Note 3 verbatim with that exact example; node -> undefined; python3 and perl -> 'bbb'"
+  },
+  {
+   "claim": "'$': Perl/Python match at end or just before a final '\\n' (Python docs 'Matches the end of the string or just before the newline at the end of the string'); JS (no /m) only at the very end",
+   "verdict": "confirmed",
+   "url": "https://docs.python.org/3/library/re.html",
+   "correction": "Python docs sentence verbatim; re.search(r'a$','a\\n') matches in Python and Perl; /a$/.test('a\\n') is false in Node"
+  },
+  {
+   "claim": "'.' excludes '\\n' in all three; JS additionally \\r, U+2028, U+2029",
+   "verdict": "confirmed",
+   "url": "https://tc39.es/ecma262/",
+   "correction": "python3 re.match('.', '\\n') is None; node /./.test('\\n') and /./.test('\\r') false; U+2028/2029 not exercised (spec LineTerminator set)"
+  },
+  {
+   "claim": "\\w = [A-Za-z0-9_] under Python re.ASCII, Perl /a, JS always; \\d = [0-9]; \\s = [ \\t\\n\\r\\f\\v] (Python ASCII, 6 chars); JS \\s also matches Unicode spaces and U+FEFF; Perl \\s includes \\v since 5.18; \\b derives from \\w so a boundary fires inside 'héllo'",
+   "verdict": "confirmed",
+   "url": "https://perldoc.perl.org/perlrecharclass",
+   "correction": "perlrecharclass: 'Starting in Perl v5.18, it also matches the vertical tab, \\cK' and under /a '\\w matches the 63 characters [a-zA-Z0-9_]'; python3 re.ASCII \\s set = ['\\t','\\n','\\x0b','\\x0c','\\r',' ']; node /\\s/ matches U+FEFF and \\v; 'héllo' splits at 'h','é','llo' in JS and Python re.ASCII finds 4 \\b positions"
+  },
+  {
+   "claim": "Class escapes: leading ']' is literal in Perl/Python but JS treats [] as an empty class",
+   "verdict": "confirmed",
+   "url": "https://tc39.es/ecma262/",
+   "correction": "python3 re.match(r'[]a]',']') and perl ']' =~ /[]a]/ match; node /[]/.test(']') and /[]a]/.test(']') are false"
+  },
+  {
+   "claim": "{n}, {n,}, {n,m}; Python also {,m}; an invalid brace ('a{', 'a{x}') is a literal '{' in Perl/Python/JS-non-unicode but an error in JS /u",
+   "verdict": "confirmed",
+   "url": "https://docs.python.org/3/library/re.html",
+   "correction": "python3 a{,2} on 'aaa' -> 'aa'; 'a{' and 'a{x}' match literally in python3, perl, node; new RegExp('a{','u') -> 'Incomplete quantifier'"
+  },
+  {
+   "claim": "Errors in Python: a**, a{1,2}{2} ('multiple repeat'), a{2,1}, *a, a|*, unbalanced ( or [",
+   "verdict": "confirmed",
+   "url": "https://docs.python.org/3/library/re.html",
+   "correction": "python3 re.compile raises: 'multiple repeat' (a**, a{1,2}{2}), 'min repeat greater than max repeat' (a{2,1}), 'nothing to repeat' (*a, a|*), 'missing )', 'unterminated character set'"
+  },
+  {
+   "claim": "Case-insensitive: Python re.ASCII folds 'only letters a to z and A to Z'; without it Python/JS/Perl also fold Unicode (Kelvin sign)",
+   "verdict": "confirmed",
+   "url": "https://docs.python.org/3/library/re.html",
+   "correction": "docs sentence verbatim ('If the ASCII flag is used, only letters a to z and A to Z are matched'); python3 re.match('K','\\u212a',re.I) matches, with re.A it does not; node /K/iu.test('\\u212a') true, /K/i false"
+  },
+  {
+   "claim": "UTF-8 spike: total UTF-8 support = 144 B by #ifdef removal (1886 -> 1742); decoder 64 B; backward step 14 B",
+   "verdict": "confirmed",
+   "url": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/spikes/dre/variants.out",
+   "correction": "rebuilt dre.c today: -Os 1886, -DDRE_NO_UTF8 1742 (=144 B); per-function listing at -Os -fno-inline shows .text.decode 64 and .text.prev_cp 14"
+  },
+  {
+   "claim": "UTF-8 spike: validating decoder is 140 B (2.2x); the ASCII-gate fold fix is 6 bytes; the corpus caught 'ő' matching 'ű' under /i",
+   "verdict": "unverified",
+   "url": "/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/spikes/dre/",
+   "correction": "no artifact (log, variant, or diff) recording the 140 B validating decoder, the 6-byte fix or the ő/ű failure was found under $S/spikes; only the final dre.c and variants.out exist"
+  }
+ ]
+}

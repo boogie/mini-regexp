@@ -1,0 +1,59 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/src/regex/regcomp.c -nostdinc -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/arch/arm -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/arch/generic -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/src/include -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/src/internal -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/obj/include -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/include
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/src/regex/regcomp.c
+cortex-m4  (thumb2, gcc 10.3): text=9285 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=9021 data=0 bss=0
+x86-64     (clang 21):         text=16121 data=208
+-- cortex-m4 per-function (bytes):
+    3004  .text.regcomp
+    1880  .text.tre_add_tags
+     764  .text.parse_atom
+     740  .text.parse_bracket
+     460  .text.tre_make_trans
+     456  .text.tre_copy_ast
+     392  .text.tre_set_union
+     236  .text.tre_match_empty
+     162  .text.regfree
+     112  .text.tre_add_tag_right
+     112  .text.tre_add_tag_left
+     110  .text.tre_ast_to_tnfa
+     104  .rodata.tre_macros
+      89  .rodata.str1.1
+      74  .text.tre_stack_push
+      72  .text.tre_new_lit
+      66  .text.tre_ast_new_iter
+      60  .text.tre_ast_new_union
+      58  .text.tre_ast_new_catenation
+      56  .text.tre_set_one
+      52  .text.tre_ast_new_literal
+      44  .text.tre_purge_regset
+      44  .text.tre_ast_new_node
+      36  .text.parse_dup_count.part.0
+      34  .text.tre_set_empty
+      20  .text.tre_stack_destroy
+      14  .text.tre_stack_pop_voidptr
+      14  .text.tre_stack_pop_int
+      12  .text.tre_compare_lit
+       4  .text.tre_stack_push_voidptr
+       4  .text.tre_stack_push_int
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/src/regex/regexec.c -nostdinc -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/arch/arm -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/arch/generic -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/src/include -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/src/internal -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/obj/include -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/include
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/src/regex/regexec.c
+cortex-m4  (thumb2, gcc 10.3): text=3792 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=3936 data=0 bss=0
+x86-64     (clang 21):         text=7614 data=0
+-- cortex-m4 per-function (bytes):
+    3452  .text.regexec
+     230  .text.tre_fill_pmatch
+      62  .text.tre_neg_char_classes_match
+      48  .text.tre_tag_order
+
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/src/regex/tre-mem.c -nostdinc -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/arch/arm -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/arch/generic -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/src/include -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/src/internal -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/obj/include -I/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/include
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/musl/src/regex/tre-mem.c
+cortex-m4  (thumb2, gcc 10.3): text=232 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=244 data=0 bss=0
+x86-64     (clang 21):         text=379 data=0
+-- cortex-m4 per-function (bytes):
+     166  .text.__tre_mem_alloc_impl
+      36  .text.__tre_mem_destroy
+      30  .text.__tre_mem_new_impl
+

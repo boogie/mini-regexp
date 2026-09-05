@@ -1,0 +1,83 @@
+Direct interpreter spike — product B (all-in, no compile step)
+
+Snapshot of 2026-09-05, after the algorithmic relay and the size-coding round. Design notes, target and the closed format axis are in
+docs/all-in-engine.md; the measured history is in docs/feasibility.md section 6.
+
+Size (tools/measure.sh, Cortex-M4/Thumb-2, arm-none-eabi-gcc 10.3.1 -Os -ffreestanding):
+
+  tools/measure.sh research/spikes/direct/re.c -Iresearch/spikes/direct
+
+  cortex-m4   text=1518 data=0 bss=0
+  cortex-m0+  text=1586 data=0 bss=0
+  x86-64      text=2830 data=0
+
+  no dynamic stack frames, and no undefined runtime symbols on either ARM target.
+  (Product A is clean only on Cortex-M4; its Thumb-1 opcode switch pulls a libgcc jump-table
+  helper. This engine dispatches with an if-chain, so it is unaffected.)
+
+This snapshot has bounded C stack: group iteration lives in caller-provided workspace, so
+stack cost depends on how deeply a pattern nests groups, not on how often they repeat.
+Two rounds of size work took it from 1712 to 1518: an algorithmic relay over parse_quant,
+atom, match and group (1712 -> 1536) and a size-coding round on instruction encoding, of which
+18 bytes survived on top (1536 -> 1518). All of it is portable C; no assembly was adopted.
+
+API
+
+  int re_match(const char *pat, const char *text, unsigned flags, int *caps, int ncaps,
+               void *ws, unsigned wsbytes);
+
+  ws/wsbytes is caller-owned scratch, the only thing that grows with the text.
+  RE_WORKSPACE_BYTES(iters) sizes it. Too small a workspace returns RE_LIMIT, never a
+  wrong answer. No malloc, no libc, no globals.
+
+Differential corpus (the single allowed failure is the deliberate Unicode-fold gap)
+
+  cc -std=c99 -Wall -Wextra -O2 -Iresearch/spikes/direct \
+    -o /tmp/direct_drv research/spikes/direct/driver.c research/spikes/direct/re.c
+  python3 tools/difftest.py /tmp/direct_drv tests/corpus/corpus_wb_seed1.jsonl
+  python3 tools/difftest.py /tmp/direct_drv tests/corpus/corpus_wb_seed7.jsonl
+
+  seed1: cases=2103 checked=2093 pass=2092 fail=1
+    FAIL flags='i' pat='é' text='É'   (ASCII-only icase; the host hook layer is the fix)
+
+Feature gate — 72 rows, each with a hardcoded expected return, span and group spans.
+A size reduction can silently drop a feature the corpus does not notice; this catches that.
+
+  cc -std=c99 -O2 -Iresearch/spikes/direct \
+    -o /tmp/direct_feature research/spikes/direct/feature.c research/spikes/direct/re.c
+  /tmp/direct_feature
+  -> feature rows=72 ok=72 fail=0
+
+Crash patterns — these segfaulted on the unbounded predecessor and must not now:
+
+  /tmp/direct_drv '(a*){65536}' ''            -> rc 0
+  /tmp/direct_drv '(){99999999999999}$b' ''   -> rc 1
+
+Stack probe — proves the C stack does not grow with the text.
+Build re.c with -finstrument-functions, instr.c and stackprobe.c without it.
+
+  cc -std=c99 -O1 -Iresearch/spikes/direct -finstrument-functions \
+    -c research/spikes/direct/re.c -o /tmp/re_instr.o
+  cc -std=c99 -O1 -Iresearch/spikes/direct \
+    -o /tmp/direct_stack research/spikes/direct/stackprobe.c \
+    research/spikes/direct/instr.c /tmp/re_instr.o
+  /tmp/direct_stack
+
+  Reports peak stack for a*, .*, (a)*, (a|b)*, (\w+ )* at 8/32/128/256 characters.
+  All five must be constant across lengths.
+
+Fuzz — ASan + UBSan, zero crashes required:
+
+  cc -std=c99 -Wall -Wextra -O1 -g -fsanitize=address,undefined \
+    -fno-sanitize-recover=all -Iresearch/spikes/direct \
+    -o /tmp/direct_fz research/spikes/direct/fuzz.c research/spikes/direct/re.c
+  /tmp/direct_fz 60 987654321
+
+Differential against another build of the same engine (dfuzz.c) — link two engines into
+one binary with one re_match renamed, then run random pattern/text pairs through both.
+Used when a size change must be proven semantics-preserving.
+
+Feature toggles, for the measured ledger in docs/all-in-engine.md:
+
+  RE_NO_ALT  RE_NO_CLASSES  RE_NO_BOUNDED  RE_NO_WORDB  RE_NO_UTF8
+  RE_NO_LAZY  RE_NO_CAPTURES  RE_NO_BUDGET  RE_NO_ICASE  RE_MULTILINE  RE_MAX_DEPTH=<n>

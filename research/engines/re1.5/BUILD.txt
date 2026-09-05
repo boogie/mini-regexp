@@ -1,0 +1,192 @@
++ S=/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad
++ M=/private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh
++ cd /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/engines/re1.5
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/compilecode.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
+== src/compilecode.c
+cortex-m4  (thumb2, gcc 10.3): text=1102 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=1126 data=0 bss=0
+x86-64     (clang 21):         text=1949 data=0
+-- cortex-m4 per-function (bytes):
+     966  .text._compilecode
+      88  .text.re1_5_compilecode
+      48  .text.re1_5_sizecode
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/recursiveloop.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
+== src/recursiveloop.c
+cortex-m4  (thumb2, gcc 10.3): text=306 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=304 data=0 bss=0
+x86-64     (clang 21):         text=572 data=0
+-- cortex-m4 per-function (bytes):
+     280  .text.recursiveloop
+      26  .text.re1_5_recursiveloopprog
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/charclass.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
+== src/charclass.c
+cortex-m4  (thumb2, gcc 10.3): text=126 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=126 data=0 bss=0
+x86-64     (clang 21):         text=154 data=0
+-- cortex-m4 per-function (bytes):
+      74  .text._re1_5_namedclassmatch
+      52  .text._re1_5_classmatch
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh mp_all.c -I.
+== mp_all.c
+cortex-m4  (thumb2, gcc 10.3): text=1530 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=1558 data=0 bss=0
+x86-64     (clang 21):         text=2706 data=0
+-- cortex-m4 per-function (bytes):
+     966  .text._compilecode
+     276  .text.recursiveloop
+      88  .text.re1_5_compilecode
+      74  .text._re1_5_namedclassmatch
+      52  .text._re1_5_classmatch
+      48  .text.re1_5_sizecode
+      26  .text.re1_5_recursiveloopprog
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/recursiveloop.c -Isrc
+== src/recursiveloop.c
+cortex-m4  (thumb2, gcc 10.3): text=336 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=328 data=0 bss=0
+x86-64     (clang 21):         text=586 data=0
+-- cortex-m4 per-function (bytes):
+     296  .text.recursiveloop
+      26  .text.re1_5_recursiveloopprog
+      14  .rodata.recursiveloop.str1.1
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/backtrack.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
+== src/backtrack.c
+cortex-m4  (thumb2, gcc 10.3): text=392 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=396 data=0 bss=0
+x86-64     (clang 21):         text=752 data=0
+-- cortex-m4 per-function (bytes):
+     392  .text.re1_5_backtrack
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/sub.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
+== src/sub.c
+cortex-m4  (thumb2, gcc 10.3): text=126 data=0 bss=4
+cortex-m0+ (thumb1, gcc 10.3): text=128 data=0 bss=4
+x86-64     (clang 21):         text=224 data=0
+-- cortex-m4 per-function (bytes):
+      58  .text.update
+      36  .text.newsub
+      24  .text.decref
+       8  .text.incref
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/recursive.c -Isrc '-Dre1_5_fatal(x)=assert(!x)'
+== src/recursive.c
+cortex-m4  (thumb2, gcc 10.3): text=322 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=308 data=0 bss=0
+x86-64     (clang 21):         text=548 data=0
+-- cortex-m4 per-function (bytes):
+     296  .text.recursive
+      26  .text.re1_5_recursiveprog
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh src/util.c -Isrc
+== src/util.c
+cortex-m4  (thumb2, gcc 10.3): text=99 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=99 data=0 bss=0
+x86-64     (clang 21):         text=136 data=0
+-- cortex-m4 per-function (bytes):
+      36  .text.mal
+      32  .text.re1_5_fatal
+      17  .rodata.re1_5_fatal.str1.1
+      14  .rodata.mal.str1.1
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh mp_lib/compilecode.c -Imp_lib -include mpfork_shim.h
+== mp_lib/compilecode.c
+cortex-m4  (thumb2, gcc 10.3): text=1080 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=1106 data=0 bss=0
+x86-64     (clang 21):         text=1953 data=0
+-- cortex-m4 per-function (bytes):
+     942  .text._compilecode
+      80  .text.re1_5_compilecode
+      36  .text.re1_5_sizecode
+      22  .text._emit_checked
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh mp_lib/recursiveloop.c -Imp_lib -include mpfork_shim.h
+== mp_lib/recursiveloop.c
+cortex-m4  (thumb2, gcc 10.3): text=306 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=304 data=0 bss=0
+x86-64     (clang 21):         text=572 data=0
+-- cortex-m4 per-function (bytes):
+     280  .text.recursiveloop
+      26  .text.re1_5_recursiveloopprog
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh mp_lib/charclass.c -Imp_lib -include mpfork_shim.h
+== mp_lib/charclass.c
+cortex-m4  (thumb2, gcc 10.3): text=150 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=146 data=0 bss=0
+x86-64     (clang 21):         text=211 data=0
+-- cortex-m4 per-function (bytes):
+      76  .text._re1_5_classmatch
+      74  .text._re1_5_namedclassmatch
++ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh mpfork_all.c -I.
+== mpfork_all.c
+cortex-m4  (thumb2, gcc 10.3): text=1532 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=1558 data=0 bss=0
+x86-64     (clang 21):         text=2735 data=0
+-- cortex-m4 per-function (bytes):
+     942  .text._compilecode
+     276  .text.recursiveloop
+      80  .text.re1_5_compilecode
+      76  .text._re1_5_classmatch
+      74  .text._re1_5_namedclassmatch
+      36  .text.re1_5_sizecode
+      26  .text.re1_5_recursiveloopprog
+      22  .text._emit_checked
++ mkdir -p obj
++ CF='-Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -mcpu=cortex-m4 -mthumb'
++ arm-none-eabi-gcc -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -mcpu=cortex-m4 -mthumb -I. -c mp_all.c -o obj/mp_all.m4.o
++ arm-none-eabi-nm -u obj/mp_all.m4.o
+         U memmove
++ arm-none-eabi-gcc -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -mcpu=cortex-m4 -mthumb -I. -c mpfork_all.c -o obj/mpfork_all.m4.o
++ arm-none-eabi-nm -u obj/mpfork_all.m4.o
+         U memmove
++ arm-none-eabi-gcc -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -mcpu=cortex-m4 -mthumb -Isrc -c src/recursiveloop.c -o obj/recursiveloop_default_fatal.m4.o
++ arm-none-eabi-nm -u obj/recursiveloop_default_fatal.m4.o
+         U _re1_5_classmatch
+         U _re1_5_namedclassmatch
+         U re1_5_fatal
++ arm-none-eabi-gcc -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -mcpu=cortex-m4 -mthumb -Isrc '-Dre1_5_fatal(x)=assert(!x)' -c src/backtrack.c -o obj/backtrack.m4.o
++ arm-none-eabi-nm -u obj/backtrack.m4.o
+         U _re1_5_classmatch
+         U _re1_5_namedclassmatch
+         U decref
+         U incref
+         U memset
+         U newsub
+         U update
++ arm-none-eabi-gcc -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -mcpu=cortex-m4 -mthumb -Isrc '-Dre1_5_fatal(x)=assert(!x)' -c src/sub.c -o obj/sub.m4.o
++ arm-none-eabi-nm -u obj/sub.m4.o
+         U mal
+         U memmove
++ arm-none-eabi-gcc -Os -std=gnu99 -DNDEBUG -fno-stack-protector -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -fno-pic -w -mcpu=cortex-m4 -mthumb -Isrc -c src/util.c -o obj/util.m4.o
++ arm-none-eabi-nm -u obj/util.m4.o
+         U _impure_ptr
+         U exit
+         U fprintf
+         U malloc
+         U memset
++ arm-none-eabi-nm -S --size-sort obj/mp_all.m4.o
+00000000 0000001a T re1_5_recursiveloopprog
+00000000 00000030 T re1_5_sizecode
+00000000 00000034 T _re1_5_classmatch
+00000000 0000004a T _re1_5_namedclassmatch
+00000000 00000058 T re1_5_compilecode
+00000000 00000114 t recursiveloop
+00000000 000003c6 t _compilecode
++ arm-none-eabi-objdump -d obj/mp_all.m4.o
++ sed -n '/<recursiveloop>:/,/bx\|pop/p'
++ head -12
+00000000 <recursiveloop>:
+   0:	e92d 4ff7 	stmdb	sp!, {r0, r1, r2, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   4:	f8dd 8030 	ldr.w	r8, [sp, #48]	; 0x30
+   8:	4606      	mov	r6, r0
+   a:	460d      	mov	r5, r1
+   c:	4617      	mov	r7, r2
+   e:	469b      	mov	fp, r3
+  10:	f04f 0902 	mov.w	r9, #2
+  14:	f04f 0a01 	mov.w	sl, #1
+  18:	7832      	ldrb	r2, [r6, #0]
+  1a:	2a4f      	cmp	r2, #79	; 0x4f
+  1c:	d802      	bhi.n	24 <recursiveloop+0x24>
+
+######## host driver + differential test (commands run after build.sh)
+cc -O1 -w -Isrc    -o re15_cli      driver.c mp_all.c
+cc -O1 -w -Imp_lib -DMPFORK -o re15_cli_fork driver.c mpfork_all.c
+python3 $S/tools/difftest.py ./re15_cli      $S/tools/corpus_seed1.jsonl 12   > difftest_upstream.txt
+python3 $S/tools/difftest.py ./re15_cli_fork $S/tools/corpus_seed1.jsonl 12   > difftest_fork.txt
+python3 classify.py ./re15_cli      $S/tools/corpus_seed1.jsonl      > classify_upstream.txt
+python3 classify.py ./re15_cli_fork $S/tools/corpus_seed1.jsonl fork > classify_fork.txt
+# results:
+cases=2088 checked=2081 pass=982 fail=1099 timeouts=1 group_spans_checked=80
+cases=2088 checked=2081 pass=1733 fail=348 timeouts=1 group_spans_checked=294

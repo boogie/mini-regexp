@@ -1,0 +1,28 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/trex/trex.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/trex/trex.c
+cortex-m4  (thumb2, gcc 10.3): text=2925 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=2847 data=0 bss=0
+x86-64     (clang 21):         text=5539 data=0
+-- cortex-m4 per-function (bytes):
+     712  .text.trex_element
+     672  .text.trex_matchnode
+     404  .text.trex_matchcclass
+     224  .text.trex_charnode
+     160  .text.trex_compile
+     114  .text.trex_searchrange
+     114  .rodata.trex_element.str1.1
+     110  .text.trex_list
+      74  .text.trex_newnode
+      64  .text.trex_parsenumber
+      42  .text.trex_free
+      40  .text.trex_match
+      34  .text.trex_search
+      30  .text.trex_getsubexp
+      29  .rodata.trex_parsenumber.str1.1
+      28  .text.trex_expect
+      21  .rodata.trex_compile.str1.1
+      18  .text.trex_error
+      16  .rodata.trex_charnode.str1.1
+      15  .rodata.trex_expect.str1.1
+       4  .text.trex_getsubexpcount
+

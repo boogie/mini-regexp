@@ -1,0 +1,11 @@
+$ sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/tools/measure.sh /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/tiny-regex-c/src/tiny_regex.c 
+== /private/tmp/claude-501/-Users-boogie-Workspace-mini-regexp/980e397c-0a6d-407c-9809-54b70c85e624/scratchpad/survey/engines-src/tiny-regex-c/src/tiny_regex.c
+cortex-m4  (thumb2, gcc 10.3): text=1865 data=0 bss=0
+cortex-m0+ (thumb1, gcc 10.3): text=1825 data=0 bss=0
+x86-64     (clang 21):         text=3615 data=0
+-- cortex-m4 per-function (bytes):
+    1472  .text.tregex_match_str
+     184  .text.__checkOneOfThem
+     166  .text.__checkCharacterWithGlobbing
+      43  .rodata.tregex_match_str.str1.1
+
